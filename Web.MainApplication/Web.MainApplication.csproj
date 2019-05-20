@@ -296,6 +296,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\DB_Tritsur.mdf" />
+    <Content Include="App_Data\TextFile1.txt" />
     <Content Include="Content\adminlte\bower_components\jquery-ui\ui\minified\autocomplete.min.js" />
     <Content Include="Content\adminlte\bower_components\moment\moment.js" />
     <Content Include="Content\adminlte\plugins\datatables\dataTables.bootstrap.css" />
@@ -321,6 +322,7 @@
     <Content Include="Content\css\bootstrap-datetimepicker.min.css" />
     <Content Include="Content\css\dataTables.bootstrap.min.css" />
     <Content Include="Content\css\googlefont\fontgoogle.css" />
+    <Content Include="Content\database\DB_Tritsur.mdf" />
     <Content Include="Content\Icon\index.puppy-dog-ajax-spinner.svg" />
     <Content Include="Content\Icon\index.ripple-radio-preloader.svg" />
     <Content Include="Content\Icon\index.spooky-ghost-ajax-preloader.svg" />
@@ -514,7 +516,6 @@
     <Content Include="Views\BatchMixes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Content\database\" />
     <Folder Include="Views\BaseOdata\" />
     <Folder Include="Views\EntityApi\" />
   </ItemGroup>
