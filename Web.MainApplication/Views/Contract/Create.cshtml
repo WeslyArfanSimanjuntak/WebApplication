@@ -1,0 +1,384 @@
+﻿@model Repository.Application.DataModel.CONTRACT
+@{
+    float tonUnitToM3Unit = (float)ViewBag.TonUnitToM3Unit;
+    ViewBag.Title = "Create";
+}
+
+<div class="box box-solid">
+    <div class="box-header with-border">
+        <h3 class="box-title">
+            Create
+        </h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.Label("Contract Number", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBox("ContractNumber", Model.ContractNumber, new { @class = "form-control", @readonly = "true" })
+                    @Html.ValidationMessageFor(model => model.ContractNumber, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("Client Id", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("ClientIdPK", null, htmlAttributes: new { @class = "form-control", @required = "required" })
+                    @Html.ValidationMessageFor(model => model.ClientIdPK, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.Label("", "Client Email", htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-8">
+                            @Html.TextBox("ClientEmail", "", new { @class = "form-control", @readonly = "true" })
+                            @Html.ValidationMessage("ClientEmail", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("", "Client Phone Number", htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-8">
+                            @Html.TextBox("ClientPhoneNumber", "", new { @class = "form-control", @readonly = "true" })
+                            @Html.ValidationMessageFor(model => model.Line, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("", "Client Client Address", htmlAttributes: new { @class = "control-label col-md-4", @readonly = "true" })
+                        <div class="col-md-8">
+                            @Html.TextBox("ClientAddress", "", new { @class = "form-control", @readonly = "true" })
+                            @Html.ValidationMessageFor(model => model.Line, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.Label("", "PIC Name", htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-8">
+                            @Html.TextBox("PICName", "", new { @class = "form-control", @readonly = "true" })
+                            @Html.ValidationMessage("PICName", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("", "PIC Phone Number", htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-8">
+                            @Html.TextBox("PICPhoneNumber", "", new { @class = "form-control", @readonly = "true" })
+                            @Html.ValidationMessage("PICPhoneNumber", "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.StartPeriode, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.StartPeriode, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                    @Html.ValidationMessageFor(model => model.StartPeriode, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.EndPeriode, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.EndPeriode, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                    @Html.ValidationMessageFor(model => model.EndPeriode, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Credit Line(IDR)", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Line, new { htmlAttributes = new { @class = "form-control", @required = "true" } })
+                    @Html.ValidationMessageFor(model => model.Line, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("DR Expired(days)", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBox("MaxExpiredDR", Model.MaxExpiredDR, htmlAttributes: new { @class = "form-control", @required = "true" })
+                    @Html.ValidationMessageFor(model => model.MaxExpiredDR, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("Remark", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextArea("Remark", Model.Remark, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Remark, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("Site Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("SiteName", null, htmlAttributes: new { @class = "form-control", @required = "true" })
+                    @Html.ValidationMessageFor(model => model.SiteName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Quantity Based On", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("sliQuantityBasedOn", null, htmlAttributes: new { @class = "form-control", @required = "true" })
+                    @Html.ValidationMessageFor(model => model.SiteName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("PPn", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("sliPpn", null, htmlAttributes: new { @class = "form-control", @required = "true" })
+                    @Html.ValidationMessageFor(model => model.MaxExpiredDR, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-2 control-label">
+                    <input type="button" id="btnDelete" value="Delete" class="btn btn-default" />
+                    <input type="button" id="btnAdd" value="Add" class="btn btn-default" />
+                </div>
+                <div class="col-md-5">
+                    <label id="lblTotalProduct" class="h4"></label>
+                    @Html.Hidden("totalProduct")
+                </div>
+                <div class="col-md-5">
+                    <label id="lblTotalValue" class="h4">
+                        <strong id="strongTotalValue">
+                            Total Value :
+                            <span span="spanTotalValue"></span>
+                        </strong>
+                    </label>
+                    @Html.Hidden("totalValue")
+                </div>
+            </div>
+            <div id="productList">
+                @{
+                    int counter = 1;
+
+                    List<SelectList> listSelect = new List<SelectList>();
+                    foreach (var item in Model.ContractProduct)
+                    {
+                        listSelect.Add(new SelectList(((SelectList)ViewBag.Product).ToList(), "Value", "Text", item.ProductId));
+                        var amountInM3 = item.Amount * tonUnitToM3Unit;
+                        <div id="DivContractProduct_@counter">
+                            <div class="form-group">
+                                @Html.Label("", "Product " + counter, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.DropDownList("ProductId_" + counter.ToString(), listSelect.ElementAt(counter - 1), new { @class = "form-control", @required = "required" })
+                                    @Html.ValidationMessage("ProductId_" + counter.ToString(), "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.Label("", "Quantity(ton)", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.TextBox("Amount_" + counter.ToString(), item.Amount, new { @onkeyup = "convertRealTime(this )", @class = "form-control convertion tonunit", @required = "required" })
+                                    @Html.ValidationMessage("Amount_" + counter, new { @class = "text -danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.Label("", "Quantity(m3)", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.TextBox("Amountm3_" + counter.ToString(), amountInM3, new { @onkeyup = "convertRealTime(this)", @class = "form-control money-format convertion meter3unit", @required = "required" })
+                                    @Html.ValidationMessage("Amountm3_" + counter, new { @class = "text -danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.Label("", "Price per Ton", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.TextBox("PricePerTon_" + counter.ToString(), item.PricePerTon, new { @onkeyup = "convertRealTime(this)", @class = "form-control", @required = "required" })
+                                    @Html.ValidationMessage("PricePerTon_" + counter, new { @class = "text -danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.Label("", "Price per M3", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.TextBox("PricePerTon_" + counter.ToString(), item.PricePerTon, new { @onkeyup = "convertRealTime(this)", @class = "form-control", @required = "required" })
+                                    @Html.ValidationMessage("PricePerTon_" + counter, new { @class = "text -danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.Label("", "Discount(%)", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.TextBox("PricePerTon_" + counter.ToString(), item.PricePerTon, new { @onkeyup = "convertRealTime(this)", @class = "form-control", @required = "required" })
+                                    @Html.ValidationMessage("PricePerTon_" + counter, new { @class = "text -danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.Label("", "Discount(IDR)", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.TextBox("PricePerTon_" + counter.ToString(), item.PricePerTon, new { @onkeyup = "convertRealTime(this)", @class = "form-control", @required = "required" })
+                                    @Html.ValidationMessage("PricePerTon_" + counter, new { @class = "text -danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.Label("", "Marketing Fee(%)", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.TextBox("PricePerTon_" + counter.ToString(), item.PricePerTon, new { @onkeyup = "convertRealTime(this)", @class = "form-control", @required = "required" })
+                                    @Html.ValidationMessage("PricePerTon_" + counter, new { @class = "text -danger" })
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                @Html.Label("", "Marketing Fee(IDR)", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.TextBox("PricePerTon_" + counter.ToString(), item.PricePerTon, new { @onkeyup = "convertRealTime(this)", @class = "form-control", @required = "required" })
+                                    @Html.ValidationMessage("PricePerTon_" + counter, new { @class = "text -danger" })
+                                </div>
+                            </div>
+
+                            <br />
+                        </div>
+                        counter++;
+                    }
+                }
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+        }
+
+    </div>
+    <div class="box-footer">
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</div>
+<script type="text/javascript">
+    (function ($) {
+        @{
+            for (int i = 0; i < Model.ContractProduct.Count; i++) {
+                <text>
+                $('#PricePerTon_@(i+1)').number(true,2);
+                $('#Amount_@(i+1)').number(true,2);
+                </text>
+            }
+
+        }
+        //Date picker
+        $('#StartPeriode').datetimepicker({
+            format: 'MM/DD/YYYY'
+        });
+        $('#EndPeriode').datetimepicker({
+            format: 'MM/DD/YYYY'
+        });
+
+        $("#Line").number(true, 2);
+        $("#MaxExpiredDR").number(true, 0);
+
+
+        $("#ClientIdPK").on("change", function () {
+            var selectedClientId = $("#ClientIdPK").val();
+            AjaxCall(function (output) {
+                if (output.data != null) {
+                    if ('company' === output.data[0]["ClientType"]) {
+                        $("#ClientEmail").val(output.data[0]["ClientCompanyLeaderEmailAddress"]);
+                        $("#PICName").val(output.data[0]["ClientCompanyPIC"]);
+                        $("#PICPhoneNumber").val(output.data[0]["ClientCompanyPICPhoneNumber"]);
+                    }
+                    else {
+                        $("#ClientEmail").val(output.data[0]["ClientEmail"]);
+                        $("#PICName").val(output.data[0]["ClientName"]);
+                        $("#PICPhoneNumber").val(output.data[0]["ClientPhoneNumber"]);
+                    }
+                    $("#ClientPhoneNumber").val(output.data[0]["ClientPhoneNumber"]);
+                    $("#ClientAddress").val(output.data[0]["ClientAddress"]);
+                }
+            }, entityApiUrl + '?entitas=CLIENT&filter=Id==' + selectedClientId);
+        });
+
+    }(jQuery));
+    $(document).ready(function () {
+        var selectedClientId = $("#ClientIdPK").val();
+        AjaxCall(function (output) {
+            if (output.data[0] != null) {
+                if ('company' === output.data[0]["ClientType"]) {
+                    $("#ClientEmail").val(output.data[0]["ClientCompanyLeaderEmailAddress"]);
+                } else {
+                    $("#ClientEmail").val(output.data[0]["ClientEmail"]);
+                }
+                $("#ClientPhoneNumber").val(output.data[0]["ClientPhoneNumber"]);
+                $("#ClientAddress").val(output.data[0]["ClientAddress"]);
+            }
+        }, entityApiUrl + '?entitas=CLIENT&filter=Id==' + selectedClientId);
+
+
+        $("#btnAdd").on("click", function () {
+            $("#productList").append($("#productList").children().first().clone()).children().last().hide().show('slow', function () {
+
+            });
+            var totalChild = $("#productList").children().length;
+            $("#productList").children().last().attr("id", "DivContractProduct_" + totalChild);
+            $("#productList").children().last().find("label:first").html("Product  " + totalChild);
+            $("#productList").children().last().find("select:first").attr("name", "ProductId_" + totalChild).attr("id", "ProductId_" + totalChild).val("0");
+            $("#productList").children().last().find("input:first").attr("name", "Amount_" + totalChild).attr("id", "Amount_" + totalChild).val("0").number(true, 2);
+            $("#productList").children().last().find("input").eq(1).attr("name", "Amountm3_" + totalChild).attr("id", "Amountm3_" + totalChild).val("0").number(true, 2);
+            $("#productList").children().last().find("input").eq(2).attr("name", "PricePerTon_" + totalChild).attr("id", "PricePerTon_" + totalChild).val("0").number(true, 2);
+            $("#lblTotalProduct").html('<strong>Total Product : ' + totalChild + '</strong>');
+            $("#totalProduct").val(totalChild);
+        });
+        $("#btnDelete").on("click", function () {
+            var totalChild = $("#productList").children().length;
+            if (totalChild > 1) {
+                $("#productList").children().last().hide('slow', function () {
+                    $(this).remove();
+
+                    $("#lblTotalProduct").html('<strong>Total Product : ' + $("#productList").children().length + '</strong>');
+                    $("#totalProduct").val($("#productList").children().length);
+                          });
+            }
+
+        });
+
+        $("#lblTotalProduct").html('<strong>Total Product : ' + $("#productList").children().length + '</strong>');
+        $("#totalProduct").val($("#productList").children().length);
+
+
+        // Convertion
+        @*$(".convertion").on("keyup", function () {
+            var tonUnitToM3Unit = @tonUnitToM3Unit;
+
+            console.log($(this).val());
+            console.log($(this));
+            console.log($(this)[0].id);
+
+            if ($(this)[0].className.indexOf('tonunit') != -1) {
+                var idSequence = $(this)[0].id.substr($(this)[0].id.indexOf("_") + 1);
+                $('#Amountm3_' + idSequence).val((parseFloat($(this).val()) * parseFloat(tonUnitToM3Unit)));
+            }
+            else if ($(this)[0].className.indexOf('meter3unit') != -1) {
+                var idSequence = $(this)[0].id.substr($(this)[0].id.indexOf("_") + 1);
+                $('#Amount_' + idSequence).val((parseFloat($(this).val()) / parseFloat(tonUnitToM3Unit)));
+            }
+
+        });*@
+
+
+
+
+    });
+    function convertRealTime(node) {
+         var tonUnitToM3Unit = @tonUnitToM3Unit;
+        if (node.className.indexOf('tonunit') != -1) {
+            var idSequence = node.id.substr(node.id.indexOf("_") + 1);
+            $('#Amountm3_' + idSequence).val((parseFloat(node.value) * parseFloat(tonUnitToM3Unit)));
+            }
+        else if (node.className.indexOf('meter3unit') != -1) {
+            var idSequence = node.id.substr(node.id.indexOf("_") + 1);
+            $('#Amount_' + idSequence).val((parseFloat(node.value) / parseFloat(tonUnitToM3Unit)));
+            }
+
+    }
+</script>

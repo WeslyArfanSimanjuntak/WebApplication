@@ -1,0 +1,92 @@
+﻿@model IEnumerable<Repository.Application.DataModel.BatchMix>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="box box-solid">
+    <div class="box-header with-border">
+        <h3 class="box-title">
+            @Html.ActionLink("Create New", "Create")
+        </h3>
+    </div>
+    <div class="box-body">
+        <table class="table table-bordered table-striped" id="masterBatch">
+            <thead>
+                <tr>
+                    <th>
+                        BatchMix Code
+                    </th>
+
+                    <th>
+                        BatchMix name
+                    </th>
+
+                    <th>
+                        Output Product
+                    </th>
+
+                    <th>
+                        Source Product
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BatchMixCode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BatchMixName)
+                        </td>
+
+                        <td>
+                            @item.OutputProduct - @item.PRODUCT.PRODUCTNAME
+                        </td>
+
+                        <td>
+                            @{ foreach (var batchProduct in item.BatchMixProduct)
+                                {
+
+                                    @batchProduct.ProductSourceId <br />
+
+
+                                    @batchProduct.PRODUCT.PRODUCTNAME <br />
+
+
+                                    @batchProduct.ProductSourcePercentage.ToString() <text>%</text><br />
+
+                                }
+                            }
+                            @Html.DisplayFor(modelItem => item.PRODUCT.PRODUCTNAME)
+                        </td>
+                        <td>
+                            @Html.ActionLinkAuthorized("Edit", "Edit", new { id = item.BatchMixProduct }) |
+                            @Html.ActionLinkAuthorized("Details", "Details", new { id = item.BatchMixProduct }) |
+                            @Html.ActionLinkAuthorized("Delete", "Delete", new { id = item.BatchMixProduct })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script type="text/javascript">
+    (function ($) {
+
+        $('#masterBatchMix').DataTable({
+            'paging': true,
+            'lengthMenu': [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+            'pageLength': 10,
+			'searching': true,
+            'ordering': true,
+            'info': true,
+            'autoWidth': false
+        });
+    }(jQuery));
+
+</script>

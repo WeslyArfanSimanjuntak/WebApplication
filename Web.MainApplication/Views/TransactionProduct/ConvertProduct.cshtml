@@ -1,0 +1,195 @@
+﻿@model Repository.Application.DataModel.ProductConvertion
+
+@{
+    ViewBag.Title = "ConvertProduct";
+}
+<div class="box box-solid">
+    <div class="box-header with-border">
+        <h3 class="box-title">
+            Create - Product Transaction Convertion
+        </h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ConvertionNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.ConvertionNumber, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                        @Html.ValidationMessageFor(model => model.ConvertionNumber, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Site, "Site", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("Site", null, htmlAttributes: new { @class = "form-control", @required = "true" })
+                        @Html.ValidationMessageFor(model => model.Site, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.SourceProudct, "Product Source", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("SourceProudct", null, htmlAttributes: new { @class = "form-control", @required = "true" })
+                        @Html.ValidationMessageFor(model => model.SourceProudct, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.BatchCode, "BatchCode", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("BatchCode", null, htmlAttributes: new { @class = "form-control", @required = "true" })
+                        @Html.ValidationMessageFor(model => model.BatchCode, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group" id="batchDetailInformation">
+                    @Html.Label("Batch Detail", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10" id="batchDetailInformationChild">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Amount(ton)", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Ammount, new { htmlAttributes = new { @onkeyup = "AmountTonM3Converter(this,'ton', 'QuantityInM3')", @class = "form-control money-format", @required = "required" } })
+                        @Html.ValidationMessageFor(model => model.Ammount, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.Label("Amount(m3)", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+
+                        @Html.TextBox("QuantityInM3", Model.Ammount * (double)ViewBag.TonUnitToM3Unit, htmlAttributes: new { @onkeyup = "AmountTonM3Converter(this,'m3', 'Ammount')", @class = "form-control money-format", @required = "required", @maxlength = "6" })
+                        @Html.ValidationMessageFor(model => model.Ammount, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ConvertionTime, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.ConvertionTime, new { htmlAttributes = new { @class = "form-control", @required = "true" } })
+                        @Html.ValidationMessageFor(model => model.ConvertionTime, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ConvertBy, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.ConvertBy, new { htmlAttributes = new { @class = "form-control", @required = "true", @readonly = "true" } })
+                        @Html.ValidationMessageFor(model => model.ConvertBy, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Remark, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.Remark, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Remark, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Create" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+    <div class="box-footer">
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</div>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $('#ConvertionTime').datetimepicker({
+            format: 'MM/DD/YYYY HH:mm:ss'
+        });
+
+
+        $("#Site").on("change", function () {
+
+            $("#SourceProudct option").not(':first-child').each(function (index) {
+                $(this).remove();
+            });
+
+            var selectedSite = $("#Site").val();
+
+            if (selectedSite != "") {
+                AjaxCall(function (output) {
+                    console.log(output);
+                    $.each(output.data, function (key, value) {
+                        //$("#SourceProudct").append('<option value="' + value["EMPLOYEEID"] + '">' + value["EMPLOYEEID"] + " - " + value["EMPLOYEEFULLNAME"] + '</option>');
+                        AjaxCall(function (outpute) {
+                            $.each(outpute.data, function (keye, valuee) {
+                                $("#SourceProudct").append('<option value="' + valuee["PRODUCTID"] + '" ' + ("@Model.SourceProudct" === valuee["PRODUCTID"] ? "selected":"") +'>' + valuee["PRODUCTID"] + " - " + valuee["PRODUCTNAME"] + ', Total Stock In Site = ' + value["TotalStock"] + ' ton</option>');
+
+                            });
+
+                        }, entityApiUrl + '?entitas=PRODUCT&filter=PRODUCTID=="' + value["ProductId"] + '"');
+                    });
+
+                }, entityApiUrl + '?entitas=ProductSite&filter=SiteName=="' + selectedSite + '"');
+
+
+                //------------- Armada ---------
+                //AjaxCall(function (output) {
+                //    console.log(output);
+                //    $.each(output.data, function (key, value) {
+                //        $("#ARMADA").append('<option value="' + value["ARMADAID"] + '">' + value["ARMADAID"] + " - " + value["ARMADANAME"] + " - " + value["ARMADACAPACITYINKG"] + ' kg</option>');
+
+                //    });
+
+                //}, entityApiUrl + '?entitas=ARMADA&filter=SiteName=="' + selectedSite + '"');
+
+                //--------------- Product ------------
+                //AjaxCall(function (output) {
+
+                //    console.log(output);
+                //    $.each(output.data, function (keyProduct, valueProduct) {
+
+
+                //        $("#PRODUCT").append('<option value="' + valueProduct["PRODUCTID"] + '">' + valueProduct["PRODUCTNAME"]);
+
+                //    });
+
+                //}, entityApiUrl + '?entitas=PRODUCT&filter=TypeMaterial="Raw"');
+
+
+
+            }
+
+
+        });
+        $("#Site").change();
+        $("#BatchCode").on("change", function () {
+            var selectedBatchCode = $("#BatchCode").val();
+            $("#batchDetailInformationChild").html("");
+            if (selectedBatchCode != "") {
+                var htmlDetail = "";
+                AjaxCall(function (output) {
+                    console.log(output);
+                    var counter = 1;
+                    $.each(output.data, function (key, value) {
+
+                        htmlDetail = htmlDetail + ("<strong>" + counter.toString() + ". Batch Code = " + value["BatchCode"] + "</br> Product Id = " + value["ProductId"] + "<br/> Product Name =  " + value["PRODUCT"]["PRODUCTNAME"] + "<br/> Product Percentage = " + value["ProductPercentage"] + " %</strong><br/><br/>");
+                        counter++;
+                    });
+                    $("#batchDetailInformationChild").append(htmlDetail);
+                }, entityApiUrl + '?entitas=BatchProduct&filter=BatchCode=="' + selectedBatchCode + '"');
+
+            }
+        });
+        $("#BatchCode").change();
+    });
+</script>

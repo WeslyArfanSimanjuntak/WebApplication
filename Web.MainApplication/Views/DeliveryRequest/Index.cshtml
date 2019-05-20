@@ -1,0 +1,129 @@
+﻿@model IEnumerable<Repository.Application.DataModel.DeliveryRequest>
+
+@{
+    ViewBag.Title = "IndexClient";
+}
+
+<div class="box box-solid">
+    <div class="box-header with-border">
+        <h3 class="box-title">
+            @Html.ActionLink("Create New", "Create")
+        </h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+        <table class="table table-bordered table-striped" id="deliveryRequestTable">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DeliveryRequestNumber)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DeliveryRequestTime)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.TokenToLoad)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.IsActiveToken)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Status)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.IsActive)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CONTRACT.ContractNumber)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DeliveryRequestNumber)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DeliveryRequestTime)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TokenToLoad)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.IsActiveToken)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Status)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.IsActive)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CONTRACT.ContractNumber)
+                            </td>
+                            <td>
+                                @*@Html.ActionLink("Edit", "Edit", new { id = item.DeliveryRequestId }) |*@
+                                @Html.ActionLink("Details", "Details", new { id = item.DeliveryRequestId }) |
+                                @*@Html.ActionLink("Delete", "Delete", new { id = item.DeliveryRequestId }) |
+                                @Html.ActionLinkAuthorized("Verify", "VerifyDeliveryRequest", new { id = item.DeliveryRequestId }) |
+                                @{ if (item.DeliveryOrder.Count == 0)
+                                    {
+                                        @Html.ActionLinkAuthorized("Create Delivery Order", "CreateDeliveryOrder", new { idDeliveryRequest = item.DeliveryRequestId })
+                                    }
+                                }*@
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        @*<table class="table table-bordered table-striped" id="deliveryRequestTableSecond">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DeliveryRequestNumber)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DeliveryRequestTime)
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>*@
+    </div>
+</div>
+<script type="text/javascript">
+
+    //$('#deliveryRequestTable').DataTable({
+    //    'paging': true,
+    //    'lengthMenu': [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+    //    'pageLength': 10,
+    //    'searching': true,
+    //    'ordering': true,
+    //    'info': true,
+    //    'autoWidth': false,
+    //    'scrollX': true
+    //});
+    //$('table#deliveryRequestTableSecond').DataTable({
+    //    "oDataUrl": "odata/DeliveryRequestsOData",
+    //    "oDataViaJsonp": false,	// set to true for cross-domain requests
+    //    "oDataAbort": false, // set to true to cancel previous on-going request
+    //    "ajax": "odata/DeliveryRequestsOData",
+    //    "serverSide": true, // set to true for OData server side filtering and sorting
+    //    "columns": [
+    //        { data: "DeliveryRequestNumber", type: "num" },
+    //        { data: "DeliveryRequestTime" }
+    //    ],
+    //    'paging': true,
+    //    'lengthMenu': [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+    //    'pageLength': 10,
+    //    'searching': true,
+    //    'ordering': true,
+    //    'info': true,
+    //    'autoWidth': false,
+    //    'scrollX': true
+    //});
+</script>

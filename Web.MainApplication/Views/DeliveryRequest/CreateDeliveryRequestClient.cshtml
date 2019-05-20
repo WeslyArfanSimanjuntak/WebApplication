@@ -1,0 +1,326 @@
+﻿@model Repository.Application.DataModel.DeliveryRequest
+@using Repository.Application.DataModel;
+@{
+    ViewBag.Title = "CreateDeliveryRequestClient";
+    var listOutStandingDR = (List<DeliveryRequest>)ViewBag.ListOutStandingDR;
+    //CONTRACT contract = (CONTRACT)ViewBag.Contract;
+}
+
+<div class="box box-solid">
+    <div class="box-header with-border">
+        <h3 class="box-title">
+            Create - Delivery Request
+        </h3>
+    </div>
+    <!-- /.box-header -->
+
+    <div class="box-body">
+        <div class="row">
+            <div class="col-md-6">
+
+                <dl class="dl-horizontal">
+
+                    <dt>
+                        Contract Number
+                    </dt>
+
+                    <dd>
+                        @Model.CONTRACT.ContractNumber
+                    </dd>
+
+                    <dt>
+                        Client Id
+                    </dt>
+
+                    <dd>
+                        @Model.CONTRACT.CLIENT.ClientId
+                    </dd>
+                    <dt>
+                        Client Name
+                    </dt>
+
+                    <dd>
+                        @Html.ActionLink(Model.CONTRACT.CLIENT.ClientType == "individual" ? Model.CONTRACT.CLIENT.ClientName : Model.CONTRACT.CLIENT.ClientCompanyName, "Details", "Client", new { id = Model.CONTRACT.ClientIdPK }, null)
+                    </dd>
+                    <dt>
+                        Credit Line
+                    </dt>
+
+                    <dd>
+                        IDR <strong id="contractLine">@Model.CONTRACT.Line</strong>
+                    </dd>
+                    <dt class="h4">
+                        Saldo/Deposit
+                    </dt>
+
+                    <dd class="money-format h4">
+                        IDR @(Model.CONTRACT.FinanceBalance.ActualAmount + Model.CONTRACT.FinanceBalance.AvailableAmount)
+                    </dd>
+
+                </dl>
+            </div>
+            <div class="col-md-6">
+
+                <dl class="dl-horizontal">
+
+
+
+                    <dt>
+                        Start Periode
+                    </dt>
+
+                    <dd>
+                        @(Model.CONTRACT.StartPeriode.HasValue ? Model.CONTRACT.StartPeriode.Value.ToString("dd/MM/yyyy") : "")
+                    </dd>
+
+                    <dt>
+                        End Periode
+                    </dt>
+
+                    <dd>
+                        @(Model.CONTRACT.EndPeriode.HasValue ? Model.CONTRACT.EndPeriode.Value.ToString("dd/MM/yyyy") : "" )
+                    </dd>
+                    <dt>
+                        Site Name
+                    </dt>
+
+                    <dd>
+                        @Model.CONTRACT.SiteName - @Model.CONTRACT.SITE.SITEADDRESS
+                    </dd>
+                </dl>
+
+            </div>
+
+        </div>
+        <div>
+            <h4 class="box-title">
+                Detail Product In Contract
+            </h4>
+            @{
+                foreach (var item in Model.CONTRACT.ContractProduct)
+                {
+                    <div class="col-md-6">
+
+                        <dl class="dl-horizontal">
+                            <dt>
+                                Product Name
+                            </dt>
+
+                            <dd>
+                                @(item.ProductId + " - " + item.PRODUCT.PRODUCTNAME)
+                            </dd>
+
+                            <dt>
+                                Price/Ton (IDR)
+                            </dt>
+
+                            <dd>
+                                IDR <strong class="money-format">@item.PricePerTon</strong>
+                            </dd>
+                            <dt>
+                                Total Amount In Contract
+                            </dt>
+
+                            <dd>
+                                @item.Amount ton
+                            </dd>
+                            <dt>
+                                Remaining Amount
+                            </dt>
+
+                            <dd>
+                                @item.Amount ton
+                            </dd>
+                       
+                        </dl>
+                    </div>
+                }
+
+            }
+
+        </div>
+        <br />
+    </div>
+
+    <div class="row">
+        <div>
+            <h4 class="box-title">
+                @{if (listOutStandingDR.Count > 0)
+                    {
+                        <strong>Outstanding DeliveryRequest</strong>
+                    }
+                }
+            </h4>
+
+        </div>
+        <div class="box-body">
+            @{
+                foreach (var item in listOutStandingDR)
+                {
+                    <div class="col-md-6">
+
+                        <dl class="dl-horizontal">
+                            <dt>
+                                Product Name
+                            </dt>
+
+                            <dd>
+                                @item.DeliveryRequestProductDetailTransaction.FirstOrDefault().PRODUCT.PRODUCTNAME
+                            </dd>
+
+                            <dt>
+                                Quantity
+                            </dt>
+
+                            <dd>
+                                @item.DeliveryRequestProductDetailTransaction.FirstOrDefault().Amount ton
+                            </dd>
+                            <dt>
+                                Delivery Request Time
+                            </dt>
+
+                            <dd>
+                                @item.DeliveryRequestTime
+                            </dd>
+                            <dt>
+                                Expired Date
+                            </dt>
+
+                            <dd>
+                                @item.DeliveryRequestTime.Value.AddDays(item.CONTRACT.MaxExpiredDR.Value)
+                            </dd>
+                        </dl>
+                    </div>
+                }
+
+            }
+
+        </div>
+    </div>
+    <div class="box-body">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.DeliveryRequestId)
+
+                <div class="form-group">
+                    @Html.Label("DR Number", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.DeliveryRequestNumber, new { htmlAttributes = new { @class = "form-control", @readonly = "true" } })
+                        @Html.ValidationMessageFor(model => model.DeliveryRequestNumber, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    @Html.Label("Date/Time", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.DeliveryRequestTime, new { htmlAttributes = new { @class = "form-control", @required = "true" } })
+                        @Html.ValidationMessageFor(model => model.DeliveryRequestTime, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-2">
+                    </div>  <div class="col-md-10">
+                        @Html.Label("Product Detail", htmlAttributes: new { @class = "control-label" })
+                    </div>
+                </div>
+                @{ foreach (var item in Model.DeliveryRequestProductDetailTransaction)
+                    {
+                        <div id="div_@item.ProductId">
+                            <div class="form-group">
+                                @Html.Label(" ", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    <input class="btn btn-default exc-inc-btn" value="Exclude" type="button" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.Label("Product", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.Hidden(item.PRODUCT.PRODUCTID, item.ProductId)
+                                    @Html.TextBox(item.PRODUCT.PRODUCTID + "display", item.PRODUCT.PRODUCTNAME, " " + (item.PRODUCT.PRODUCTID), htmlAttributes: new { @class = "form-control", @readonly = "true", @required = "true" })
+                                    @Html.ValidationMessageFor(model => model.DeliveryRequestTime, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.Label("Quantity(ton)", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.TextBox(item.ProductId + "Amount", item.Amount, htmlAttributes: new { @onkeyup = "AmountTonM3Converter(this,'ton','" + @item.ProductId + "Amountm3')", @class = "money-format form-control", @required = "true" })
+                                    @Html.ValidationMessage(item.PRODUCT.PRODUCTID + "Amount", "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.Label("Quantity(m3)", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.TextBox(item.ProductId + "Amountm3", item.Amount, htmlAttributes: new { @onkeyup = "AmountTonM3Converter(this,'ton','" + @item.ProductId + "Amount')", @class = "money-format form-control", @required = "true" })
+                                    @Html.ValidationMessage(item.PRODUCT.PRODUCTID + "Amount", "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.Label("Driver Name Armada", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.TextBox(item.ProductId + "DriverName", item.DriverName, htmlAttributes: new { @class = "form-control", @required = "true" })
+                                    @Html.ValidationMessage(item.ProductId + "DriverName", "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.Label("Armada Plat Number", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.TextBox(item.ProductId + "ArmadaPlatNumber", item.ArmadaPlatNumber, htmlAttributes: new { @class = "form-control", @required = "true" })
+                                    @Html.ValidationMessage(item.ProductId + "ArmadaPlatNumber", "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <br />
+                        </div>
+
+                    }
+
+                }
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Save" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+    <div class="box-footer">
+        @Html.ActionLinkAuthorized("Back to Contract List |", "IndexClientContract", "Contract")
+        @Html.ActionLinkAuthorized("Delivery Request List |", "indexclient", "deliveryrequest")
+
+    </div>
+</div>
+<script>
+    (function ($) {
+        //Date picker
+        $('#DeliveryRequestTime').datetimepicker({
+            format: 'MM/DD/YYYY HH:mm:ss'
+        });
+        $("#contractLine").number(true, 2);
+
+    }(jQuery));
+    $(document).ready(function () {
+        $(".exc-inc-btn").on("click", function () {
+            if ($(this).attr("value") == "Exclude") {
+                $(this).parent().parent().parent().find("input").each(function () {
+                    $(this).attr("disabled", "true");
+                });
+                $(this).attr("value", "Include");
+                $(this).removeAttr("disabled");
+            }
+            else if ($(this).attr("value") == "Include") {
+                $(this).parent().parent().parent().find("input").each(function () {
+                    $(this).removeAttr("disabled");
+                });
+                $(this).attr("value", "Exclude");
+                $(this).removeAttr("disabled");
+            }
+
+
+        });
+    });
+</script>

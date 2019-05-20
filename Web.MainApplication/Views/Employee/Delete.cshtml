@@ -1,0 +1,71 @@
+﻿@model Repository.Application.DataModel.EMPLOYEE
+
+@{
+    ViewBag.Title = "Delete";
+}
+<div class="box box-solid">
+    <div class="box-header with-border">
+        <h3 class="box-title">
+            Delete - Employee
+        </h3>
+        <h4>Are you sure you want to delete this?</h4>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+
+
+        <dl class="dl-horizontal">
+            <dt>
+                Employee Name
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.EMPLOYEENAME)
+            </dd>
+
+            <dt>
+                Employee Age
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.EMPLOYEEAGE)
+            </dd>
+
+            <dt>
+                Employee Full Name
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.EMPLOYEEFULLNAME)
+            </dd>
+
+            <dt>
+                Join Date
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.EMPLOYEEJOINAT)
+            </dd>
+
+            <dt>
+                Employee Status
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.EMPLOYEESTATUS)
+            </dd>
+
+        </dl>
+    </div>
+    <div class="box-footer">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-default" /> |
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        }
+    </div>
+</div>

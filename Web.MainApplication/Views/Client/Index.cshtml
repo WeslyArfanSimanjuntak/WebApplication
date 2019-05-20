@@ -1,0 +1,182 @@
+﻿@model IEnumerable<Repository.Application.DataModel.CLIENT>
+
+@{
+    ViewBag.Title = "Index";
+}
+<div class="box box-solid">
+    <div class="box-header with-border">
+        <h3 class="box-title">
+            @Html.ActionLink("Create New", "Create")
+        </h3>
+    </div>
+    <div class="box-header with-border">
+        <h3 class="box-title">
+            Client Individu
+        </h3>
+    </div>
+    <div class="box-body">
+        <table class="table table-bordered table-striped" id="masterClient">
+            <thead>
+                <tr>
+                    <th>
+                        Client Id
+                    </th>
+                    <th>
+                        Client Name
+                    </th>
+                    <th>
+                        Client Address
+                    </th>
+                    <th>
+                        Client Type
+                    </th>
+                    <th>
+                        Client Phone Number
+                    </th>
+                    <th>
+                        Client Email
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Where(x => x.ClientType == "individual"))
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ClientId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ClientName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ClientAddress)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ClientType)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ClientPhoneNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ClientEmail)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="box-header with-border">
+        <h3 class="box-title">
+            Client Company
+        </h3>
+    </div>
+    <div class="box-body">
+        <table class="table table-bordered table-striped" id="masterClientCompany">
+            <thead>
+                <tr>
+                    <th>
+                        Client Id
+                    </th>
+                    <th>
+                        Company Name
+                    </th>
+                    <th>
+                        Company Address
+                    </th>
+                    <th>
+                        Client Type
+                    </th>
+                    <th>
+                        Company Leader
+                    </th>
+                    <th>
+                        Email Leader
+                    </th>
+                    <th>
+                        PIC Phone Number
+                    </th>
+                    <th>
+                        Company Phone Number
+                    </th>
+                    <th>
+                        Company Email
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Where(x => x.ClientType == "company"))
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ClientId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ClientCompanyName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ClientAddress)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ClientType)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ClientCompanyPIC)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ClientCompanyLeaderEmailAddress)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ClientCompanyPICPhoneNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ClientPhoneNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ClientEmail)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<script type="text/javascript">
+    (function ($) {
+
+        $('#masterClient').DataTable({
+            'paging': true,
+            'lengthMenu': [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+            'pageLength': 10,
+            'searching': true,
+            'ordering': true,
+            'info': true,
+            'autoWidth': false,
+            'scrollX': true
+        });
+        $('#masterClientCompany').DataTable({
+            'paging': true,
+            'lengthMenu': [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+            'pageLength': 10,
+            'searching': true,
+            'ordering': true,
+            'info': true,
+            'autoWidth': false,
+            'scrollX': true
+        });
+    }(jQuery));
+
+</script>

@@ -1,0 +1,157 @@
+﻿@model Repository.Application.DataModel.CONTRACT
+
+@{
+    ViewBag.Title = "Details";
+    var paramSetupTonToM3 = (float)ViewBag.ParamSetupTonToM3;
+}
+<div class="box box-solid">
+    <div class="box-header with-border">
+        <h3 class="box-title">
+            Details
+        </h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.ContractNumber)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ContractNumber)
+            </dd>
+
+            <dt>
+                Contract Value
+            </dt>
+
+            <dd class="money-format">
+                @Model.Value
+            </dd>
+
+            <dt>
+                Credit Line
+            </dt>
+
+            <dd class="money-format">
+                @Html.DisplayFor(model => model.Line)
+            </dd>
+
+            <dt class="h4">
+                Saldo/Deposit
+            </dt>
+
+            <dd class="money-format h4">
+                @(Model.FinanceBalance.ActualAmount + Model.FinanceBalance.AvailableAmount)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.StartPeriode)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.StartPeriode)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.EndPeriode)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.EndPeriode)
+            </dd>
+
+            <dt>
+                Client Id
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ClientIdPK)
+            </dd>
+
+            <dt>
+                Client Name
+            </dt>
+
+            <dd>
+                @Html.ActionLink(Model.CLIENT.ClientName, "Details", "Client", new { id = Model.ClientIdPK }, null)
+            </dd>
+
+
+        </dl>
+
+        <strong class="h4">Detail Product In Contract</strong><br />
+        <strong class="h4">Total Product : @Model.ContractProduct.Count</strong>
+        <br />
+        <br />
+        <dl class="dl-horizontal">
+            @{ foreach (var item in Model.ContractProduct)
+                {
+                    <dt>
+                        Product Id
+                    </dt>
+
+                    <dd>
+                        @item.ProductId
+                    </dd>
+                    <dt>
+                        Product Name
+                    </dt>
+
+                    <dd>
+                        @item.PRODUCT.PRODUCTNAME
+                    </dd>
+                    <dt>
+                        Quantity(ton)
+                    </dt>
+
+                    <dd class="money-format">
+                        @item.Amount
+                    </dd>
+                    <dt>
+                        Quantity(m3)
+                    </dt>
+
+                    <dd class="money-format">
+                        @(item.Amount * paramSetupTonToM3)
+                    </dd>
+
+                    <dt>
+                        Price / Ton(IDR)
+                    </dt>
+
+                    <dd class="money-format">
+                        @item.PricePerTon
+                    </dd>
+                    <dt>
+                        <br />
+                    </dt>
+                    <dd></dd>
+                }
+
+            }
+
+        </dl>
+    </div>
+    <div class="box-footer">
+
+        @Html.ActionLinkAuthorized("Edit |", "Edit", new { id = Model.ContractId })
+        @Html.ActionLinkAuthorized("Back to List |", "Index")
+        @Html.ActionLinkAuthorized("Back to List Client Contract", "indexclientcontract")
+        @Html.ActionLinkAuthorized("Deposit", "Deposit", "FinanceTransaction", new { contractId = Model.ContractId }, htmlAttributes: new { @class = "btn btn-default" })
+        @Html.ActionLinkAuthorized("Create Delivery Request", "CreateDeliveryRequestClient", "DeliveryRequest", new { contractId = Model.ContractId  }, htmlAttributes: new { @class = "btn btn-default" }) 
+
+        @{
+            var userMapping = Model.CLIENT.UserClientMapping.Where(x => x.ClientId == Model.ClientIdPK).FirstOrDefault();
+            if (userMapping != null)
+            {
+                @Html.ActionLinkAuthorized("User Client", "UserClientDetails", new { clientId = Model.ClientIdPK }, htmlAttributes: new { @class = "btn btn-default" }) }
+            else
+            {
+
+                @Html.ActionLinkAuthorized("Create User Client", "UserClientCreate", new { id = Model.ContractId }, htmlAttributes: new { @class = "btn btn-default" })
+            }
+        }
+    </div>
+</div>

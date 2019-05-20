@@ -1,0 +1,97 @@
+﻿@model IEnumerable<Repository.Application.DataModel.CONTRACT>
+
+@{
+    /**/
+
+    ViewBag.Title = "Index";
+}
+
+
+<div class="box box-solid">
+    <div class="box-header with-border">
+        <h3 class="box-title">
+            Index - Client Contract
+        </h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+        <table class="table table-bordered table-striped" id="contractClientTable">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ContractNumber)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Value)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Line)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.StartPeriode)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.EndPeriode)
+                    </th>
+                    <th>
+                        Client Name
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ContractNumber)
+                        </td>
+                        <td>
+                            @item.Value
+                        </td>
+                        <td>
+                            Credit Line
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.StartPeriode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EndPeriode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ClientIdPK) - @Html.DisplayFor(modelItem => item.CLIENT.ClientName)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Details", "Details", new { id = item.ContractId })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<script type="text/javascript">
+
+    $('#contractClientTable').DataTable({
+        'paging': true,
+        'lengthMenu': [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+        'pageLength': 10,
+        'searching': true,
+        'ordering': true,
+        'info': true,
+        'autoWidth': false,
+        'scrollX': true,
+        'dom': 'Blfrtip',
+        'buttons': [
+            'excelHtml5', {
+                extend: 'pdfHtml5',
+                text: 'Pdf',
+                title: 'Data export',
+                download: 'open'
+            }
+            //,
+            //'csvHtml5',
+            //'copyHtml5'
+        ]
+    })
+</script>

@@ -1,0 +1,277 @@
+﻿@model IEnumerable<Repository.Application.DataModel.TransactionProduct>
+@using Repository.Application.DataModel;
+@{
+    ViewBag.Title = "Index";
+    double? stock = (double?)ViewBag.Stock;
+    var siteDetails = (SITE)ViewBag.SiteDetails;
+}
+
+
+<div class="box box-solid">
+    <div class="box-header with-border">
+        <h3 class="box-title">
+            Index - Product <strong>@siteDetails.SITENAME</strong> Site Transaction <br />
+
+        </h3>
+        <h4>
+            Address : @siteDetails.SITEADDRESS
+        </h4>
+        <h4>
+            Product : @(Model.FirstOrDefault() != null ? (Model.FirstOrDefault().ProductId + " - " + Model.FirstOrDefault().PRODUCT.PRODUCTNAME) : "")
+        </h4>
+        <h4>
+            Stock : <strong class="text-success">@(stock.HasValue ? stock.Value : 0) ton</strong>
+        </h4>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+        <table class="table table-bordered table-striped" id="productSiteTransactionTable">
+            <thead>
+                <tr>
+                    <th>
+                        Transaction Number
+                    </th>
+                    <th>Date</th>
+                    <th>
+                        Type
+                    </th>
+                    <th>
+                        Amount
+                    </th>
+
+                    <th>
+                        Type Number
+                    </th>
+                    <th>
+                        Remark
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TransactionProductNumber)
+                        </td>
+                        <td>
+                            @{ if (item.RitaseId != null)
+                                {
+                                    @item.RITASE.RITASETIME.Value.ToShortDateString()
+                                }
+                                else if (item.ConvertionId != null)
+                                {
+                                    @item.ProductConvertion.ConvertionTime.Value.ToShortDateString()
+
+                                }
+                                else if (item.AdjustmentId != null)
+                                {
+                                    @item.ProductAdjustment.AdjustmentTime.Value.ToShortDateString()
+                                }
+                            }
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Jenis)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Ammount)
+                        </td>
+
+                        <td>
+                            @{ if (item.RitaseId != null)
+                                {
+                                    @Html.ActionLink(item.RITASE.RITASENUMBER, "Details", "Ritase", new { id = item.RitaseId }, null)
+                                }
+                                else if (item.ConvertionId != null)
+                                {
+                                    @Html.ActionLink(item.ProductConvertion.ConvertionNumber, "ConvertionDetails", "TransactionProduct", new { id = item.ConvertionId }, null)
+
+                                }
+                                else if (item.AdjustmentId != null)
+                                {
+                                    @Html.ActionLink(item.ProductAdjustment.AdjustmentNumber, "AdjustmentDetails", "TransactionProduct", new { id = item.AdjustmentId }, null)
+                                }
+                            }
+                        </td>
+                        <td>
+                            @{ if (item.RitaseId != null)
+                                {
+                                    @item.RITASE.Remark
+                                }
+                                else if (item.ConvertionId != null)
+                                {
+                                    @item.ProductConvertion.Remark
+
+                                }
+                                else if (item.AdjustmentId != null)
+                                {
+                                    @item.ProductAdjustment.Remark
+                                }
+                            }
+                        </td>
+                        <td>
+                            @Html.ActionLink("Details", "Details", new { id = item.Id })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        @*<table id="deliveryRequest">
+                <thead>
+                    <tr>
+                        First Column
+                    </tr>
+                    <tr> Second Column</tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>*@
+        <table class="table table-bordered table-striped" id="products1">
+            <thead>
+                <tr>
+                    <th>
+                        DeliveryRequestId
+                    </th>
+                    <th>DeliveryRequestNumber</th>
+                    <th>
+                        ContractId
+                    </th>
+                    <th>
+                        DeliveryRequestTime
+                    </th>
+
+                    <th>
+                        TokenToLoad
+                    </th>
+                    <th>
+                        IsActiveToken
+                    </th>
+                    <th>CreatedBy</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+<script type="text/javascript">
+    $('#productSiteTransactionTable thead tr').clone(true).appendTo('#productSiteTransactionTable thead');
+    $('#productSiteTransactionTable thead tr:eq(1) th').each(function (i) {
+        var title = $(this).text();
+        if (title != "") {
+            $(this).html('<input type="text" style="border:0;border-bottom:solid 1px #707070;outline:none;width:90%" />');
+        }
+        $('input', this).on('keyup change', function () {
+            if (dataTable.column(i).search() !== this.value) {
+                if (String(this.value).length > 2 || String(this.value).length == 0) {
+                    dataTable
+                        .column(i)
+                        .search(this.value)
+                        .draw();
+                }
+
+            }
+        });
+    });
+
+    $('#products1 thead tr').clone(true).appendTo('#products1 thead');
+    $('#products1 thead tr:eq(1) th').each(function (i) {
+        var title = $(this).text();
+        if (title != "") {
+            $(this).html('<input type="text" style="border:0;border-bottom:solid 1px #707070;outline:none;width:90%" />');
+        }
+        $('input', this).on('keyup change', function () {
+            if (products1.column(i).search() !== this.value) {
+                if (String(this.value).length > 2 || String(this.value).length == 0) {
+                    products1.column(i)
+                        .search(this.value)
+                        .draw();
+                }
+
+            }
+        });
+    });
+
+    var dataTable = $('#productSiteTransactionTable').DataTable({
+        'orderCellsTop': true,
+        'fixedHeader': true,
+        'paging': true,
+        'lengthMenu': [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+        'pageLength': 10,
+        'searching': true,
+        'ordering': true,
+        'info': true,
+        'autoWidth': false,
+        'scrollX': true,
+        'order': [[0, "desc"]],
+        'dom': 'Blfrtip',
+
+        'buttons': [
+            'excelHtml5', {
+                extend: 'pdfHtml5',
+                text: 'Pdf',
+                title: 'Data export',
+                download: 'open'
+            }
+            //,
+            //'csvHtml5',
+            //'copyHtml5'
+        ]
+    });
+
+    var products1 = $('#products1').DataTable({
+
+        "sPaginationType": "full_numbers",
+        'orderCellsTop': true,
+        'fixedHeader': true,
+        'paging': true,
+        'lengthMenu': [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+        'pageLength': 10,
+        "processing": true,
+        "serverSide": true,
+        "sAjaxSource": "../odata/DeliveryRequestsOData?$expand=CONTRACT",
+        "aoColumns": [
+            { "mData": "DeliveryRequestId", sType: "numeric" },
+            { "mData": "DeliveryRequestNumber" },
+            { "oData" : "CONTRACT/ContractNumber"},
+            { "mData": "DeliveryRequestTime", sType: 'date' },
+            { "mData": "TokenToLoad" },
+            { "mData": "IsActiveToken" },
+            { "mData": "CreatedBy" }
+        ],
+        "aoColumnDefs": [
+            {
+                // `data` refers to the data for the cell (defined by `mData`, which
+                // defaults to the column being worked with, in this case is the first
+                // Using `row[0]` is equivalent.
+                "mRender": function (data, type, row) {
+                    return row.CONTRACT["ContractNumber"];
+                },
+                "aTargets": [2]
+            },
+        ],
+        "fnServerData": ServerOData,
+        "iODataVersion": 3,
+        "bUseODataViaJSONP": false, 'searching': true,
+        'ordering': true,
+        'info': true,
+        'autoWidth': false,
+        'scrollX': true,
+        'dom': 'Blfrtip',
+
+        'buttons': [
+            'excelHtml5', {
+                extend: 'pdfHtml5',
+                orientation: 'landscape',
+                pageSize: 'LEGAL',
+                text: 'Pdf',
+                title: 'Data export',
+                download: 'open'
+            }
+            //,
+            //'csvHtml5',
+            //'copyHtml5'
+        ]
+    });
+</script>

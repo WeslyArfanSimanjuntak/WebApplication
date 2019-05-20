@@ -1,0 +1,112 @@
+﻿@model Repository.Application.DataModel.DeliveryOrder
+@{
+    var deliveryRequest = (Repository.Application.DataModel.DeliveryRequest)ViewBag.DeliveryRequest;
+
+}
+
+<div class="box box-solid">
+    <div class="box-header with-border">
+        <h3 class="box-title">
+            Create - Delivery Order
+        </h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+        <div class="col-md-12">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.Hidden("DeliveryRequestId", Model.DeliveryRequestId)
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DeliveryOrderNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.DeliveryOrderNumber, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                            @Html.ValidationMessageFor(model => model.DeliveryOrderNumber, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        @Html.Label("Loading Amount (ton/m3)", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control money-format", @required = "required" } })
+                            @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Remark, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.Remark, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Remark, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Create" class="btn btn-default" />
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="col-md-12">
+
+            <dl class="dl-horizontal">
+                <dt>
+                    DeliveryRequestNumber
+                </dt>
+
+                <dd>
+                    @deliveryRequest.DeliveryRequestNumber
+                </dd>
+
+                <dt>
+                    DeliveryRequestTime
+                </dt>
+
+                <dd>
+                    @deliveryRequest.DeliveryRequestTime
+                </dd>
+
+                <dt>
+                    TokenToLoad
+                </dt>
+
+                <dd>
+                    @deliveryRequest.TokenToLoad
+                </dd>
+
+                <dt>
+                    IsActiveToken
+                </dt>
+
+                <dd>
+                    @deliveryRequest.IsActiveToken
+                </dd>
+
+
+                <dt>
+                    ContractNumber
+                </dt>
+
+                <dd>
+                    @deliveryRequest.CONTRACT.ContractNumber
+                </dd>
+
+            </dl>
+        </div>
+
+    </div>
+    <div class="box-footer">
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</div>
+<script type="text/javascript">
+    (function ($) {
+    });
+</script>

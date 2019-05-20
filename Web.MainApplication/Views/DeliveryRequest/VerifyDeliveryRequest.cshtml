@@ -1,0 +1,137 @@
+﻿@model Repository.Application.DataModel.DeliveryRequest
+
+<div class="box box-solid">
+    <div class="box-header with-border">
+        <h3 class="box-title">
+            Verify - Delivery Request
+        </h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+        <div class="row">
+            <div class="col-md-12">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+                        @Html.Hidden("Id", Model.DeliveryRequestId)
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownList("Status", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        @*<div class="form-group">
+                                @Html.Label("Client Id", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.DropDownList("ClientIdPK", null, htmlAttributes: new { @class = "form-control", @required = "required" })
+                                    @Html.ValidationMessageFor(model => model.ClientIdPK, "", new { @class = "text-danger" })
+                                </div>
+                            </div>*@
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Save" class="btn btn-default" />
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.DeliveryRequestNumber)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.DeliveryRequestNumber)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.DeliveryRequestTime)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.DeliveryRequestTime)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.TokenToLoad)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.TokenToLoad)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.IsActiveToken)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.IsActiveToken)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CreatedBy)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.CreatedBy)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.UpdatedBy)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.UpdatedBy)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CreatedDate)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.CreatedDate)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.UpdatedDate)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.UpdatedDate)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.IsActive)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.IsActive)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CONTRACT.ContractNumber)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.CONTRACT.ContractNumber)
+                    </dd>
+
+                </dl>
+            </div>
+        </div>
+
+    </div>
+    <div class="box-footer">
+        @Html.ActionLinkAuthorized("Edit |", "Edit", new { id = Model.DeliveryRequestId })
+        @Html.ActionLinkAuthorized("Back to List |", "Index")
+        @Html.ActionLinkAuthorized("Back to List Client DR", "indexclient")
+    </div>
+</div>

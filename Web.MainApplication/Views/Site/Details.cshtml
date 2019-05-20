@@ -1,0 +1,31 @@
+﻿@model Repository.Application.DataModel.SITE
+
+@{
+    ViewBag.Title = "Details";
+}
+<div class="box box-solid">
+    <div class="box-header with-border">
+        <h3 class="box-title">
+            Details - Site
+        </h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+
+        <dl class="dl-horizontal">
+            <dt>
+                Site Address
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.SITEADDRESS)
+            </dd>
+
+        </dl>
+
+    </div>
+    <div class="box-footer">
+        @Html.ActionLink("Edit", "Edit", new { id = Model.SITENAME }) |
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</div>

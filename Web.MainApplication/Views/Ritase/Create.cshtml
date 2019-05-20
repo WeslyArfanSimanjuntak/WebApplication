@@ -1,0 +1,282 @@
+﻿@model Repository.Application.DataModel.RITASE
+
+@{
+    /**/
+
+    ViewBag.Title = "Create";
+}
+<div class="box box-solid">
+    <div class="box-header with-border">
+        <h3 class="box-title">
+            Create - Delivery Request
+        </h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.Label("Ritase Number", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.RITASENUMBER, new { htmlAttributes = new { @class = "form-control", @readonly = "true" } })
+                        @Html.ValidationMessageFor(model => model.RITASENUMBER, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Site Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("SITE", null, htmlAttributes: new { @class = "form-control", @required = "required" })
+                        @Html.ValidationMessageFor(model => model.SITE, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.Label("Source Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("SOURCEID", null, htmlAttributes: new { @class = "form-control", @required = "required" })
+                        @Html.ValidationMessageFor(model => model.SOURCEID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.Label("Raw Material (Product)", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("PRODUCT", null, htmlAttributes: new { @class = "form-control", @required = "required" })
+                        @Html.ValidationMessageFor(model => model.PRODUCT, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.Label("Quantity(ton)", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.QuantityInTon, new { htmlAttributes = new { @onkeyup = "AmountTonM3Converter(this,'ton', 'QuantityInM3')", @class = "form-control", @required = "required" } })
+                        @Html.ValidationMessageFor(model => model.QuantityInTon, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.Label("Quantity(m3)", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+
+                        @Html.TextBox("QuantityInM3", Model.QuantityInTon * (double)ViewBag.TonUnitToM3Unit, htmlAttributes: new { @onkeyup = "AmountTonM3Converter(this,'m3', 'QuantityInTon')", @class = "form-control money-format", @required = "required", @maxlength = "6" })
+                        @Html.ValidationMessageFor(model => model.QuantityInTon, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.Label("Driver Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("DRIVERARMADA", null, htmlAttributes: new { @class = "form-control", @required = "required" })
+                        @Html.ValidationMessageFor(model => model.DRIVERARMADA, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Armada Detail", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("ARMADA", null, htmlAttributes: new { @class = "form-control", @required = "required" })
+                        @Html.ValidationMessageFor(model => model.ARMADA, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Ritase Time", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.RITASETIME, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                        @Html.ValidationMessageFor(model => model.RITASETIME, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Ritase Status", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("RITASESTATUS", null, htmlAttributes: new { @class = "form-control", @required = "required" })
+                        @Html.ValidationMessageFor(model => model.RITASESTATUS, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.Label("Formula / Batch", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("BatchCode", null, htmlAttributes: new { @class = "form-control", @required = "required" })
+                        @Html.ValidationMessageFor(model => model.BatchCode, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group" id="batchDetailInformation">
+                    @Html.Label("Batch Detail", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10" id="batchDetailInformationChild">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Create/Process" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="box-footer clearfix">
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</div>
+<script type="text/javascript">
+    (function ($) {
+        //Date picker
+        $('#RITASETIME').datetimepicker({
+            format: 'MM/DD/YYYY HH:mm:ss'
+        });
+        $('#QuantityInTon').number(true, 2).attr("maxlength", "6");
+    }(jQuery));
+    $(document).ready(function () {
+        $('#RITASESTATUS').on("change", function () {
+            if ($("#RITASESTATUS").val() == "" || $("#RITASESTATUS").val() == "Accumulate") {
+                $("#BatchCode").val("").change();
+                $("#BatchCode option").not(':first-child').each(function (index) {
+                    $(this).attr('disabled', true);
+                });
+                //$("#BatchCode").val("").attr("readonly", true);
+            }
+            else {
+                $("#BatchCode").val("").change();
+                $("#BatchCode option").not(':first-child').each(function (index) {
+                    $(this).removeAttr('disabled', true);
+                });
+            }
+        });
+
+        $("#RITASESTATUS").change();
+
+
+        $("#SITE").on("change", function () {
+
+            $("#DRIVERARMADA option").not(':first-child').each(function (index) {
+                $(this).remove();
+            });
+            $("#ARMADA option").not(':first-child').each(function (index) {
+                $(this).remove();
+            });
+            $("#PRODUCT option").not(':first-child').each(function (index) {
+                $(this).remove();
+            });
+            var selectedSite = $("#SITE").val();
+
+            if (selectedSite != "") {
+                AjaxCall(function (output) {
+                    console.log(output);
+                    $.each(output.data, function (key, value) {
+                        $("#DRIVERARMADA").append('<option value="' + value["EMPLOYEEID"] + '">' + value["EMPLOYEEID"] + " - " + value["EMPLOYEEFULLNAME"] + '</option>');
+
+                    });
+
+                }, entityApiUrl + '?entitas=EMPLOYEE&filter=SiteName=="' + selectedSite + '" and EmployeeGroup="Driver"');
+
+                //------------- Armada ---------
+                AjaxCall(function (output) {
+                    console.log(output);
+                    $.each(output.data, function (key, value) {
+                        $("#ARMADA").append('<option value="' + value["ARMADAID"] + '">' + value["ARMADAID"] + " - " + value["ARMADANAME"] + " - " + value["ARMADACAPACITYINKG"] + ' kg</option>');
+
+                    });
+
+                }, entityApiUrl + '?entitas=ARMADA&filter=SiteName=="' + selectedSite + '"');
+
+                //--------------- Product ------------
+                AjaxCall(function (output) {
+
+                    console.log(output);
+                    $.each(output.data, function (keyProduct, valueProduct) {
+
+
+                        $("#PRODUCT").append('<option value="' + valueProduct["PRODUCTID"] + '">' + valueProduct["PRODUCTNAME"]);
+
+                    });
+
+                }, entityApiUrl + '?entitas=PRODUCT&filter=TypeMaterial="Raw"');
+
+                //AjaxCall(function (output) {
+                //    console.log(output);
+                //    $.each(output.data, function (key, value) {
+                //        AjaxCall(function (output) {
+
+                //            console.log(output);
+                //            $.each(output.data, function (keyProduct, valueProduct) {
+
+
+                //                $("#PRODUCT").append('<option value="' + valueProduct["PRODUCTID"] + '">' + valueProduct["PRODUCTNAME"]);
+
+                //            });
+
+                //        }, entityApiUrl + '?entitas=PRODUCT&filter=TypeMaterial="Raw" and PRODUCTID=="' + value['ProductId'] + '"');
+
+                //        //$("#PRODUCT").append('<option value="' + value["ARMADAID"] + '">' + value["ARMADAID"] + " - " + value["ARMADANAME"] + " - " + value["ARMADACAPACITYINKG"] + ' kg</option>');
+
+                //    });
+
+                //}, entityApiUrl + '?entitas=ProductSite&filter=SiteName=="' + selectedSite + '"');
+
+            }
+
+
+        });
+        $("#SITE").change();
+
+        $("#PRODUCT").on("change", function () {
+            $("#BatchCode option").not(':first-child').each(function (index) {
+                $(this).remove();
+            });
+            $("#RITASESTATUS").change();
+            //var selectedProduct = $("#PRODUCT").val();
+            //var ritaseStatus = $("#RITASESTATUS").val();
+            //if (selectedProduct != "" && ritaseStatus != "" && ritaseStatus != "Accumulate") {
+            //    AjaxCall(function (output) {
+            //        console.log(output);
+            //        $.each(output.data, function (key, value) {
+            //            $("#BatchCode").append('<option value="' + value["BatchCode"] + '">' + value["BatchCode"] + " - " + value["BatchName"] + '</option>');
+            //        });
+
+            //    }, entityApiUrl + '?entitas=BATCH&filter=RawProduct=="' + selectedProduct + '"');
+            //}
+        });
+        $("#PRODUCT").change();
+
+        $("#BatchCode").on("change", function () {
+            var selectedBatchCode = $("#BatchCode").val();
+            $("#batchDetailInformationChild").html("");
+            if (selectedBatchCode != "") {
+                var htmlDetail = "";
+                AjaxCall(function (output) {
+                    console.log(output);
+                    var counter = 1;
+                    $.each(output.data, function (key, value) {
+
+                        htmlDetail = htmlDetail + ("<strong>" + counter.toString() + ". Batch Code = " + value["BatchCode"] + "</br> Product Id = " + value["ProductId"] + "<br/> Product Name =  " + value["PRODUCT"]["PRODUCTNAME"] + "<br/> Product Percentage = " + value["ProductPercentage"] + " %</strong><br/><br/>");
+                        counter++;
+                    });
+                    $("#batchDetailInformationChild").append(htmlDetail);
+                }, entityApiUrl + '?entitas=BatchProduct&filter=BatchCode=="' + selectedBatchCode + '"');
+
+            }
+        });
+        $("#BatchCode").change();
+
+        $("#RITASESTATUS").on("change", function () {
+            var selectedRitaseStatus = $("#RITASESTATUS").val();
+            if (selectedRitaseStatus == "Accumulate") {
+                $("#BatchCode").removeAttr("required");
+            }
+            $("#BatchCode option").not(':first-child').each(function (index) {
+                $(this).remove();
+            });
+            var selectedProduct = $("#PRODUCT").val();
+            var ritaseStatus = $("#RITASESTATUS").val();
+            if (selectedProduct != "" && ritaseStatus != "" && ritaseStatus != "Accumulate") {
+                AjaxCall(function (output) {
+                    console.log(output);
+                    $.each(output.data, function (key, value) {
+                        $("#BatchCode").append('<option value="' + value["BatchCode"] + '">' + value["BatchCode"] + " - " + value["BatchName"] + '</option>');
+                    });
+
+                }, entityApiUrl + '?entitas=BATCH&filter=RawProduct=="' + selectedProduct + '"');
+            }
+        });
+    });
+</script>

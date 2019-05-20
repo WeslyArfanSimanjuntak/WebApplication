@@ -1,0 +1,119 @@
+﻿@model IEnumerable<Repository.Application.DataModel.Menu>
+
+<div class="box box-solid">
+    <div class="box-header with-border">
+        <h3 class="box-title">
+            @Html.ActionLink("Create New", "Create")
+        </h3>
+
+    </div>
+    <div class="box-header">
+        <h3 class="box-title">
+            Menu
+        </h3>
+    </div>
+    <div class="box-body">
+        <table class="table table-bordered table-striped" id="menusTable">
+            <thead>
+
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.MenuName)
+                    </th>
+                    <th>
+                        Parent Menu
+                    </th>
+                    <th>
+                        Roles
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Sequence)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.MenuIClass)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.MenuLevel)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Remark)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IsActive)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MenuName)
+                        </td>
+                        <td>
+
+                            @Html.DisplayFor(modelItem => item.Menu2.MenuName)
+                        </td>
+                        <td>
+                            @{
+                                if (item.AspNetRoles1 != null)
+                                {
+                                    if (item.AspNetRoles1.Type == "Controller")
+                                    {
+                                        @item.AspNetRoles1.Name
+                                    }
+                                    else
+                                    {
+                                        @("-- " + item.AspNetRoles1.Name)
+                                    }
+                                }
+
+                            }
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Sequence)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MenuIClass)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MenuLevel)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Remark)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IsActive)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.MenuId }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.MenuId }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.MenuId })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<script type="text/javascript">
+    (function ($) {
+
+
+        $('#menusTable').DataTable({ 
+			'lengthMenu': [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+            'pageLength': 10,
+            'paging': true,
+            'searching': true,
+            'ordering': true,
+            'info': true,
+            'autoWidth': false,
+            'scrollX': true
+        });
+    }(jQuery));
+
+</script>

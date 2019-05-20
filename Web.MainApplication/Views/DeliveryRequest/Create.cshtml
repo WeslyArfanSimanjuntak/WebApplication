@@ -1,0 +1,151 @@
+﻿@model Repository.Application.DataModel.DeliveryRequest
+
+@{
+                ViewBag.Title = "Create";
+}
+<div class="box box-solid">
+    <div class="box-header with-border">
+        <h3 class="box-title">
+            Create - Delivery Request
+        </h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DeliveryRequestNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.DeliveryRequestNumber, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.DeliveryRequestNumber, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ContractId, "ContractId", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("ContractId", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.ContractId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DeliveryRequestTime, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.DeliveryRequestTime, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.DeliveryRequestTime, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.TokenToLoad, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.TokenToLoad, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.TokenToLoad, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.IsActiveToken, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.IsActiveToken, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.IsActiveToken, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CreatedBy, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.CreatedBy, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CreatedBy, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.UpdatedBy, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.UpdatedBy, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.UpdatedBy, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CreatedDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.CreatedDate, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CreatedDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.UpdatedDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.UpdatedDate, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.UpdatedDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.IsActive, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.IsActive, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Create" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+    <div class="box-footer">
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</div>
+<script type="text/javascript">
+    (function ($) {
+        //Date picker
+        $('#StartPeriode').datepicker({
+            autoclose: true,
+            format: 'dd/mm/yyyy'
+        }).val();
+        $('#EndPeriode').datepicker({
+            autoclose: true,
+            format: 'dd/mm/yyyy'
+        });
+
+        $("#ClientId").on("change", function () {
+            var selectedClientId = $("#ClientId").val();
+            AjaxCall(function (output) {
+                if ('company' === output.data[0]["ClientType"]) {
+                    $("#ClientEmail").val(output.data[0]["ClientCompanyLeaderEmailAddress"]);
+                } else {
+                    $("#ClientEmail").val(output.data[0]["ClientEmail"]);
+                }
+                $("#ClientPhoneNumber").val(output.data[0]["ClientPhoneNumber"]);
+                $("#ClientAddress").val(output.data[0]["ClientAddress"]);
+            }, entityApiUrl + '?entitas=CLIENT&filter=ClientId=="' + selectedClientId + '"');
+        });
+
+    }(jQuery));
+    $(document).ready(function () {
+        var selectedClientId = $("#ClientId").val();
+        AjaxCall(function (output) {
+            if ('company' === output.data[0]["ClientType"]) {
+                $("#ClientEmail").val(output.data[0]["ClientCompanyLeaderEmailAddress"]);
+            } else {
+                $("#ClientEmail").val(output.data[0]["ClientEmail"]);
+            }
+            $("#ClientPhoneNumber").val(output.data[0]["ClientPhoneNumber"]);
+            $("#ClientAddress").val(output.data[0]["ClientAddress"]);
+        }, entityApiUrl + '?entitas=CLIENT&filter=ClientId=="' + selectedClientId + '"');
+    });
+</script>

@@ -1,0 +1,136 @@
+﻿@model Repository.Application.DataModel.TransactionProduct
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+<div class="box box-solid">
+    <div class="box-header with-border">
+        <h3 class="box-title">
+            Transaction Product - Details
+        </h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.TransactionProductNumber)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TransactionProductNumber)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.TypeDebitOrCredit)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TypeDebitOrCredit)
+            </dd>
+
+            <dt>
+                Type
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Jenis)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Ammount)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Ammount)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Remark)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Remark)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CreatedBy)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CreatedBy)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.UpdatedBy)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.UpdatedBy)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CreatedDate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CreatedDate)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.UpdatedDate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.UpdatedDate)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.IsActive)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.IsActive)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.PRODUCT.PRODUCTNAME)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PRODUCT.PRODUCTNAME)
+            </dd>
+
+            <dt>
+                Type Number
+            </dt>
+
+            <dd>
+                @{ if (Model.RitaseId != null)
+                    {
+                        @Html.ActionLink(Model.RITASE.RITASENUMBER, "Details", "Ritase", new { id = Model.RitaseId }, null)
+                    }
+                    else if (Model.ConvertionId != null)
+                    {
+                        @Html.ActionLink(Model.ProductConvertion.ConvertionNumber, "ConvertionDetails", "TransactionProduct", new { id = Model.ConvertionId }, null)
+
+                    }
+                    else if (Model.AdjustmentId != null)
+                    {
+                        @Html.ActionLink(Model.ProductAdjustment.AdjustmentNumber, "AdjustmentDetails", "TransactionProduct", new { id = Model.AdjustmentId }, null)
+                    }
+                }
+            </dd>
+
+        </dl>
+
+    </div>
+    <div class="box-footer">
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</div>
+
+@*@Html.Action("Details", "Ritase", new { id=Model.RitaseId})
+    @Html.Partial("~/Views/Ritase/Details.cshtml", Model.RITASE)*@

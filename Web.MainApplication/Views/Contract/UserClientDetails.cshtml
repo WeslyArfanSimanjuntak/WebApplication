@@ -1,0 +1,155 @@
+﻿@model Repository.Application.DataModel.AspNetUsers
+
+@{
+    ViewBag.Title = "UserClientDetails";
+}
+<div class="box box-solid">
+    <div class="box-header with-border">
+        <h3 class="box-title">
+            Details - Client User
+        </h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Username)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Username)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.FullName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.FullName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Password)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Password)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.LastPasswordChange)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.LastPasswordChange)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ErrorTried)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ErrorTried)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.IsLocked)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.IsLocked)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Remark)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Remark)
+            </dd>
+
+            <dt>
+                Roles
+            </dt>
+
+            <dd>
+                @{ var roles = new List<Repository.Application.DataModel.AspNetRoles>();
+                    foreach (var item in Model.AspNetGroupUser)
+                    {
+                        foreach (var itemRoles in item.AspNetGroups.AspNetRoleGroup)
+                        {
+                            roles.Add(itemRoles.AspNetRoles);
+                        }
+                    }
+                    roles.Distinct().OrderBy(x => x.Name);
+                    foreach (var item in roles)
+                    {
+                        if (item.ParentId != null)
+                        {
+                            @(item.AspNetRoles2.Name + " - " + item.Name)
+                        }
+                        else
+                        {
+                            @item.Name
+                        }
+                        <br />
+                    }
+                }
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CreatedBy)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CreatedBy)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.UpdatedBy)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.UpdatedBy)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CreatedDate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CreatedDate)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.UpdatedDate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.UpdatedDate)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.IsActive)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.IsActive)
+            </dd>
+
+        </dl>
+
+    </div>
+    <div class="box-footer">
+        @Html.ActionLink("Update Password to Default", "UpdatePassword", new { id = Model.Username })
+    </div>
+</div>
+

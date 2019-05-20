@@ -1,0 +1,155 @@
+﻿@model IEnumerable<Repository.Application.DataModel.PRODUCT>
+@using Repository.Application.DataModel;
+@{
+    ViewBag.Title = "Index";
+    DB_TritsurEntities db = new DB_TritsurEntities();
+}
+<div class="box box-solid">
+    <div class="box-header with-border">
+        <h3 class="box-title">
+            @Html.ActionLink("Create New", "Create")
+        </h3>
+        <h4 class="h4">Raw Product</h4>
+    </div>
+    <div class="box-body">
+        <table class="table table-bordered table-striped" id="masterProduct">
+            <thead>
+                <tr>
+                    <th>
+                        Product Id
+                    </th>
+                    <th>
+                        Product Name
+                    </th>
+                    <th>Stock</th>
+                    <th>
+                        Product Description
+                    </th>
+                    <th>
+                        Product Image
+                    </th>
+                    <th></th>
+                </tr>
+
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model.Where(x => x.TypeMaterial == "Raw"))
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PRODUCTID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PRODUCTNAME)
+                        </td>
+                        <td>
+                            @{
+                                var result = db.ProductSite.Where(x => x.ProductId == item.PRODUCTID).Sum(x => x.TotalStock);
+
+                            }
+                            <strong> @(result == null ? "0":result.ToString()) ton </strong>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PRODUCTDESCRIPTION)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PRODUCTIMAGEPATH)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.PRODUCTID }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.PRODUCTID }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.PRODUCTID })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="box-header with-border">
+        <h4 class="h4">Processed Product</h4>
+    </div>
+    <div class="box-body">
+        <table class="table table-bordered table-striped" id="masterProductMature">
+            <thead>
+                <tr>
+                    <th>
+                        Product Id
+                    </th>
+                    <th>
+                        Product Name
+                    </th>
+                    <th>
+                        Stock
+                    </th>
+                    <th>
+                        Product Description
+                    </th>
+                    <th>
+                        Product Image
+                    </th>
+                    <th></th>
+                </tr>
+
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model.Where(x => x.TypeMaterial == "Mature"))
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PRODUCTID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PRODUCTNAME)
+                        </td>
+                        <td>
+                            @{
+                                var resultMature = db.ProductSite.Where(x => x.ProductId == item.PRODUCTID).Sum(x => x.TotalStock);
+
+                            }
+                            <strong> @(resultMature== null ? "0": resultMature.ToString()) ton</strong>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PRODUCTDESCRIPTION)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PRODUCTIMAGEPATH)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.PRODUCTID }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.PRODUCTID }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.PRODUCTID })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script type="text/javascript">
+    (function ($) {
+
+        $('#masterProduct').DataTable({
+            'paging': true,
+            'lengthMenu': [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+            'pageLength': 10,
+            'searching': true,
+            'ordering': true,
+            'info': true,
+            'autoWidth': false
+        });
+        $('#masterProductMature').DataTable({
+            'paging': true,
+            'lengthMenu': [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+            'pageLength': 10,
+            'searching': true,
+            'ordering': true,
+            'info': true,
+            'autoWidth': false
+        });
+    }(jQuery));
+
+</script>

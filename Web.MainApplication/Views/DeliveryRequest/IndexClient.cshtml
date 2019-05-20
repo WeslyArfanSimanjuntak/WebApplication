@@ -1,0 +1,100 @@
+﻿@model IEnumerable<Repository.Application.DataModel.DeliveryRequest>
+
+@{
+    ViewBag.Title = "IndexClient";
+}
+
+<div class="box box-solid">
+    <div class="box-header with-border">
+        <h3 class="box-title">
+            Delivery Request - Client @User.Identity.FullName()
+        </h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+        <table class="table table-bordered table-striped" id="deliveryRequestClientTable">
+            <thead>
+                <tr>
+                    <th>
+                        DR Number
+                    </th>
+                    <th>
+                        Time
+                    </th>
+
+                    <th>
+                        Contract Number
+                    </th>
+                    @*<th>
+                            Status
+                        </th>*@
+                    <th>
+                        Expired Time
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DeliveryRequestNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DeliveryRequestTime)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CONTRACT.ContractNumber)
+                        </td>
+                        @*<td>Status</td>*@
+                        <td>
+                            @{
+                                if (item.DeliveryRequestTime.Value.AddDays(7) <= DateTime.Now)
+                                {
+                                    <p>Expired</p>
+                                }
+                                else
+                                {
+                                    <p>@(item.DeliveryRequestTime.Value.AddDays(7))</p>
+                                }
+                            }
+                        </td>
+                        <td>
+                            @Html.ActionLink("Details", "Details", new { id = item.DeliveryRequestId }) |
+                            @Html.ActionLink("Print DR", "PrintDeliveryRequest", new { @id = item.DeliveryRequestId }, new { @target = "_blank", @id = item.DeliveryRequestId.ToString() })
+                            @*  @Html.ActionLink("Print DR", "PrintDeliveryRequest", new { @id = item.DeliveryRequestId }, new { @target="_blank", @id = item.DeliveryRequestId.ToString() , @onclick = "javascript : PopItUp(document.getElementById('"+item.DeliveryRequestId.ToString()+"').getAttribute(\"href\"))" })*@
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<script type="text/javascript">
+
+    $('#deliveryRequestClientTable').DataTable({
+        'paging': true,
+        'lengthMenu': [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+        'pageLength': 10,
+        'searching': true,
+        'ordering': true,
+        'info': true,
+        'autoWidth': false,
+        'scrollX': true,
+        'dom': 'Blfrtip',
+        'order': [['1', 'DESC']],
+        'buttons': [
+            'excelHtml5', {
+                extend: 'pdfHtml5',
+                text: 'Pdf',
+                title: 'Data export',
+                download: 'open'
+            }
+            //,
+            //'csvHtml5',
+            //'copyHtml5'
+        ]
+    })
+</script>

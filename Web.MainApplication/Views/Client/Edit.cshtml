@@ -1,0 +1,174 @@
+﻿@model Repository.Application.DataModel.CLIENT
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<div class="box box-solid">
+    <div class="box-header with-border">
+        <h3 class="box-title">
+            Create
+        </h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.Id)
+                <div class="form-group">
+                    @Html.Label("", "Client Type", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("ClientType", null, new { @class = "form-control", @required = "required" })
+                        @*@Html.EditorFor(model => model.ClientType, new { htmlAttributes = new { @class = "form-control", @required = "required" } })*@
+                        @Html.ValidationMessageFor(model => model.ClientType, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div id="clientDetailForm">
+                    <div class="form-group">
+                        @Html.Label("", "Client Id", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.ClientId, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                            @Html.ValidationMessageFor(model => model.ClientId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("", "Company Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.ClientCompanyName, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                            @Html.ValidationMessageFor(model => model.ClientCompanyName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("", "Client Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.ClientName, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                            @Html.ValidationMessageFor(model => model.ClientName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("", "Client Phone Number", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @*     @Html.TextArea("ClientAddress",Model.ClientAddress, new { @class = "form-control" })*@
+                            @Html.EditorFor(model => model.ClientPhoneNumber, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                            @Html.ValidationMessageFor(model => model.ClientPhoneNumber, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.Label("", "Client Address", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @*     @Html.TextArea("ClientAddress",Model.ClientAddress, new { @class = "form-control" })*@
+                            @Html.TextAreaFor(model => model.ClientAddress, new { @class = "form-control", @required = "required" })
+                            @Html.ValidationMessageFor(model => model.ClientAddress, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("", "Company PIC Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.ClientCompanyPIC, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                            @Html.ValidationMessageFor(model => model.ClientCompanyPIC, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("", "Company PIC Email", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.ClientCompanyLeaderEmailAddress, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                            @Html.ValidationMessageFor(model => model.ClientCompanyLeaderEmailAddress, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("", "Company PIC PhoneNumber", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.ClientCompanyPICPhoneNumber, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                            @Html.ValidationMessageFor(model => model.ClientCompanyPICPhoneNumber, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("", "Company NPWP", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.ClientNPWP, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                            @Html.ValidationMessageFor(model => model.ClientNPWP, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("", "Client Email", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.ClientEmail, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                            @Html.ValidationMessageFor(model => model.ClientEmail, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("Remark", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.TextArea("Remark", Model.Remark, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Remark, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("IsActive", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("IsActive", null, htmlAttributes: new { @class = "form-control", @required = "true" })
+                            @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Save" class="btn btn-default" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="box-footer">
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</div>
+
+<script type="text/javascript">
+    (function ($) {
+        $("#ClientType").on('change', function () {
+            var value = $("#ClientType").val();
+            if (value == "individual") {
+
+                $("#clientDetailForm").show();
+                $("#ClientCompanyName").parent().parent().hide(500);
+                $("#ClientCompanyPIC").parent().parent().hide(500);
+                $("#ClientCompanyLeaderEmailAddress").parent().parent().hide(500);
+                $("#ClientCompanyName").removeAttr("required");
+                $("#ClientCompanyPIC").removeAttr("required");
+                $("#ClientCompanyLeaderEmailAddress").removeAttr("required");
+                $("#ClientCompanyPICPhoneNumber").removeAttr("required").parent().parent().hide(500);
+                $("#ClientNPWP").parent().parent().find("label").text("Client NPWP");
+                $("#ClientPhoneNumber").parent().parent().find("label").text("Client Phone Number");
+                $("#ClientName").parent().parent().show(500);
+                $("#ClientName").attr("required", "required");
+            } else if (value == "company") {
+                $("#ClientCompanyName").attr("required", "required");
+                $("#ClientCompanyPIC").attr("required", "required");
+                $("#ClientCompanyLeaderEmailAddress").attr("required", "required");
+                $("#clientDetailForm").show();
+                $("#ClientNPWP").parent().parent().find("label").text("Company NPWP");
+                $("#ClientName").parent().parent().hide(500);
+                $("#ClientName").removeAttr("required");
+                $("#ClientCompanyName").parent().parent().show(500).find("label").text("Company Name");
+                $("#ClientPhoneNumber").parent().parent().find("label").text("Company Phone Number");
+                $("#ClientAddress").parent().parent().find("label").text("Company Address");
+                $("#ClientEmail").parent().parent().find("label").text("Company Email");
+                $("#ClientCompanyPIC").parent().parent().show(500);
+                $("#ClientCompanyLeaderEmailAddress").parent().parent().show(500);
+                $("#ClientCompanyPICPhoneNumber").attr("required", "required").parent().parent().show(500);
+            } else {
+                $("#clientDetailForm").hide();
+            }
+        });
+
+        $("#ClientType").change().attr("readonly", "true");
+
+
+    }(jQuery));
+</script>

@@ -1,0 +1,61 @@
+﻿@model Repository.Application.DataModel.PRODUCT
+@using Repository.Application.DataModel;
+
+@{
+    ViewBag.Title = "Details";
+
+    DB_TritsurEntities db = new DB_TritsurEntities();
+}
+
+<div class="box box-solid">
+    <div class="box-header with-border">
+        <h3 class="box-title">
+            Details
+        </h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+
+        <dl class="dl-horizontal">
+            <dt>
+                Product Name
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PRODUCTNAME)
+            </dd>
+
+            <dt>
+                Product Description
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PRODUCTDESCRIPTION)
+            </dd>
+            <dt>
+                Total Amount
+            </dt>
+
+            <dd>
+                @{
+                    var result = db.ProductSite.Where(x => x.ProductId == Model.PRODUCTID).Sum(x => x.TotalStock);
+
+                }
+                <strong>@(result == null ? "0" : result.ToString())ton</strong>
+            </dd>
+            <dt>
+                Product Image
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PRODUCTIMAGEPATH)
+            </dd>
+
+        </dl>
+
+    </div>
+    <div class="box-footer">
+        @Html.ActionLink("Edit", "Edit", new { id = Model.PRODUCTID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</div>

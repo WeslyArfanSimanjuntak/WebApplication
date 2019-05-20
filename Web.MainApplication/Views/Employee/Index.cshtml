@@ -1,0 +1,87 @@
+﻿@model IEnumerable<Repository.Application.DataModel.EMPLOYEE>
+
+@{
+    ViewBag.Title = "Index";
+}
+<div class="box box-solid">
+    <div class="box-header with-border">
+        <h3 class="box-title">
+            @Html.ActionLink("Create New", "Create")
+        </h3>
+    </div>
+    <div class="box-body">
+        <table class="table table-bordered table-striped" id="masterEmployee">
+            <thead>
+                <tr>
+                    <th>
+                        Site Detail
+                    </th>
+
+                    <th>
+                        Employee Name
+                    </th>
+<th>
+                        Employee Age
+                    </th>
+                    <th>
+                        Employee Fullname
+                    </th>
+                    <th>
+                        Join Date
+                    </th>
+                    <th>
+                       Employee Status
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+              @foreach (var item in Model)
+              {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SiteName) - @Html.DisplayFor(modelItem => item.SITE.SITEADDRESS) 
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EMPLOYEENAME)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EMPLOYEEAGE)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EMPLOYEEFULLNAME)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EMPLOYEEJOINAT)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EMPLOYEESTATUS)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.EMPLOYEEID }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.EMPLOYEEID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.EMPLOYEEID })
+                    </td>
+                </tr>
+              }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script type="text/javascript">
+    (function ($) {
+
+        $('#masterEmployee').DataTable({
+            'lengthMenu': [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+            'pageLength': 10,
+			'paging': true,
+            'searching': true,
+            'ordering': true,
+            'info': true,
+            'autoWidth': false
+        });
+    }(jQuery));
+
+</script>

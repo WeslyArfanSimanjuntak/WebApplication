@@ -1,0 +1,101 @@
+﻿@model IEnumerable<Repository.Application.DataModel.AspNetGroups>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="box box-solid">
+    <div class="box-header with-border">
+        <h3 class="box-title">
+            @Html.ActionLink("Create New", "Create")
+        </h3>
+    </div>
+    <div class="box-header with-border">
+        <h3 class="box-title">
+            Users
+        </h3>
+    </div>
+    <div class="box-body">
+        <table class="table table-bordered table-striped" id="userTable">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.GroupDescription)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Remark)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CreatedBy)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UpdatedBy)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CreatedDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UpdatedDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IsActive)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.GroupDescription)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Remark)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CreatedBy)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UpdatedBy)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CreatedDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UpdatedDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IsActive)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.GroupName }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.GroupName }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.GroupName })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<script type="text/javascript">
+    (function ($) {
+
+
+        $('#userTable').DataTable({
+            'paging': true,
+        'lengthMenu': [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+            'pageLength': 10,
+			    'searching': true,
+            'ordering': true,
+            'info': true,
+            'autoWidth': false,
+            'scrollX' : true
+        });
+    }(jQuery));
+
+</script>

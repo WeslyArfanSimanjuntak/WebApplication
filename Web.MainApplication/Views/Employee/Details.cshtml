@@ -1,0 +1,63 @@
+﻿@model Repository.Application.DataModel.EMPLOYEE
+
+@{
+    ViewBag.Title = "Details";
+}
+<div class="box box-solid">
+    <div class="box-header with-border">
+        <h3 class="box-title">
+            Details
+        </h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+
+        <dl class="dl-horizontal">
+            <dt>
+              Employee Name
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.EMPLOYEENAME)
+            </dd>
+
+            <dt>
+              Employee Age
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.EMPLOYEEAGE)
+            </dd>
+
+            <dt>
+               Employee Full Name
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.EMPLOYEEFULLNAME)
+            </dd>
+
+            <dt>
+             Join Date
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.EMPLOYEEJOINAT)
+            </dd>
+
+            <dt>
+              Employee Status
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.EMPLOYEESTATUS)
+            </dd>
+
+        </dl>
+
+    </div>
+    <div class="box-footer">
+       @Html.ActionLink("Edit", "Edit", new { id = Model.EMPLOYEEID }) |
+    @Html.ActionLink("Back to List", "Index")
+    </div>
+</div>

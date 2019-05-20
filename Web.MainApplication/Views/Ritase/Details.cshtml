@@ -1,0 +1,92 @@
+﻿@model Repository.Application.DataModel.RITASE
+
+@{
+    ViewBag.Title = "Details";
+}
+<div class="box box-solid">
+    <div class="box-header with-border">
+        <h3 class="box-title">
+            Details - Ritase
+        </h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+
+
+
+        <dl class="dl-horizontal">
+            <dt>
+                Ritase Number
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.RITASENUMBER)
+            </dd>
+            <dt>
+                Ritase Time
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.RITASETIME)
+            </dd>
+
+            <dt>
+                Status
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.RITASESTATUS)
+            </dd>
+
+            <dt>
+                Detail Armada
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ARMADA1.ARMADANAME) - @Html.DisplayFor(model => model.ARMADA1.ARMADACAPACITYINKG) kg - Site @Html.DisplayFor(model => model.ARMADA1.SITE.SITENAME) - @Html.DisplayFor(model => model.ARMADA1.SITE.SITEADDRESS)
+            </dd>
+
+            <dt>
+                Driver(Employee)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.EMPLOYEE.EMPLOYEENAME)
+            </dd>
+
+            <dt>
+                Product Name
+            </dt>
+
+
+            <dd>
+                @Html.DisplayFor(model => model.PRODUCT1.PRODUCTNAME)
+            </dd>
+            <dt>
+                Ammount
+            </dt>
+            <dd>
+                <strong>@Html.DisplayFor(model => model.QuantityInTon) ton</strong>
+            </dd>
+            <dt>
+                Site Address
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.SITE1.SITEADDRESS)
+            </dd>
+            <dt>
+                Remark
+            </dt>
+
+            <dd>
+                @Model.Remark
+            </dd>
+        </dl>
+
+    </div>
+    <div class="box-footer">
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</div>
+

@@ -1,0 +1,249 @@
+﻿@model IEnumerable<Repository.Application.DataModel.TransactionProduct>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<div class="box box-solid">
+    <div class="box-header with-border">
+        <h3 class="box-title">
+            Index - Product Transaction
+        </h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+        <table class="table table-bordered table-striped" id="productTransactionTable">
+            <thead>
+                <tr>
+                    <th>
+                        Transaction Number
+                    </th>
+                    <th>
+                        Product Id
+                    </th>
+                    <th>
+                        Product Name
+                    </th>
+
+                    <th>
+                        Debit/ Kredit
+                    </th>
+                    <th>
+                        Type
+                    </th>
+                    <th>
+                        Ammount
+                    </th>
+
+                    <th>
+                        Type Number
+                    </th>
+                    <th>
+                        Remark
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TransactionProductNumber)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(model => item.PRODUCT.PRODUCTID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.PRODUCT.PRODUCTNAME)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TypeDebitOrCredit)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Jenis)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Ammount)
+                        </td>
+
+                        <td>
+                            @{ if (item.RitaseId != null)
+                                {
+                                    @Html.ActionLink(item.RITASE.RITASENUMBER, "Details", "Ritase", new { id = item.RitaseId }, null)
+                                }
+                                else if (item.ConvertionId != null)
+                                {
+                                    @Html.ActionLink(item.ProductConvertion.ConvertionNumber, "ConvertionDetails", "TransactionProduct", new { id = item.ConvertionId }, null)
+
+                                }
+                                else if (item.AdjustmentId != null)
+                                {
+                                    @Html.ActionLink(item.ProductAdjustment.AdjustmentNumber, "AdjustmentDetails", "TransactionProduct", new { id = item.AdjustmentId }, null)
+                                }
+                            }
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Remark)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Details", "Details", new { id = item.Id })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <table class="table table-bordered table-striped" id="productTransactionTableOData">
+            <thead>
+                <tr>
+                    <th>
+                        Transaction Number
+                    </th>
+                    <th>
+                        Product Id
+                    </th>
+                    <th>
+                        Product Name
+                    </th>
+                    <th>
+                        Debit/ Kredit
+                    </th>
+                    <th>
+                        Type
+                    </th>
+                    <th>
+                        Type Number
+                    </th>
+                    <th>
+                        Amount
+                    </th>
+                    <th>
+                        Remark
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+<script type="text/javascript">
+
+    $('#productTransactionTable').DataTable({
+        'paging': true,
+        'lengthMenu': [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+        'pageLength': 10,
+        'searching': true,
+        'ordering': true,
+        'info': true,
+        'autoWidth': false,
+        'scrollX': true,
+        "order": [[0, "desc"]]
+    });
+
+
+    $('#productTransactionTableOData thead tr').clone(true).appendTo('#productTransactionTableOData thead');
+    $('#productTransactionTableOData thead tr:eq(1) th').each(function (i) {
+        var title = $(this).text();
+        if (title != "") {
+            $(this).html('<input type="text" style="border:0;border-bottom:solid 1px #707070;outline:none;width:90%" />');
+        }
+        $('input', this).on('keyup change', function () {
+            if (productTransactionTableOData.column(i).search() !== this.value) {
+                if (String(this.value).length > 2 || String(this.value).length == 0) {
+                    productTransactionTableOData.column(i)
+                        .search(this.value)
+                        .draw();
+                }
+
+            }
+        });
+    });
+
+    var productTransactionTableOData = $('#productTransactionTableOData').DataTable({
+
+        "sPaginationType": "full_numbers",
+        'orderCellsTop': true,
+        'fixedHeader': true,
+        'paging': true,
+        'lengthMenu': [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+        'pageLength': 10,
+        "processing": true,
+        "serverSide": true,
+        "sAjaxSource": "../odata/TransactionProductsOdata?$expand=PRODUCT,ProductConvertion,ProductAdjustment,RITASE",
+        "aoColumns": [
+            { "mData": "TransactionProductNumber" },
+            { "mData": "ProductId" },
+            { "oData": "PRODUCT/PRODUCTNAME" },
+            { "mData": "TypeDebitOrCredit" },
+            { "mData": "Id" },
+            { "oData": "RITASE/RITASENUMBER;ProductAdjustment/AdjustmentNumber;ProductConvertion/ConvertionNumber" },
+            { "mData": "Ammount" },
+            { "mData": "Remark" },
+            { "mData": "Id" }
+        ],
+        "aoColumnDefs": [
+            {
+                // `data` refers to the data for the cell (defined by `mData`, which
+                // defaults to the column being worked with, in this case is the first
+                // Using `row[0]` is equivalent.
+                "mRender": function (data, type, row) {
+                    return row.PRODUCT["PRODUCTNAME"];
+                },
+                "aTargets": [2],
+                
+            },
+            {
+                // `data` refers to the data for the cell (defined by `mData`, which
+                // defaults to the column being worked with, in this case is the first
+                // Using `row[0]` is equivalent.
+                "mRender": function (data, type, row) {
+                    if (row.RITASE !== undefined) {
+                        return row.RITASE["RITASENUMBER"];
+                    }
+                    if (row.ProductConvertion !== undefined) {
+                        return row.ProductConvertion["ConvertionNumber"];
+                    }
+                    if (row.ProductAdjustment !== undefined) {
+                        return row.ProductAdjustment["AdjustmentNumber"];
+                    }
+                    return "-";
+                },
+                "aTargets": [5]
+            },
+        ],
+        "columnDefs": [
+
+            {
+                "orderable": false,
+                "targets": [2]
+            }
+        ],
+        "fnServerData": ServerOData,
+        "iODataVersion": 3,
+        "bUseODataViaJSONP": false, 'searching': true,
+        'ordering': true,
+        'info': true,
+        'autoWidth': false,
+        'scrollX': true,
+        'dom': 'Blfrtip',
+
+        'buttons': [
+            'excelHtml5', {
+                extend: 'pdfHtml5',
+                orientation: 'landscape',
+                pageSize: 'LEGAL',
+                text: 'Pdf',
+                title: 'Data export',
+                download: 'open'
+            }
+            //,
+            //'csvHtml5',
+            //'copyHtml5'
+        ]
+    });
+
+
+</script>

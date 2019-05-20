@@ -1,0 +1,81 @@
+﻿@model IEnumerable<Repository.Application.DataModel.CONTRACT>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<div class="box box-solid">
+    <div class="box-header with-border">
+        <h3 class="box-title">
+            @Html.ActionLink("Create New", "Create")
+        </h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+        <table class="table table-bordered table-striped" id="contractTable">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ContractNumber)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Line)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.StartPeriode)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.EndPeriode)
+                    </th>
+                    <th>
+                        Client Name
+                    </th>
+
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ContractNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Line)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.StartPeriode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EndPeriode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ClientIdPK) - @Html.DisplayFor(modelItem => item.CLIENT.ClientName)
+                        </td>
+
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.ContractId }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.ContractId }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.ContractId })
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<script type="text/javascript">
+
+    $('#contractTable').DataTable({
+        'paging': true,
+        'lengthMenu': [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+        'pageLength': 10,
+        'searching': true,
+        'ordering': true,
+        'info': true,
+        'autoWidth': false
+    })
+</script>

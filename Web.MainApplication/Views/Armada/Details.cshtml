@@ -1,0 +1,77 @@
+﻿@model Repository.Application.DataModel.ARMADA
+
+@{
+    ViewBag.Title = "Details";
+}
+<div class="box box-solid">
+    <div class="box-header with-border">
+        <h3 class="box-title">
+            Details
+        </h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+
+        <dl class="dl-horizontal">
+            <dt>
+                Site
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.SITENAME)
+            </dd>
+            <dt>
+                Site Address
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.SITE.SITEADDRESS)
+            </dd>
+            <dt>
+                Armada Name
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ARMADANAME)
+            </dd>
+
+            <dt>
+                Capacity(Kg)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ARMADACAPACITYINKG)
+            </dd>
+
+            <dt>
+                Total Tire
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ARMADATOTALTIRE)
+            </dd>
+
+            <dt>
+                Body Color
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ARMADACOLOR)
+            </dd>
+
+            <dt>
+                Merk
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ARMADAMERK)
+            </dd>
+
+        </dl>
+
+    </div>
+    <div class="box-footer">
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ARMADAID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</div>

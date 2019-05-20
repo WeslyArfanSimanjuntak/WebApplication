@@ -1,0 +1,142 @@
+﻿@model Repository.Application.DataModel.CONTRACT
+
+@{
+    ViewBag.Title = "Create";
+    string contractNumber = (string)ViewBag.contractNumber;
+}
+
+<div class="box box-solid">
+    <div class="box-header with-border">
+        <h3 class="box-title">
+            Create
+        </h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.ContractId)
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ContractNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBox("ContractNumber", contractNumber, new { @class = "form-control", @readonly = "true" })
+                        @Html.ValidationMessageFor(model => model.ContractNumber, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ClientIdPK, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("ClientId", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.ClientIdPK, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.Label("", "Client Email", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBox("ClientEmail", "", new { @class = "form-control", @readonly = "true" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.Label("", "Client Phone Number", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBox("ClientPhoneNumber", "", new { @class = "form-control", @readonly = "true" })
+                        @Html.ValidationMessageFor(model => model.Line, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.Label("", "Client Client Address", htmlAttributes: new { @class = "control-label col-md-2", @readonly = "true" })
+                    <div class="col-md-10">
+                        @Html.TextBox("ClientAddress", "", new { @class = "form-control", @readonly = "true" })
+                        @Html.ValidationMessageFor(model => model.Line, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ContractProduct, "ProductId", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("ProductId", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.ContractProduct, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.StartPeriode, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.StartPeriode, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.StartPeriode, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.EndPeriode, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.EndPeriode, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.EndPeriode, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Save" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+    <div class="box-footer">
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</div>
+<script type="text/javascript">
+    (function ($) {
+        //Date picker
+        $('#StartPeriode').datepicker({
+            autoclose: true,
+            format: 'dd/mm/yyyy'
+        }).val();
+        $('#EndPeriode').datepicker({
+            autoclose: true,
+            format: 'dd/mm/yyyy'
+        });
+
+        $("#ClientId").on("change", function () {
+            var selectedClientId = $("#ClientId").val();
+            AjaxCall(function (output) {
+                if (output.data[0] !== undefined) {
+                    if ('company' === output.data[0]["ClientType"]) {
+                        $("#ClientEmail").val("").val(output.data[0]["ClientCompanyLeaderEmailAddress"]);
+                    } else {
+                        $("#ClientEmail").val("").val(output.data[0]["ClientEmail"]);
+                    }
+                    $("#ClientPhoneNumber").val("").val(output.data[0]["ClientPhoneNumber"]);
+                    $("#ClientAddress").val("").val(output.data[0]["ClientAddress"]);
+                }
+                $("#ClientEmail").val("");
+                $("#ClientPhoneNumber").val("");
+                $("#ClientAddress").val("");
+            }, entityApiUrl + '?entitas=CLIENT&filter=ClientId=="' + selectedClientId + '"');
+        });
+
+    }(jQuery));
+    $(document).ready(function () {
+        var selectedClientId = $("#ClientId").val();
+        AjaxCall(function (output) {
+            if (output.data[0] !== undefined) {
+                if ('company' === output.data[0]["ClientType"]) {
+                    $("#ClientEmail").val(output.data[0]["ClientCompanyLeaderEmailAddress"]);
+                } else {
+                    $("#ClientEmail").val(output.data[0]["ClientEmail"]);
+                }
+                $("#ClientPhoneNumber").val(output.data[0]["ClientPhoneNumber"]);
+                $("#ClientAddress").val(output.data[0]["ClientAddress"]);
+            }
+        }, entityApiUrl + '?entitas=CLIENT&filter=ClientId=="' + selectedClientId + '"');
+    });
+</script>

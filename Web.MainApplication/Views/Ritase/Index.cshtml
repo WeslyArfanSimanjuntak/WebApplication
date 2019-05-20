@@ -1,0 +1,106 @@
+﻿@model IEnumerable<Repository.Application.DataModel.RITASE>
+
+@{
+    ViewBag.Title = "Index";
+}
+<div class="box box-solid">
+    <div class="box-header with-border">
+        <h3 class="box-title">
+            @Html.ActionLink("Create New", "Create")
+        </h3>
+    </div>
+    <div class="box-body">
+        <table class="table table-bordered table-striped" id="masterRitase">
+            <thead>
+                <tr>
+                    <th>
+                        Ritase Number
+                    </th>
+                    <th>
+                        Ritase Time
+                    </th>
+                    <th>
+                        Ritase Status
+                    </th>
+                    <th>Ammount</th>
+                    <th>
+                        Armada Name
+                    </th>
+                    <th>
+                        Employee(Driver)
+                    </th>
+                    <th>
+                        Product Name
+                    </th>
+                    <th>
+                        Site
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RITASENUMBER)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RITASETIME)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RITASESTATUS)
+                        </td>
+                        <td>
+                            <strong>@item.QuantityInTon ton</strong>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ARMADA1.ARMADANAME)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EMPLOYEE.EMPLOYEENAME)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PRODUCT1.PRODUCTNAME)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SITE1.SITEADDRESS)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Details", "Details", new { id = item.RITASEID })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        @{
+            
+            var dtIndexDeliveryRequest = new Web.MainApplication.Models.DatatableIndexModels(
+                                        typeof(Repository.Application.DataModel.RITASE),
+                                        new string[] { "RITASENUMBER", "RITASETIME", "RITASESTATUS", "QuantityInTon", "RITASEID" },
+                                        new string[] { "Ritase Number", "Ritase Time", "Ritase Status", "Ammount", "" },
+                                        "dtIndexDeliveryRequest",
+                                        "/EntityApi/Search?entity=DeliveryRequest",
+                                        "");
+
+        }
+        @*@Html.Raw(Html.Partial("_DataTableIndex", dtIndexDeliveryRequest))*@
+
+    </div>
+</div>
+<script type="text/javascript">
+    (function ($) {
+
+        $('#masterRitase').DataTable({
+            'paging': true,
+            'lengthMenu': [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+            'pageLength': 10,
+			'searching': true,
+            'ordering': true,
+            'info': true,
+            'autoWidth': false
+        });
+    }(jQuery));
+
+</script>

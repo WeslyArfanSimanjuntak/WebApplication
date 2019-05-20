@@ -1,0 +1,163 @@
+﻿@model Repository.Application.DataModel.ProductAdjustment
+
+@{
+    ViewBag.Title = "AdjustProduct";
+}
+
+<div class="box box-solid">
+    <div class="box-header with-border">
+        <h3 class="box-title">
+            Create
+        </h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.AdjustmentNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.AdjustmentNumber, new { htmlAttributes = new { @class = "form-control", @readonly = "true" } })
+                    @Html.ValidationMessageFor(model => model.AdjustmentNumber, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.SiteName, "Site Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("SiteName", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.SiteName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ProductId, "Product", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("ProductId", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ProductId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.AdjustBy, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.AdjustBy, new { htmlAttributes = new { @class = "form-control", @readonly = "true" } })
+                    @Html.ValidationMessageFor(model => model.AdjustBy, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Amount(ton)", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Ammount, new { htmlAttributes = new { @onkeyup = "AmountTonM3Converter(this,'ton', 'QuantityInM3')", @class = "form-control money-format", @required = "required" } })
+                    @Html.ValidationMessageFor(model => model.Ammount, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Amount(m3)", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+
+                    @Html.TextBox("QuantityInM3", Model.Ammount * (double)ViewBag.TonUnitToM3Unit, htmlAttributes: new { @onkeyup = "AmountTonM3Converter(this,'m3', 'Ammount')", @class = "form-control money-format", @required = "required", @maxlength = "6" })
+                    @Html.ValidationMessageFor(model => model.Ammount, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.AdjustmentTime, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.AdjustmentTime, new { htmlAttributes = new { @class = "form-control", @required = "true" } })
+                    @Html.ValidationMessageFor(model => model.AdjustmentTime, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Remark (Supporting Document Needed)", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.Remark, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Remark, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+        }
+
+    </div>
+    <div class="box-footer">
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</div>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('#AdjustmentTime').datetimepicker({
+            format: 'MM/DD/YYYY HH:mm:ss'
+        });
+        $('#Ammount').number(5, 2);
+
+        $("#SiteName").on("change", function () {
+
+            $("#ProductId option").not(':first-child').each(function (index) {
+                $(this).remove();
+            });
+
+            var selectedSite = $("#SiteName").val();
+
+            if (selectedSite != "") {
+                AjaxCall(function (output) {
+                    console.log(output);
+                    $.each(output.data, function (key, value) {
+                        //$("#SourceProudct").append('<option value="' + value["EMPLOYEEID"] + '">' + value["EMPLOYEEID"] + " - " + value["EMPLOYEEFULLNAME"] + '</option>');
+                        AjaxCall(function (outpute) {
+                            $.each(outpute.data, function (keye, valuee) {
+                                $("#ProductId").append('<option value="' + valuee["PRODUCTID"] + '">' + valuee["PRODUCTID"] + " - " + valuee["PRODUCTNAME"] + ', Total Stock In Site = ' + value["TotalStock"] + ' ton</option>');
+
+                            });
+
+                        }, entityApiUrl + '?entitas=PRODUCT&filter=PRODUCTID=="' + value["ProductId"] + '"');
+                    });
+
+                }, entityApiUrl + '?entitas=ProductSite&filter=SiteName=="' + selectedSite + '"');
+
+
+                //------------- Armada ---------
+                //AjaxCall(function (output) {
+                //    console.log(output);
+                //    $.each(output.data, function (key, value) {
+                //        $("#ARMADA").append('<option value="' + value["ARMADAID"] + '">' + value["ARMADAID"] + " - " + value["ARMADANAME"] + " - " + value["ARMADACAPACITYINKG"] + ' kg</option>');
+
+                //    });
+
+                //}, entityApiUrl + '?entitas=ARMADA&filter=SiteName=="' + selectedSite + '"');
+
+                //--------------- Product ------------
+                //AjaxCall(function (output) {
+
+                //    console.log(output);
+                //    $.each(output.data, function (keyProduct, valueProduct) {
+
+
+                //        $("#PRODUCT").append('<option value="' + valueProduct["PRODUCTID"] + '">' + valueProduct["PRODUCTNAME"]);
+
+                //    });
+
+                //}, entityApiUrl + '?entitas=PRODUCT&filter=TypeMaterial="Raw"');
+
+
+
+            }
+
+
+        });
+        $("#SiteName").change();
+    });
+</script>
