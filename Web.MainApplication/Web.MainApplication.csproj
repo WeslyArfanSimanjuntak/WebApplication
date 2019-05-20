@@ -514,6 +514,7 @@
     <Content Include="Views\BatchMixes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Content\database\" />
     <Folder Include="Views\BaseOdata\" />
     <Folder Include="Views\EntityApi\" />
   </ItemGroup>
