@@ -469,5 +469,18 @@ namespace System.Web.Mvc
         public const string DeliveryRequest = "DeliveryRequest";
 
     }
+    public static class Message
+    {
+        public const string CreateSuccess = "Data Created Succesfully";
+        public const string CreateFail = "Data Failed To Create";
+
+        public const string UpdateSuccess = "Data Updated Succesfully";
+        public const string UpdateFail = "Data Failed To Update";
+
+        public const string DeleteSuccess = "Data Deleted Succesfully";
+        public const string DeleteFail = "Data Failed To Delete";
+
+
+    }
 
 }

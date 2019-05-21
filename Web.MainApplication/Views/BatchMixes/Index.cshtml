@@ -11,7 +11,7 @@
         </h3>
     </div>
     <div class="box-body">
-        <table class="table table-bordered table-striped" id="masterBatch">
+        <table class="table table-bordered table-striped" id="masterBatchMix">
             <thead>
                 <tr>
                     <th>
@@ -64,9 +64,9 @@
                             @Html.DisplayFor(modelItem => item.PRODUCT.PRODUCTNAME)
                         </td>
                         <td>
-                            @Html.ActionLinkAuthorized("Edit", "Edit", new { id = item.BatchMixProduct }) |
-                            @Html.ActionLinkAuthorized("Details", "Details", new { id = item.BatchMixProduct }) |
-                            @Html.ActionLinkAuthorized("Delete", "Delete", new { id = item.BatchMixProduct })
+                            @Html.ActionLinkAuthorized("Edit", "Edit", new { id = item.BatchMixCode }) |
+                            @Html.ActionLinkAuthorized("Details", "Details", new { id = item.BatchMixCode }) |
+                            @Html.ActionLinkAuthorized("Delete", "Delete", new { id = item.BatchMixCode })
                         </td>
                     </tr>
                 }

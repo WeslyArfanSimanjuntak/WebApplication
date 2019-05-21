@@ -104,13 +104,18 @@ namespace Repository.Application.DataModel
     public partial class Menu : IAuditableObject
     {
     }
-    public partial class DeliveryOrder  : IAuditableObject
+    public partial class DeliveryOrder : IAuditableObject
     {
     }
-    public partial class DeliveryOrderInvoice  : IAuditableObject
+    public partial class DeliveryOrderInvoice : IAuditableObject
     {
         public virtual DeliveryOrder DeliveryOrder { get; set; }
-
+    }
+    public partial class BatchMix : IAuditableObject
+    {
+    }
+    public partial class BatchMixProduct : IAuditableObject
+    {
     }
 
 

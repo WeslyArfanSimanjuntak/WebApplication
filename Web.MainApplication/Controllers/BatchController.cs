@@ -32,7 +32,7 @@ namespace Web.MainApplication.Controllers
             {
                 return HttpNotFound();
             }
-            
+
             return View(bATCH);
         }
 
@@ -93,13 +93,14 @@ namespace Web.MainApplication.Controllers
 
             }
 
-            if (ModelState.IsValid && totalComposedProduct > 0 && ! (batchProduct.Sum(x => x.ProductPercentage) != 100))
+            if (ModelState.IsValid && totalComposedProduct > 0 && !(batchProduct.Sum(x => x.ProductPercentage) != 100))
             {
-               
+
 
                 db.BATCH.Add(bATCH);
                 db.BatchProduct.AddRange(batchProduct);
                 db.SaveChanges();
+                SuccessMessagesAdd("Batch " + bATCH.BatchCode + " added successfully");
                 return RedirectToAction("Index");
             }
 
@@ -118,7 +119,6 @@ namespace Web.MainApplication.Controllers
             ViewBag.RawProduct = lsProduct.ToSelectList(bATCH.RawProduct);
             bATCH.BatchProduct = batchProduct;
             ViewBag.MatureProduct = lsProductMature.ToSelectList();
-            bATCH.BatchProduct = batchProduct;
             return View(bATCH);
         }
 
@@ -188,14 +188,29 @@ namespace Web.MainApplication.Controllers
             }
             if (ModelState.IsValid && WarningMessages().Count == 0)
             {
+                batchProduct.ForEach(z =>
+                {
+                    var batchProductOrigin = db.BatchProduct.Where(x => x.BatchCode == bATCH.BatchCode && x.ProductId == z.ProductId).FirstOrDefault();
+                    if (batchProductOrigin != null)
+                    {
+                        z.CreatedBy = batchProductOrigin.CreatedBy;
+                        z.CreatedDate = batchProductOrigin.CreatedDate;
+                        z.SetPropertyUpdate();
+                    }
+                    else
+                    {
+                        z.SetPropertyCreate();
+                    }
 
+
+                });
                 db.BatchProduct.RemoveRange(db.BatchProduct.Where(x => x.BatchCode == bATCH.BatchCode));
                 db.SaveChanges();
                 db.BatchProduct.AddRange(batchProduct);
                 db.Entry(bATCH).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
-                WarningMessagesAdd("Data Success Updated");
-                
+                WarningMessagesAdd(Message.UpdateSuccess + ", " + bATCH.BatchCode);
+
                 return RedirectToAction("Index");
             }
             List<SelectListItem> lsProduct = new List<SelectListItem>();
@@ -246,7 +261,7 @@ namespace Web.MainApplication.Controllers
             {
                 WarningMessagesAdd(e.Message);
             }
-            
+
             return RedirectToAction("Index");
         }
 

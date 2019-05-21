@@ -50,7 +50,7 @@ namespace Web.MainApplication.Controllers
             string password = model.Password;
 
             string passwordHash = Encriptor.SHA1(password);
-            var aspNetUser = this.unitOfWork.AspNetUserRepository.GetByID(userName);
+            var aspNetUser = this.db.AspNetUsers.Where(x => x.Username == userName).ToList().Where(x => x.Username == userName).FirstOrDefault();
             if (aspNetUser == null)
             {
                 WarningMessagesAdd("Username is not Exist");
@@ -165,10 +165,10 @@ namespace Web.MainApplication.Controllers
 
             var userMenu = "";
 
-            db.Menu.Where(x => x.MenuLevel == 1 && x.IsActive == 1).OrderBy(x=>x.Sequence).ToList().ForEach(x =>
-            {
-                userMenu += GenerateUL(x, userRolesId);
-            });
+            db.Menu.Where(x => x.MenuLevel == 1 && x.IsActive == 1).OrderBy(x => x.Sequence).ToList().ForEach(x =>
+              {
+                  userMenu += GenerateUL(x, userRolesId);
+              });
             claims.Add(new Claim(WebClaimIdentity.MenuString, userMenu));
             return claims;
         }
@@ -236,6 +236,14 @@ namespace Web.MainApplication.Controllers
             }
             return false;
         }
-
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+                unitOfWork.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
 }
