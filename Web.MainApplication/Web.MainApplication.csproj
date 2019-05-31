@@ -301,7 +301,6 @@
     <Compile Include="WebUtility\WebClaimIdentity.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\DB_Tritsur.mdf" />
     <Content Include="Content\adminlte\bower_components\jquery-ui\ui\minified\autocomplete.min.js" />
     <Content Include="Content\adminlte\bower_components\moment\moment.js" />
     <Content Include="Content\adminlte\plugins\datatables\dataTables.bootstrap.css" />
@@ -520,6 +519,7 @@
     <Content Include="Views\BatchMixes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\" />
     <Folder Include="Views\BaseOdata\" />
     <Folder Include="Views\EntityApi\" />
   </ItemGroup>
