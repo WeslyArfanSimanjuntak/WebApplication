@@ -37,6 +37,8 @@ namespace Web.MainApplication.Controllers
         {
             ViewBag.GroupName = new SelectList(db.AspNetGroups, "GroupName", "GroupDescription");
             ViewBag.Username = new SelectList(db.AspNetUsers, "Username", "FullName");
+            ViewBag.IsActive = WebAppUtility.SelectListIsActive();
+
             return View();
         }
 
@@ -56,23 +58,26 @@ namespace Web.MainApplication.Controllers
 
             ViewBag.GroupName = new SelectList(db.AspNetGroups, "GroupName", "GroupDescription", aspNetGroupUser.GroupName);
             ViewBag.Username = new SelectList(db.AspNetUsers, "Username", "FullName", aspNetGroupUser.Username);
+            ViewBag.IsActive = WebAppUtility.SelectListIsActive(aspNetGroupUser.IsActive);
+
             return View(aspNetGroupUser);
         }
 
         // GET: AspNetGroupUsers/Edit/5
-        public ActionResult Edit(string username , string groupName)
+        public ActionResult Edit(string username, string groupName)
         {
-            if (username == null || groupName== null)
+            if (username == null || groupName == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AspNetGroupUser aspNetGroupUser = db.AspNetGroupUser.Where(x=>x.Username==username && x.GroupName == groupName).FirstOrDefault();
+            AspNetGroupUser aspNetGroupUser = db.AspNetGroupUser.Where(x => x.Username == username && x.GroupName == groupName).FirstOrDefault();
             if (aspNetGroupUser == null)
             {
                 return HttpNotFound();
             }
             ViewBag.GroupName = new SelectList(db.AspNetGroups, "GroupName", "GroupDescription", aspNetGroupUser.GroupName);
             ViewBag.Username = new SelectList(db.AspNetUsers, "Username", "FullName", aspNetGroupUser.Username);
+            ViewBag.IsActive = WebAppUtility.SelectListIsActive(aspNetGroupUser.IsActive);
             return View(aspNetGroupUser);
         }
 
@@ -91,6 +96,7 @@ namespace Web.MainApplication.Controllers
             }
             ViewBag.GroupName = new SelectList(db.AspNetGroups, "GroupName", "GroupDescription", aspNetGroupUser.GroupName);
             ViewBag.Username = new SelectList(db.AspNetUsers, "Username", "FullName", aspNetGroupUser.Username);
+            ViewBag.IsActive = WebAppUtility.SelectListIsActive(aspNetGroupUser.IsActive);
             return View(aspNetGroupUser);
         }
 
@@ -101,7 +107,7 @@ namespace Web.MainApplication.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AspNetGroupUser aspNetGroupUser = db.AspNetGroupUser.Where(x=>x.Username==username && x.GroupName==groupName).FirstOrDefault();
+            AspNetGroupUser aspNetGroupUser = db.AspNetGroupUser.Where(x => x.Username == username && x.GroupName == groupName).FirstOrDefault();
             if (aspNetGroupUser == null)
             {
                 return HttpNotFound();

@@ -54,6 +54,7 @@ namespace Web.MainApplication.Controllers
             });
             BATCH batch = new BATCH();
             batch.BatchProduct.Add(new BatchProduct());
+            ViewBag.IsActive = WebAppUtility.SelectListIsActive();
             ViewBag.MatureProduct = lsProductMature.ToSelectList();
             return View(batch);
         }
@@ -119,6 +120,7 @@ namespace Web.MainApplication.Controllers
             ViewBag.RawProduct = lsProduct.ToSelectList(bATCH.RawProduct);
             bATCH.BatchProduct = batchProduct;
             ViewBag.MatureProduct = lsProductMature.ToSelectList();
+            ViewBag.IsActive = WebAppUtility.SelectListIsActive(bATCH.IsActive);
             return View(bATCH);
         }
 
@@ -149,6 +151,7 @@ namespace Web.MainApplication.Controllers
             });
             ViewBag.MatureProduct = lsProductMature.ToSelectList();
             ViewBag.RawProduct = lsProduct.ToSelectList(bATCH.RawProduct);
+            ViewBag.IsActive = WebAppUtility.SelectListIsActive(bATCH.IsActive);
             return View(bATCH);
         }
 
@@ -228,6 +231,7 @@ namespace Web.MainApplication.Controllers
             ViewBag.RawProduct = lsProduct.ToSelectList(bATCH.RawProduct);
             ViewBag.MatureProduct = lsProductMature.ToSelectList();
             bATCH.BatchProduct = batchProduct;
+            ViewBag.IsActive = WebAppUtility.SelectListIsActive(bATCH.IsActive);
             return View(bATCH);
         }
 

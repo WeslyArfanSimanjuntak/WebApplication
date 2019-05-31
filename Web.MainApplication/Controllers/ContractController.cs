@@ -65,7 +65,7 @@ namespace Web.MainApplication.Controllers
                 selectListSite.AddItemValText(x.SITENAME, x.SITENAME + " - " + x.SITEADDRESS);
             });
             ViewBag.SiteName = selectListSite.ToSelectList();
-            var selectList = new List<SelectListItem>();
+            List<SelectListItem> selectList = new List<SelectListItem>();
             selectList.Add(new SelectListItem()
             {
                 Value = "",
@@ -81,13 +81,12 @@ namespace Web.MainApplication.Controllers
 
               });
             ViewBag.ClientIdPK = new SelectList(selectList, "Value", "Text");
-            var listContractProduct = new List<ContractProduct>();
-            listContractProduct.Add(new ContractProduct()
+            new List<ContractProduct>().Add(new ContractProduct()
             {
                 Amount = 0,
                 PricePerTon = 0
             });
-            contract.ContractProduct = listContractProduct;
+            contract.ContractProduct = new List<ContractProduct>();
             var lsiProduct = new List<SelectListItem>();
             lsiProduct.AddBlank();
             db.PRODUCT.ToList().ForEach(x =>
@@ -105,6 +104,7 @@ namespace Web.MainApplication.Controllers
             ViewBag.sliQuantityBasedOn = sliQuantityBasedOn;
             var sliPpn = new List<SelectListItem>();
             sliPpn.AddBlank();
+            ViewBag.IsActive = WebAppUtility.SelectListIsActive(contract.IsActive);
 
             sliPpn.AddItemValText("Y", "Yes");
             sliPpn.AddItemValText("N", "No");
@@ -242,6 +242,7 @@ namespace Web.MainApplication.Controllers
             float convertTonToM3;
             float.TryParse((string)db.ParameterSetup.Where(x => x.Name == "Convertion(ton to m3)").FirstOrDefault().Value, out convertTonToM3);
             ViewBag.TonUnitToM3Unit = convertTonToM3;
+            ViewBag.IsActive = WebAppUtility.SelectListIsActive(cONTRACT.IsActive);
 
             return View(cONTRACT);
         }
@@ -285,6 +286,8 @@ namespace Web.MainApplication.Controllers
 
             ViewBag.ClientId = selectList.ToSelectList(cONTRACT.ClientIdPK);
             ViewBag.ProductId = selectListProduct.ToSelectList(cONTRACT.ContractProduct);
+            ViewBag.IsActive = WebAppUtility.SelectListIsActive(cONTRACT.IsActive);
+
             return View(cONTRACT);
         }
 

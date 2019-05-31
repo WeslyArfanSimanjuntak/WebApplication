@@ -34,6 +34,7 @@ namespace Web.MainApplication.Controllers
         // GET: AspNetUsers/Create
         public ActionResult Create()
         {
+            ViewBag.IsActive = WebAppUtility.SelectListIsActive();
             return View();
         }
 
@@ -50,6 +51,7 @@ namespace Web.MainApplication.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.IsActive = WebAppUtility.SelectListIsActive(aspNetUsers.IsActive);
 
             return View(aspNetUsers);
         }
@@ -66,6 +68,7 @@ namespace Web.MainApplication.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.IsActive = WebAppUtility.SelectListIsActive(aspNetUsers.IsActive);
             return View(aspNetUsers);
         }
 
@@ -83,6 +86,8 @@ namespace Web.MainApplication.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.IsActive = WebAppUtility.SelectListIsActive(aspNetUsers.IsActive);
+
             return View(aspNetUsers);
         }
 
@@ -98,6 +103,7 @@ namespace Web.MainApplication.Controllers
             {
                 return HttpNotFound();
             }
+
             return View(aspNetUsers);
         }
 

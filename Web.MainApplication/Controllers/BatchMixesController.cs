@@ -53,10 +53,11 @@ namespace Web.MainApplication.Controllers
             {
                 lsProductMature.AddItemValText(x.PRODUCTID, x.PRODUCTNAME + " - " + x.PRODUCTDESCRIPTION);
             });
-            BatchMix batch = new BatchMix();
-            batch.BatchMixProduct.Add(new BatchMixProduct());
+            BatchMix batchMix = new BatchMix();
+            batchMix.BatchMixProduct.Add(new BatchMixProduct());
+            ViewBag.IsActive = WebAppUtility.SelectListIsActive(batchMix.IsActive);
             ViewBag.MatureProduct = lsProductMature.ToSelectList();
-            return View(batch);
+            return View(batchMix);
             //ViewBag.OutputProduct = new SelectList(db.PRODUCT, "PRODUCTID", "PRODUCTNAME");
             //return View();
         }
@@ -123,6 +124,7 @@ namespace Web.MainApplication.Controllers
             ViewBag.RawProduct = lsProduct.ToSelectList();
             batchMix.BatchMixProduct = batchMixProduct;
             ViewBag.MatureProduct = lsProductMature.ToSelectList(batchMix.OutputProduct);
+            ViewBag.IsActive = WebAppUtility.SelectListIsActive(batchMix.IsActive);
 
             return View(batchMix);
         }
@@ -154,6 +156,7 @@ namespace Web.MainApplication.Controllers
 
             ViewBag.RawProduct = lsProduct.ToSelectList();
             ViewBag.MatureProduct = lsProductMature.ToSelectList(batchMix.OutputProduct);
+            ViewBag.IsActive = WebAppUtility.SelectListIsActive(batchMix.IsActive);
 
             return View(batchMix);
         }
@@ -240,6 +243,7 @@ namespace Web.MainApplication.Controllers
             ViewBag.RawProduct = lsProduct.ToSelectList();
             batchMix.BatchMixProduct = batchMixProduct;
             ViewBag.MatureProduct = lsProductMature.ToSelectList(batchMix.OutputProduct);
+            ViewBag.IsActive = WebAppUtility.SelectListIsActive(batchMix.IsActive);
 
             return View(batchMix);
         }

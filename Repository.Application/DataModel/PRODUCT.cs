@@ -18,17 +18,17 @@ namespace Repository.Application.DataModel
         public PRODUCT()
         {
             this.BATCH = new HashSet<BATCH>();
+            this.BatchMix = new HashSet<BatchMix>();
+            this.BatchMixProduct = new HashSet<BatchMixProduct>();
             this.BatchProduct = new HashSet<BatchProduct>();
             this.ContractProduct = new HashSet<ContractProduct>();
             this.DeliveryRequestProductDetailTransaction = new HashSet<DeliveryRequestProductDetailTransaction>();
             this.ProductAdjustment = new HashSet<ProductAdjustment>();
             this.ProductConvertion = new HashSet<ProductConvertion>();
+            this.ProductMixing = new HashSet<ProductMixing>();
             this.ProductSite = new HashSet<ProductSite>();
             this.RITASE = new HashSet<RITASE>();
             this.TransactionProduct = new HashSet<TransactionProduct>();
-            this.BatchMix = new HashSet<BatchMix>();
-            this.BatchMixProduct = new HashSet<BatchMixProduct>();
-            this.ProductMixing = new HashSet<ProductMixing>();
         }
     
         public string PRODUCTID { get; set; }
@@ -45,6 +45,10 @@ namespace Repository.Application.DataModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BATCH> BATCH { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BatchMix> BatchMix { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BatchMixProduct> BatchMixProduct { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BatchProduct> BatchProduct { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ContractProduct> ContractProduct { get; set; }
@@ -55,17 +59,13 @@ namespace Repository.Application.DataModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductConvertion> ProductConvertion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ProductMixing> ProductMixing { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductSite> ProductSite { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RITASE> RITASE { get; set; }
         public virtual StockProduct StockProduct { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TransactionProduct> TransactionProduct { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BatchMix> BatchMix { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BatchMixProduct> BatchMixProduct { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ProductMixing> ProductMixing { get; set; }
     }
 }

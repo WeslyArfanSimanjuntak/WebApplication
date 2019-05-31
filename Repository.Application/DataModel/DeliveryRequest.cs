@@ -17,8 +17,8 @@ namespace Repository.Application.DataModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public DeliveryRequest()
         {
-            this.DeliveryRequestProductDetailTransaction = new HashSet<DeliveryRequestProductDetailTransaction>();
             this.DeliveryOrder = new HashSet<DeliveryOrder>();
+            this.DeliveryRequestProductDetailTransaction = new HashSet<DeliveryRequestProductDetailTransaction>();
         }
     
         public long DeliveryRequestId { get; set; }
@@ -36,8 +36,8 @@ namespace Repository.Application.DataModel
     
         public virtual CONTRACT CONTRACT { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DeliveryRequestProductDetailTransaction> DeliveryRequestProductDetailTransaction { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DeliveryOrder> DeliveryOrder { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DeliveryRequestProductDetailTransaction> DeliveryRequestProductDetailTransaction { get; set; }
     }
 }

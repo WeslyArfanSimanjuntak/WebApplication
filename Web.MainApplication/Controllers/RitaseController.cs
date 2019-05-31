@@ -122,8 +122,7 @@ namespace Web.MainApplication.Controllers
 
                         try
                         {
-                            var ritasetLast = db.RITASE.Where(x => x.SITE == rITASE.SITE).OrderByDescending(x => x.RITASEID).FirstOrDefault();
-                            rITASE.RITASENUMBER = WebAppUtility.RitaseNumberGenerator(ritasetLast != null ? ritasetLast.RITASEID : 0 + 1);
+                            rITASE.RITASENUMBER = WebAppUtility.RitaseNumberGenerator(db.RitaseSequence() + 1);
                             var batchProduct = db.BatchProduct.Where(x => x.BatchCode == rITASE.BatchCode);
                             List<TransactionProduct> listTransactionProduct = new List<TransactionProduct>();
                             foreach (var item in batchProduct)
@@ -184,53 +183,69 @@ namespace Web.MainApplication.Controllers
                 }
                 else if (rITASE.RITASESTATUS == "Accumulate")
                 {
-                    var lastRitase = db.RITASE.OrderByDescending(x => x.RITASEID).FirstOrDefault();
-
-                    rITASE.RITASENUMBER = WebAppUtility.RitaseNumberGenerator(lastRitase != null ? lastRitase.RITASEID + 1 : 0 + 1);
-                    var product = db.PRODUCT.Where(x => x.PRODUCTID == rITASE.PRODUCT);
-                    List<TransactionProduct> listTransactionProduct = new List<TransactionProduct>();
-                    foreach (var item in product)
+                    using (var dbTransaction = db.Database.BeginTransaction())
                     {
-                        var lastTP = db.TransactionProduct.OrderByDescending(x => x.Id).FirstOrDefault();
-                        listTransactionProduct.Add(new TransactionProduct()
+                        try
                         {
-                            TransactionProductNumber = WebAppUtility.TransactionProductNumberGenerator(lastTP != null ? lastTP.Id + 1 : 0 + 1),
-                            ProductId = item.PRODUCTID,
-                            Jenis = "Ritase",
-                            RitaseId = rITASE.RITASEID,
-                            TypeDebitOrCredit = "Kredit",
-                            Ammount = rITASE.QuantityInTon
+                            var lastSequence = db.TableSequence.Find("Ritase", 2019);
+                            var lastRitase = db.RITASE.OrderByDescending(x => x.RITASEID).FirstOrDefault();
 
-                        });
-
-                        var productSite = db.ProductSite.Where(z => z.ProductId == z.ProductId && z.SiteName == rITASE.SITE).FirstOrDefault();
-
-                        if (productSite == null)
-                        {
-                            productSite = new ProductSite()
+                            rITASE.RITASENUMBER = WebAppUtility.RitaseNumberGenerator(db.RitaseSequence() + 1);
+                            db.RitaseSequencePlusOne();
+                            
+                            var product = db.PRODUCT.Where(x => x.PRODUCTID == rITASE.PRODUCT);
+                            List<TransactionProduct> listTransactionProduct = new List<TransactionProduct>();
+                            foreach (var item in product)
                             {
-                                SiteName = rITASE.SITE,
-                                ProductId = rITASE.PRODUCT,
-                                TotalStock = rITASE.QuantityInTon
-                            };
-                            productSite.SetPropertyCreate();
-                            db.ProductSite.Add(productSite);
+                                var lastTP = db.TransactionProduct.OrderByDescending(x => x.Id).FirstOrDefault();
+                                listTransactionProduct.Add(new TransactionProduct()
+                                {
+                                    TransactionProductNumber = WebAppUtility.TransactionProductNumberGenerator(lastTP != null ? lastTP.Id + 1 : 0 + 1),
+                                    ProductId = item.PRODUCTID,
+                                    Jenis = "Ritase",
+                                    RitaseId = rITASE.RITASEID,
+                                    TypeDebitOrCredit = "Kredit",
+                                    Ammount = rITASE.QuantityInTon
+
+                                });
+
+                                var productSite = db.ProductSite.Where(z => z.ProductId == z.ProductId && z.SiteName == rITASE.SITE).FirstOrDefault();
+
+                                if (productSite == null)
+                                {
+                                    productSite = new ProductSite()
+                                    {
+                                        SiteName = rITASE.SITE,
+                                        ProductId = rITASE.PRODUCT,
+                                        TotalStock = rITASE.QuantityInTon
+                                    };
+                                    productSite.SetPropertyCreate();
+                                    db.ProductSite.Add(productSite);
+                                }
+                                else
+                                {
+
+                                    productSite.TotalStock = productSite.TotalStock + rITASE.QuantityInTon;
+                                    productSite.SetPropertyUpdate();
+                                    db.Entry(productSite).State = System.Data.Entity.EntityState.Modified;
+                                }
+
+                            }
+
+                            db.RITASE.Add(rITASE);
+                            db.TransactionProduct.AddRange(listTransactionProduct);
+                            db.SaveChanges();
+                            dbTransaction.Commit();
+                            return RedirectToAction("Index");
+
                         }
-                        else
+                        catch (Exception e)
                         {
-
-                            productSite.TotalStock = productSite.TotalStock + rITASE.QuantityInTon;
-                            productSite.SetPropertyUpdate();
-                            db.Entry(productSite).State = System.Data.Entity.EntityState.Modified;
+                            dbTransaction.Rollback();
+                            ErrorMessagesAdd(e.Message);
+                            throw;
                         }
-
                     }
-
-                    db.RITASE.Add(rITASE);
-                    db.TransactionProduct.AddRange(listTransactionProduct);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-
                 }
 
 

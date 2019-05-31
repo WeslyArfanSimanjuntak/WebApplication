@@ -31,39 +31,39 @@ namespace Repository.Application.DataModel
         public virtual DbSet<AspNetGroups> AspNetGroups { get; set; }
         public virtual DbSet<AspNetGroupUser> AspNetGroupUser { get; set; }
         public virtual DbSet<AspNetRoleGroup> AspNetRoleGroup { get; set; }
+        public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
         public virtual DbSet<BATCH> BATCH { get; set; }
+        public virtual DbSet<BatchMix> BatchMix { get; set; }
+        public virtual DbSet<BatchMixProduct> BatchMixProduct { get; set; }
         public virtual DbSet<BatchProduct> BatchProduct { get; set; }
         public virtual DbSet<CLIENT> CLIENT { get; set; }
         public virtual DbSet<CONTRACT> CONTRACT { get; set; }
         public virtual DbSet<ContractProduct> ContractProduct { get; set; }
+        public virtual DbSet<DeliveryOrder> DeliveryOrder { get; set; }
+        public virtual DbSet<DeliveryOrderInvoice> DeliveryOrderInvoice { get; set; }
         public virtual DbSet<DeliveryRequest> DeliveryRequest { get; set; }
         public virtual DbSet<DeliveryRequestProductDetailTransaction> DeliveryRequestProductDetailTransaction { get; set; }
         public virtual DbSet<EMPLOYEE> EMPLOYEE { get; set; }
-        public virtual DbSet<PRODUCT> PRODUCT { get; set; }
-        public virtual DbSet<ProductAdjustment> ProductAdjustment { get; set; }
-        public virtual DbSet<ProductConvertion> ProductConvertion { get; set; }
-        public virtual DbSet<ProductSite> ProductSite { get; set; }
-        public virtual DbSet<RITASE> RITASE { get; set; }
-        public virtual DbSet<SITE> SITE { get; set; }
-        public virtual DbSet<StockProduct> StockProduct { get; set; }
-        public virtual DbSet<TransactionProduct> TransactionProduct { get; set; }
-        public virtual DbSet<UserClientMapping> UserClientMapping { get; set; }
-        public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
         public virtual DbSet<FinanceBalance> FinanceBalance { get; set; }
         public virtual DbSet<FinanceTransaction> FinanceTransaction { get; set; }
         public virtual DbSet<FinanceTransactionNostro> FinanceTransactionNostro { get; set; }
-        public virtual DbSet<NostroBank> NostroBank { get; set; }
-        public virtual DbSet<TransactionCode> TransactionCode { get; set; }
         public virtual DbSet<Menu> Menu { get; set; }
-        public virtual DbSet<DeliveryOrder> DeliveryOrder { get; set; }
-        public virtual DbSet<DeliveryOrderInvoice> DeliveryOrderInvoice { get; set; }
-        public virtual DbSet<TableSequence> TableSequence { get; set; }
+        public virtual DbSet<NostroBank> NostroBank { get; set; }
         public virtual DbSet<ParameterSetup> ParameterSetup { get; set; }
-        public virtual DbSet<SOURCE> SOURCE { get; set; }
-        public virtual DbSet<BatchMix> BatchMix { get; set; }
-        public virtual DbSet<BatchMixProduct> BatchMixProduct { get; set; }
+        public virtual DbSet<PRODUCT> PRODUCT { get; set; }
+        public virtual DbSet<ProductAdjustment> ProductAdjustment { get; set; }
+        public virtual DbSet<ProductConvertion> ProductConvertion { get; set; }
         public virtual DbSet<ProductMixing> ProductMixing { get; set; }
+        public virtual DbSet<ProductSite> ProductSite { get; set; }
+        public virtual DbSet<RITASE> RITASE { get; set; }
+        public virtual DbSet<SITE> SITE { get; set; }
+        public virtual DbSet<SOURCE> SOURCE { get; set; }
+        public virtual DbSet<StockProduct> StockProduct { get; set; }
+        public virtual DbSet<TransactionCode> TransactionCode { get; set; }
+        public virtual DbSet<TransactionProduct> TransactionProduct { get; set; }
+        public virtual DbSet<UserClientMapping> UserClientMapping { get; set; }
+        public virtual DbSet<TableSequence> TableSequence { get; set; }
     
         public virtual ObjectResult<SPSelectDeliveryRequest_Result> SPSelectDeliveryRequest()
         {

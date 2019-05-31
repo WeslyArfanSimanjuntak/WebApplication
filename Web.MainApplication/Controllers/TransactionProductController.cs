@@ -322,7 +322,7 @@ namespace Web.MainApplication.Controllers
         {
             ProductMixing pm = new ProductMixing()
             {
-                ProductMixingNumber = WebAppUtility.TransactionProductMixingNumberGenerator(this.db.ProductMixing() + 1)
+                ProductMixingNumber = WebAppUtility.TransactionProductMixingNumberGenerator(this.db.ProductMixingSequence() + 1)
                 ,
                 Ammount = 0,
                 MixedBy = User.Identity.Name

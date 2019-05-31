@@ -49,6 +49,7 @@ namespace Web.MainApplication.Controllers
             selectListTypeController.AddItemValText("Function", "Function");
             ViewBag.ParentId = selectList.ToSelectList();
             ViewBag.Type = selectListTypeController.ToSelectList();
+            ViewBag.IsActive = WebAppUtility.SelectListIsActive();
 
             return View();
         }
@@ -85,6 +86,8 @@ namespace Web.MainApplication.Controllers
             selectListTypeController.AddItemValText("Function", "Function");
             ViewBag.ParentId = selectList.ToSelectList();
             ViewBag.Type = selectListTypeController.ToSelectList();
+            ViewBag.IsActive = WebAppUtility.SelectListIsActive(aspNetRoles.IsActive);
+
             return View(aspNetRoles);
         }
 
@@ -113,6 +116,7 @@ namespace Web.MainApplication.Controllers
             selectListTypeController.AddItemValText("Function", "Function");
             ViewBag.ParentId = selectList.ToSelectList(aspNetRoles.ParentId);
             ViewBag.Type = selectListTypeController.ToSelectList(aspNetRoles.Type);
+            ViewBag.IsActive = WebAppUtility.SelectListIsActive(aspNetRoles.IsActive);
             return View(aspNetRoles);
         }
 
@@ -143,6 +147,7 @@ namespace Web.MainApplication.Controllers
             selectListTypeController.AddItemValText("Function", "Function");
             ViewBag.ParentId = selectList.ToSelectList();
             ViewBag.Type = selectListTypeController.ToSelectList();
+            ViewBag.IsActive = WebAppUtility.SelectListIsActive(aspNetRoles.IsActive);
             return View(aspNetRoles);
         }
 

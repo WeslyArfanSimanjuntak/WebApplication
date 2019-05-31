@@ -26,6 +26,9 @@
                     <th>
                         @Html.DisplayNameFor(model => model.Description)
                     </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IsActive)
+                    </th>
                     <th></th>
                 </tr>
             </thead>
@@ -45,6 +48,9 @@
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+                            @(item.IsActive == 1 ? "Active" : "Non-Active")
                         </td>
                         <td>
                             @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
