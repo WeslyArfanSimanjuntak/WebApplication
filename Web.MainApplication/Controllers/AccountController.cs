@@ -17,7 +17,7 @@ namespace Web.MainApplication.Controllers
 {
     public class AccountController : BaseController
     {
-        //wesly arfan simanjuntak
+        //wesly simanjuntak
         private UnitOfWork unitOfWork;
         private DB_TritsurEntities db = new DB_TritsurEntities();
 
