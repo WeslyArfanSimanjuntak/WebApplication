@@ -3,129 +3,181 @@
 @{
     ViewBag.Title = "MixProduct";
 }
-
-<h2>MixProduct</h2>
-
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>ProductMixing</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.ProductMixingNumber, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ProductMixingNumber, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ProductMixingNumber, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Site, "Site", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("Site", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Site, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.BatchMixCode, "BatchMixCode", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("BatchMixCode", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.BatchMixCode, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.OutcomeProudct, "OutcomeProudct", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("OutcomeProudct", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.OutcomeProudct, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Ammount, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Ammount, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Ammount, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.MixingTime, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.MixingTime, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.MixingTime, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.MixedBy, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.MixedBy, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.MixedBy, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Remark, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Remark, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Remark, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.CreatedBy, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CreatedBy, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CreatedBy, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.UpdatedBy, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.UpdatedBy, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.UpdatedBy, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.CreatedDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CreatedDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CreatedDate, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.UpdatedDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.UpdatedDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.UpdatedDate, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.IsActive, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.IsActive, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
+<div class="box box-solid">
+    <div class="box-header with-border">
+        <h3 class="box-title">
+            Create - Product Transaction Mixing
+        </h3>
     </div>
-}
+    <!-- /.box-header -->
+    <div class="box-body">
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ProductMixingNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.ProductMixingNumber, new { htmlAttributes = new { @readonly = "readonly", @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ProductMixingNumber, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Site, "Site", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("Site", null, htmlAttributes: new { @required = "required", @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Site, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.BatchMixCode, "BatchMixCode", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("BatchMixCode", null, htmlAttributes: new { @required = "required", @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.BatchMixCode, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Outcome Product", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBox("OutcomeProudct", null, htmlAttributes: new { @required = "required", @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.OutcomeProudct, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Amount", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Ammount, new { htmlAttributes = new { @required = "required", @class = "form-control money-format2" } })
+                        @Html.ValidationMessageFor(model => model.Ammount, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.MixingTime, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.MixingTime, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.MixingTime, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.MixedBy, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.MixedBy, new { htmlAttributes = new {@readonly="readonly", @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.MixedBy, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Remark, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Remark, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Remark, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Create" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+    <div class="box-footer">
+        @Html.ActionLink("Back to List", "Index")
+    </div>
 </div>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $('#MixingTime').datetimepicker({
+            format: 'MM/DD/YYYY HH:mm:ss'
+        });
+
+        @*
+        $("#Site").on("change", function () {
+
+            $("#SourceProudct option").not(':first-child').each(function (index) {
+                $(this).remove();
+            });
+
+            var selectedSite = $("#Site").val();
+
+            if (selectedSite != "") {
+                AjaxCall(function (output) {
+                    console.log(output);
+                    $.each(output.data, function (key, value) {
+                        //$("#SourceProudct").append('<option value="' + value["EMPLOYEEID"] + '">' + value["EMPLOYEEID"] + " - " + value["EMPLOYEEFULLNAME"] + '</option>');
+                        AjaxCall(function (outpute) {
+                            $.each(outpute.data, function (keye, valuee) {
+                                $("#SourceProudct").append('<option value="' + valuee["PRODUCTID"] + '" ' + ("@Model.SourceProudct" === valuee["PRODUCTID"] ? "selected":"") +'>' + valuee["PRODUCTID"] + " - " + valuee["PRODUCTNAME"] + ', Total Stock In Site = ' + value["TotalStock"] + ' ton</option>');
+
+                            });
+
+                        }, entityApiUrl + '?entitas=PRODUCT&filter=PRODUCTID=="' + value["ProductId"] + '"');
+                    });
+
+                }, entityApiUrl + '?entitas=ProductSite&filter=SiteName=="' + selectedSite + '"');
+
+
+                //------------- Armada ---------
+                //AjaxCall(function (output) {
+                //    console.log(output);
+                //    $.each(output.data, function (key, value) {
+                //        $("#ARMADA").append('<option value="' + value["ARMADAID"] + '">' + value["ARMADAID"] + " - " + value["ARMADANAME"] + " - " + value["ARMADACAPACITYINKG"] + ' kg</option>');
+
+                //    });
+
+                //}, entityApiUrl + '?entitas=ARMADA&filter=SiteName=="' + selectedSite + '"');
+
+                //--------------- Product ------------
+                //AjaxCall(function (output) {
+
+                //    console.log(output);
+                //    $.each(output.data, function (keyProduct, valueProduct) {
+
+
+                //        $("#PRODUCT").append('<option value="' + valueProduct["PRODUCTID"] + '">' + valueProduct["PRODUCTNAME"]);
+
+                //    });
+
+                //}, entityApiUrl + '?entitas=PRODUCT&filter=TypeMaterial="Raw"');
+
+
+
+            }
+
+
+        });
+        $("#Site").change();
+        $("#BatchCode").on("change", function () {
+            var selectedBatchCode = $("#BatchCode").val();
+            $("#batchDetailInformationChild").html("");
+            if (selectedBatchCode != "") {
+                var htmlDetail = "";
+                AjaxCall(function (output) {
+                    console.log(output);
+                    var counter = 1;
+                    $.each(output.data, function (key, value) {
+
+                        htmlDetail = htmlDetail + ("<strong>" + counter.toString() + ". Batch Code = " + value["BatchCode"] + "</br> Product Id = " + value["ProductId"] + "<br/> Product Name =  " + value["PRODUCT"]["PRODUCTNAME"] + "<br/> Product Percentage = " + value["ProductPercentage"] + " %</strong><br/><br/>");
+                        counter++;
+                    });
+                    $("#batchDetailInformationChild").append(htmlDetail);
+                }, entityApiUrl + '?entitas=BatchProduct&filter=BatchCode=="' + selectedBatchCode + '"');
+
+            }
+        });
+        $("#BatchCode").change();*@
+    });
+</script>

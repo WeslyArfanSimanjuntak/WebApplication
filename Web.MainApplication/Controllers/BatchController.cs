@@ -96,13 +96,20 @@ namespace Web.MainApplication.Controllers
 
             if (ModelState.IsValid && totalComposedProduct > 0 && !(batchProduct.Sum(x => x.ProductPercentage) != 100))
             {
+                try
+                {
+                    db.BATCH.Add(bATCH);
+                    db.BatchProduct.AddRange(batchProduct);
+                    db.SaveChanges();
+                    SuccessMessagesAdd("Batch " + bATCH.BatchCode + " added successfully");
+                    return RedirectToAction("Index");
+                }
+                catch (Exception e)
+                {
+                    ErrorMessagesAdd(e.Message);
+                }
 
 
-                db.BATCH.Add(bATCH);
-                db.BatchProduct.AddRange(batchProduct);
-                db.SaveChanges();
-                SuccessMessagesAdd("Batch " + bATCH.BatchCode + " added successfully");
-                return RedirectToAction("Index");
             }
 
             List<SelectListItem> lsProduct = new List<SelectListItem>();

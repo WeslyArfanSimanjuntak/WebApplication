@@ -352,142 +352,174 @@ namespace Web.MainApplication.Controllers
             float convertTonToM3;
             float.TryParse((string)db.ParameterSetup.Where(x => x.Name == "Convertion(ton to m3)").FirstOrDefault().Value, out convertTonToM3);
             ViewBag.TonUnitToM3Unit = convertTonToM3;
+            var sliBatchMixCode = new List<SelectListItem>();
+            sliBatchMixCode.AddBlank();
+            db.BatchMix.Where(x => x.IsActive == 1).ToList().ForEach(x =>
+            {
+                sliBatchMixCode.AddItemValText(x.BatchMixName, x.BatchMixCode);
+            });
+            ViewBag.BatchMixCode = sliBatchMixCode.ToSelectList();
+
+            
+            //ViewBag.IsActive = WebAppUtility.SelectListIsActive();
             return View(pm);
         }
-        [HttpPost]
-        public ActionResult MixProduct(ProductConvertion pc)
-        {
-            var productSiteStock = db.ProductSite.Where(x => x.SiteName == pc.Site && x.ProductId == pc.SourceProudct).FirstOrDefault();
-            if (productSiteStock == null)
-            {
-                WarningMessagesAdd("Product \"" + pc.SourceProudct + "\" is not found in site \"" + pc.Site + "\".");
-            }
-            if (productSiteStock != null && (productSiteStock.TotalStock < pc.Ammount))
-            {
-                WarningMessagesAdd("Insufficient Stock. Total stock : " + productSiteStock.TotalStock.ToString() + " ton");
-            }
-            if (pc.Ammount < 0)
-            {
-                WarningMessagesAdd("Amount can not be lower than 0 ton/m3");
-            }
-            var batchProductFirst = db.BatchProduct.Where(x => x.BatchCode == pc.BatchCode).FirstOrDefault();
-            string rawProduct = batchProductFirst.BATCH.RawProduct;
-            if (batchProductFirst.BATCH.RawProduct != pc.SourceProudct)
-            {
-                WarningMessagesAdd("Product and Batch is not match.");
-            }
+        //[HttpPost]
+        //public ActionResult MixProduct(ProductMixing pm )
+        //{
+        //    var productSiteStock = db.ProductSite.Where(x => x.SiteName == pc.Site && x.ProductId == pc.SourceProudct).FirstOrDefault();
+        //    if (productSiteStock == null)
+        //    {
+        //        WarningMessagesAdd("Product \"" + pc.SourceProudct + "\" is not found in site \"" + pc.Site + "\".");
+        //    }
+        //    if (productSiteStock != null && (productSiteStock.TotalStock < pc.Ammount))
+        //    {
+        //        WarningMessagesAdd("Insufficient Stock. Total stock : " + productSiteStock.TotalStock.ToString() + " ton");
+        //    }
+        //    if (pc.Ammount < 0)
+        //    {
+        //        WarningMessagesAdd("Amount can not be lower than 0 ton/m3");
+        //    }
+        //    var batchProductFirst = db.BatchProduct.Where(x => x.BatchCode == pc.BatchCode).FirstOrDefault();
+        //    string rawProduct = batchProductFirst.BATCH.RawProduct;
+        //    if (batchProductFirst.BATCH.RawProduct != pc.SourceProudct)
+        //    {
+        //        WarningMessagesAdd("Product and Batch is not match.");
+        //    }
 
 
-            if (ModelState.IsValid && WarningMessages().Count == 0)
-            {
-                using (var dbTransaction = db.Database.BeginTransaction())
-                {
+        //    if (ModelState.IsValid && WarningMessages().Count == 0)
+        //    {
+        //        using (var dbTransaction = db.Database.BeginTransaction())
+        //        {
 
-                    try
-                    {
-                        var batchProduct = db.BatchProduct.Where(x => x.BatchCode == pc.BatchCode).ToList();
-                        List<TransactionProduct> listTransactionProduct = new List<TransactionProduct>();
+        //            try
+        //            {
+        //                var batchProduct = db.BatchProduct.Where(x => x.BatchCode == pc.BatchCode).ToList();
+        //                List<TransactionProduct> listTransactionProduct = new List<TransactionProduct>();
 
-                        foreach (var item in batchProduct)
-                        {
-                            listTransactionProduct.Add(new TransactionProduct()
-                            {
-                                ProductId = item.ProductId,
-                                ConvertionId = pc.ConvertionId,
-                                Jenis = "Convertion",
-                                TypeDebitOrCredit = "Kredit",
-                                Ammount = item.ProductPercentage / 100 * pc.Ammount
+        //                foreach (var item in batchProduct)
+        //                {
+        //                    listTransactionProduct.Add(new TransactionProduct()
+        //                    {
+        //                        ProductId = item.ProductId,
+        //                        ConvertionId = pc.ConvertionId,
+        //                        Jenis = "Convertion",
+        //                        TypeDebitOrCredit = "Kredit",
+        //                        Ammount = item.ProductPercentage / 100 * pc.Ammount
 
-                            });
-                            var productSite = db.ProductSite.Where(x => x.ProductId == item.ProductId && x.SiteName == pc.Site).FirstOrDefault();
-                            if (productSite != null)
-                            {
-                                productSite.TotalStock = productSite.TotalStock + (item.ProductPercentage / 100 * pc.Ammount);
-                                productSite.SetPropertyUpdate();
-                                db.Entry(productSite).State = System.Data.Entity.EntityState.Modified;
-                            }
-                            else
-                            {
-                                productSite = new ProductSite()
-                                {
-                                    SiteName = pc.Site,
-                                    ProductId = item.ProductId,
-                                    TotalStock = item.ProductPercentage / 100 * pc.Ammount
-                                };
-                                productSite.SetPropertyCreate();
-                                db.ProductSite.Add(productSite);
-                            }
+        //                    });
+        //                    var productSite = db.ProductSite.Where(x => x.ProductId == item.ProductId && x.SiteName == pc.Site).FirstOrDefault();
+        //                    if (productSite != null)
+        //                    {
+        //                        productSite.TotalStock = productSite.TotalStock + (item.ProductPercentage / 100 * pc.Ammount);
+        //                        productSite.SetPropertyUpdate();
+        //                        db.Entry(productSite).State = System.Data.Entity.EntityState.Modified;
+        //                    }
+        //                    else
+        //                    {
+        //                        productSite = new ProductSite()
+        //                        {
+        //                            SiteName = pc.Site,
+        //                            ProductId = item.ProductId,
+        //                            TotalStock = item.ProductPercentage / 100 * pc.Ammount
+        //                        };
+        //                        productSite.SetPropertyCreate();
+        //                        db.ProductSite.Add(productSite);
+        //                    }
 
-                        }
+        //                }
 
-                        //db.TransactionProduct.AddRange(listTransactionProduct);
-                        pc.SetPropertyCreate();
-                        var lastPC = db.TransactionProduct.OrderByDescending(z => z.Id).FirstOrDefault();
-                        var lastPCId = lastPC != null ? lastPC.Id : 0;
-                        pc.ConvertionNumber = WebAppUtility.TransactionProductConvertionNumberGenerator(lastPCId + 1);
-                        db.ProductConvertion.Add(pc);
-                        db.SaveChanges();
-                        listTransactionProduct.ForEach(x =>
-                        {
-                            var lastTransaction = db.TransactionProduct.OrderByDescending(z => z.Id).FirstOrDefault();
-                            var lastTPId = lastTransaction != null ? lastTransaction.Id : 0;
-                            x.TransactionProductNumber = WebAppUtility.TransactionProductNumberGenerator(lastTPId + 1);
-                            x.SetPropertyCreate();
-                            x.ConvertionId = pc.ConvertionId;
-                            x.Remark = pc.Remark;
-                            db.TransactionProduct.Add(x);
-                            db.SaveChanges();
-                        });
-                        var productSiteToUpdate = db.ProductSite.Find(pc.SourceProudct, pc.Site);
-                        productSiteToUpdate.TotalStock = productSiteToUpdate.TotalStock - pc.Ammount;
-                        db.Entry(productSiteToUpdate).State = System.Data.Entity.EntityState.Modified;
-                        db.SaveChanges();
-                        dbTransaction.Commit();
-                        SuccessMessagesAdd("Convertion Success With Number \"" + pc.ConvertionNumber + "\"");
-                        return RedirectToAction("Index");
-                    }
-                    catch (Exception e)
-                    {
-                        dbTransaction.Rollback();
-                        WarningMessagesAdd(e.Message);
-                    }
-                }
+        //                //db.TransactionProduct.AddRange(listTransactionProduct);
+        //                pc.SetPropertyCreate();
+        //                var lastPC = db.TransactionProduct.OrderByDescending(z => z.Id).FirstOrDefault();
+        //                var lastPCId = lastPC != null ? lastPC.Id : 0;
+        //                pc.ConvertionNumber = WebAppUtility.TransactionProductConvertionNumberGenerator(lastPCId + 1);
+        //                db.ProductConvertion.Add(pc);
+        //                db.SaveChanges();
+        //                listTransactionProduct.ForEach(x =>
+        //                {
+        //                    var lastTransaction = db.TransactionProduct.OrderByDescending(z => z.Id).FirstOrDefault();
+        //                    var lastTPId = lastTransaction != null ? lastTransaction.Id : 0;
+        //                    x.TransactionProductNumber = WebAppUtility.TransactionProductNumberGenerator(lastTPId + 1);
+        //                    x.SetPropertyCreate();
+        //                    x.ConvertionId = pc.ConvertionId;
+        //                    x.Remark = pc.Remark;
+        //                    db.TransactionProduct.Add(x);
+        //                    db.SaveChanges();
+        //                });
+        //                var productSiteToUpdate = db.ProductSite.Find(pc.SourceProudct, pc.Site);
+        //                productSiteToUpdate.TotalStock = productSiteToUpdate.TotalStock - pc.Ammount;
+        //                db.Entry(productSiteToUpdate).State = System.Data.Entity.EntityState.Modified;
+        //                db.SaveChanges();
+        //                dbTransaction.Commit();
+        //                SuccessMessagesAdd("Convertion Success With Number \"" + pc.ConvertionNumber + "\"");
+        //                return RedirectToAction("Index");
+        //            }
+        //            catch (Exception e)
+        //            {
+        //                dbTransaction.Rollback();
+        //                WarningMessagesAdd(e.Message);
+        //            }
+        //        }
 
-            }
+        //    }
 
-            var lastCP = db.ProductConvertion.OrderByDescending(x => x.ConvertionId).FirstOrDefault();
-            var lastId = lastCP != null ? lastCP.ConvertionId : 0;
+        //    var lastCP = db.ProductConvertion.OrderByDescending(x => x.ConvertionId).FirstOrDefault();
+        //    var lastId = lastCP != null ? lastCP.ConvertionId : 0;
 
-            pc.ConvertionNumber = WebAppUtility.TransactionProductConvertionNumberGenerator(lastId + 1);
+        //    pc.ConvertionNumber = WebAppUtility.TransactionProductConvertionNumberGenerator(lastId + 1);
 
 
-            List<SelectListItem> selectListItemSite = new List<SelectListItem>();
-            selectListItemSite.AddBlank();
-            db.SITE.ToList().ForEach(x =>
-            {
-                selectListItemSite.AddItemValText(x.SITENAME, x.SITENAME + " - " + x.SITEADDRESS);
-            });
-            ViewBag.Site = selectListItemSite.ToSelectList(pc.Site);
-            List<SelectListItem> selectListItemProduct = new List<SelectListItem>();
-            selectListItemProduct.AddBlank();
-            db.PRODUCT.ToList().ForEach(x =>
-            {
-                selectListItemProduct.AddItemValText(x.PRODUCTID, x.PRODUCTID + " - " + x.PRODUCTNAME);
-            });
-            ViewBag.SourceProudct = selectListItemProduct.ToSelectList(pc.SourceProudct);
-            var listSelectItemBatchProduct = new List<SelectListItem>();
-            listSelectItemBatchProduct.AddBlank();
-            db.BATCH.ToList().ForEach(x =>
-            {
-                listSelectItemBatchProduct.AddItemValText(x.BatchCode, x.BatchCode + " - " + x.BatchName + " [Raw Product = " + x.RawProduct + " - " + x.PRODUCT.PRODUCTNAME + "]");
+        //    List<SelectListItem> selectListItemSite = new List<SelectListItem>();
+        //    selectListItemSite.AddBlank();
+        //    db.SITE.ToList().ForEach(x =>
+        //    {
+        //        selectListItemSite.AddItemValText(x.SITENAME, x.SITENAME + " - " + x.SITEADDRESS);
+        //    });
+        //    ViewBag.Site = selectListItemSite.ToSelectList(pc.Site);
+        //    List<SelectListItem> selectListItemProduct = new List<SelectListItem>();
+        //    selectListItemProduct.AddBlank();
+        //    db.PRODUCT.ToList().ForEach(x =>
+        //    {
+        //        selectListItemProduct.AddItemValText(x.PRODUCTID, x.PRODUCTID + " - " + x.PRODUCTNAME);
+        //    });
+        //    ViewBag.SourceProudct = selectListItemProduct.ToSelectList(pc.SourceProudct);
+        //    var listSelectItemBatchProduct = new List<SelectListItem>();
+        //    listSelectItemBatchProduct.AddBlank();
+        //    db.BATCH.ToList().ForEach(x =>
+        //    {
+        //        listSelectItemBatchProduct.AddItemValText(x.BatchCode, x.BatchCode + " - " + x.BatchName + " [Raw Product = " + x.RawProduct + " - " + x.PRODUCT.PRODUCTNAME + "]");
 
-            });
-            ViewBag.BatchCode = listSelectItemBatchProduct.ToSelectList(pc.BatchCode);
-            float convertTonToM3;
-            float.TryParse((string)db.ParameterSetup.Where(x => x.Name == "Convertion(ton to m3)").FirstOrDefault().Value, out convertTonToM3);
-            ViewBag.TonUnitToM3Unit = convertTonToM3;
-            return View(pc);
-        }
+        //    });
+        //    ViewBag.BatchCode = listSelectItemBatchProduct.ToSelectList(pc.BatchCode);
+        //    float convertTonToM3;
+        //    float.TryParse((string)db.ParameterSetup.Where(x => x.Name == "Convertion(ton to m3)").FirstOrDefault().Value, out convertTonToM3);
+        //    ViewBag.TonUnitToM3Unit = convertTonToM3;
+        //    var sliBatchMixCode = new List<SelectListItem>();
+        //    sliBatchMixCode.AddBlank();
+        //    db.BatchMix.Where(x => x.IsActive == 1).ToList().ForEach(x =>
+        //    {
+        //        sliBatchMixCode.Add(new SelectListItem()
+        //        {
+        //            Text = x.BatchMixCode,
+        //            Value = x.BatchMixName
+        //        });
+        //    });
+        //    ViewBag.BatchMixCode = sliBatchMixCode.ToSelectList(pm.BatchMixCode);
+
+
+        //    var sliOutComeProduct = new List<SelectListItem>();
+        //    sliOutComeProduct.AddBlank();
+
+        //    db.PRODUCT.Where(x => x.IsActive == 1).ToList().ForEach(z =>
+        //    {
+        //        sliOutComeProduct.AddItemValText(z.PRODUCTID, z.PRODUCTID + " - " + z.PRODUCTNAME);
+        //    });
+        //    ViewBag.OutcomeProudct = sliOutComeProduct.ToSelectList(pm.OutcomeProudct);
+
+        //    return View(pm);
+        //}
         [HttpGet]
         public ActionResult ConvertionDetails(long? id)
         {
