@@ -586,6 +586,7 @@
           <Property Name="RitaseId" Type="int" />
           <Property Name="AdjustmentId" Type="bigint" />
           <Property Name="ConvertionId" Type="bigint" />
+          <Property Name="MixingId" Type="bigint" />
           <Property Name="Remark" Type="varchar" MaxLength="512" />
           <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
           <Property Name="UpdatedBy" Type="varchar" MaxLength="50" />
@@ -1184,6 +1185,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TransactionProduct_ToProductMixing">
+          <End Role="ProductMixing" Type="Self.ProductMixing" Multiplicity="0..1" />
+          <End Role="TransactionProduct" Type="Self.TransactionProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductMixing">
+              <PropertyRef Name="ProductMixingId" />
+            </Principal>
+            <Dependent Role="TransactionProduct">
+              <PropertyRef Name="MixingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TransactionProduct_ToProductProductConvertion">
           <End Role="ProductConvertion" Type="Self.ProductConvertion" Multiplicity="0..1" />
           <End Role="TransactionProduct" Type="Self.TransactionProduct" Multiplicity="*" />
@@ -1462,6 +1475,10 @@
             <End Role="ProductAdjustment" EntitySet="ProductAdjustment" />
             <End Role="TransactionProduct" EntitySet="TransactionProduct" />
           </AssociationSet>
+          <AssociationSet Name="FK_TransactionProduct_ToProductMixing" Association="Self.FK_TransactionProduct_ToProductMixing">
+            <End Role="ProductMixing" EntitySet="ProductMixing" />
+            <End Role="TransactionProduct" EntitySet="TransactionProduct" />
+          </AssociationSet>
           <AssociationSet Name="FK_TransactionProduct_ToProductProductConvertion" Association="Self.FK_TransactionProduct_ToProductProductConvertion">
             <End Role="ProductConvertion" EntitySet="ProductConvertion" />
             <End Role="TransactionProduct" EntitySet="TransactionProduct" />
@@ -1730,6 +1747,10 @@
             <End Role="SITE" EntitySet="SITE" />
           </AssociationSet>
           <EntitySet Name="TableSequence" EntityType="DB_TritsurModel.TableSequence" />
+          <AssociationSet Name="FK_TransactionProduct_ToProductMixing" Association="DB_TritsurModel.FK_TransactionProduct_ToProductMixing">
+            <End Role="ProductMixing" EntitySet="ProductMixing" />
+            <End Role="TransactionProduct" EntitySet="TransactionProduct" />
+          </AssociationSet>
           </EntityContainer>
         <ComplexType Name="SPSelectDeliveryRequest_Result">
           <Property Type="Int64" Name="DeliveryRequestId" Nullable="false" />
@@ -2279,6 +2300,7 @@
           <NavigationProperty Name="BatchMix" Relationship="DB_TritsurModel.FK_ProductMixing_BatchMix" FromRole="ProductMixing" ToRole="BatchMix" />
           <NavigationProperty Name="PRODUCT" Relationship="DB_TritsurModel.FK_ProductMixing_PRODUCT" FromRole="ProductMixing" ToRole="PRODUCT" />
           <NavigationProperty Name="SITE1" Relationship="DB_TritsurModel.FK_ProductMixing_SITE" FromRole="ProductMixing" ToRole="SITE" />
+          <NavigationProperty Name="TransactionProduct" Relationship="DB_TritsurModel.FK_TransactionProduct_ToProductMixing" FromRole="ProductMixing" ToRole="TransactionProduct" />
         </EntityType>
         <EntityType Name="ProductSite">
           <Key>
@@ -2419,6 +2441,8 @@
           <NavigationProperty Name="ProductAdjustment" Relationship="DB_TritsurModel.FK_TransactionProduct_ToProductAdjustment" FromRole="TransactionProduct" ToRole="ProductAdjustment" />
           <NavigationProperty Name="ProductConvertion" Relationship="DB_TritsurModel.FK_TransactionProduct_ToProductProductConvertion" FromRole="TransactionProduct" ToRole="ProductConvertion" />
           <NavigationProperty Name="RITASE" Relationship="DB_TritsurModel.FK_TransactionProduct_ToRitase" FromRole="TransactionProduct" ToRole="RITASE" />
+          <Property Name="MixingId" Type="Int64" />
+          <NavigationProperty Name="ProductMixing" Relationship="DB_TritsurModel.FK_TransactionProduct_ToProductMixing" FromRole="TransactionProduct" ToRole="ProductMixing" />
         </EntityType>
         <EntityType Name="UserClientMapping">
           <Key>
@@ -3075,6 +3099,18 @@
           <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
           <Property Name="IsActive" Type="Int16" />
         </EntityType>
+        <Association Name="FK_TransactionProduct_ToProductMixing">
+          <End Type="DB_TritsurModel.ProductMixing" Role="ProductMixing" Multiplicity="0..1" />
+          <End Type="DB_TritsurModel.TransactionProduct" Role="TransactionProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductMixing">
+              <PropertyRef Name="ProductMixingId" />
+            </Principal>
+            <Dependent Role="TransactionProduct">
+              <PropertyRef Name="MixingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3663,6 +3699,7 @@
           <EntitySetMapping Name="TransactionProduct">
             <EntityTypeMapping TypeName="DB_TritsurModel.TransactionProduct">
               <MappingFragment StoreEntitySet="TransactionProduct">
+                <ScalarProperty Name="MixingId" ColumnName="MixingId" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />

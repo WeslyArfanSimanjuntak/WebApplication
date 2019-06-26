@@ -94,6 +94,7 @@
         <AssociationConnector Association="DB_TritsurModel.FK_TransactionProduct_ToRitase" />
         <AssociationConnector Association="DB_TritsurModel.FK_SITE_ToSource" />
         <EntityTypeShape EntityType="DB_TritsurModel.TableSequence" Width="1.5" PointX="13.375" PointY="10.75" />
+        <AssociationConnector Association="DB_TritsurModel.FK_TransactionProduct_ToProductMixing" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

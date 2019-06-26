@@ -236,6 +236,7 @@ namespace Web.MainApplication.Controllers
                             db.TransactionProduct.AddRange(listTransactionProduct);
                             db.SaveChanges();
                             dbTransaction.Commit();
+                            SuccessMessagesAdd("Ritase Success Inserted.");
                             return RedirectToAction("Index");
 
                         }

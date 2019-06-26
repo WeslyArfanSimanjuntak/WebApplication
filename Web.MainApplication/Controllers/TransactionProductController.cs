@@ -415,18 +415,26 @@ namespace Web.MainApplication.Controllers
                             db.Entry(x).State = System.Data.Entity.EntityState.Modified;
                         });
 
-                        //db.Entry(listProductSiteStock).State = System.Data.Entity.EntityState.Modified;
-                        var transactionProduct = new TransactionProduct();
-                        var lastTransaction = db.TransactionProduct.OrderByDescending(z => z.Id).FirstOrDefault();
-                        var lastTPId = lastTransaction != null ? lastTransaction.Id : 0;
-                        transactionProduct.TransactionProductNumber = WebAppUtility.TransactionProductNumberGenerator(lastTPId + 1);
-                        transactionProduct.ProductId = batchMix.OutputProduct;
-                        //transactionProduct.MixingId = 
-                        transactionProduct.Jenis = "Mixing";
-                        transactionProduct.TypeDebitOrCredit = "Kredit";
-                        transactionProduct.Ammount = pm.Ammount;
-
-                        db.TransactionProduct.Add(transactionProduct);
+                        var productSiteStockOutComeProduct = db.ProductSite.Where(x => x.ProductId == pm.OutcomeProudct && x.SiteName == pm.Site).FirstOrDefault();
+                        if (productSiteStockOutComeProduct == null)
+                        {
+                            productSiteStockOutComeProduct = new ProductSite()
+                            {
+                                SiteName = pm.Site,
+                                TotalStock = pm.Ammount,
+                                ProductId = pm.OutcomeProudct
+                            };
+                            productSiteStockOutComeProduct.SetPropertyCreate();
+                            db.ProductSite.Add(productSiteStockOutComeProduct);
+                            db.SaveChanges();
+                        }
+                        else
+                        {
+                            productSiteStockOutComeProduct.TotalStock = productSiteStockOutComeProduct.TotalStock + pm.Ammount;
+                            productSiteStockOutComeProduct.SetPropertyUpdate();
+                            db.Entry(productSiteStockOutComeProduct).State = System.Data.Entity.EntityState.Modified;
+                            db.SaveChanges();
+                        }
 
 
 
@@ -434,6 +442,21 @@ namespace Web.MainApplication.Controllers
                         pm.SetPropertyCreate();
                         db.ProductMixing.Add(pm);
 
+
+                        db.SaveChanges();
+
+                        //db.Entry(listProductSiteStock).State = System.Data.Entity.EntityState.Modified;
+                        var transactionProduct = new TransactionProduct();
+                        var lastTransaction = db.TransactionProduct.OrderByDescending(z => z.Id).FirstOrDefault();
+                        var lastTPId = lastTransaction != null ? lastTransaction.Id : 0;
+                        transactionProduct.TransactionProductNumber = WebAppUtility.TransactionProductNumberGenerator(lastTPId + 1);
+                        transactionProduct.ProductId = batchMix.OutputProduct;
+                        transactionProduct.MixingId = pm.ProductMixingId;
+                        transactionProduct.Jenis = "Mixing";
+                        transactionProduct.TypeDebitOrCredit = "Kredit";
+                        transactionProduct.Ammount = pm.Ammount;
+                        transactionProduct.SetPropertyCreate();
+                        db.TransactionProduct.Add(transactionProduct);
 
                         db.SaveChanges();
                         dbTransaction.Commit();
@@ -605,6 +628,7 @@ namespace Web.MainApplication.Controllers
             var transactionDetails = db.TransactionProduct.Where(x => x.RITASE.SITE == siteId && x.ProductId == productId).ToList();
             transactionDetails.AddRange(db.TransactionProduct.Where(x => x.ProductAdjustment.SiteName == siteId && x.ProductId == productId).ToList());
             transactionDetails.AddRange(db.TransactionProduct.Where(x => x.ProductConvertion.Site == siteId && x.ProductId == productId).ToList());
+            transactionDetails.AddRange(db.TransactionProduct.Where(x => x.ProductMixing.Site == siteId && x.ProductId == productId).ToList());
             transactionDetails.OrderByDescending(x => x.CreatedDate);
             ViewBag.Stock = db.ProductSite.Where(x => x.SiteName == siteId && x.ProductId == productId).FirstOrDefault().TotalStock;
             ViewBag.SiteDetails = db.SITE.Where(x => x.SITENAME == siteId).FirstOrDefault();
