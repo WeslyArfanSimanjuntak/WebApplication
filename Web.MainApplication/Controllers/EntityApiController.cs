@@ -93,6 +93,15 @@ namespace Web.MainApplication.Controllers
                     }, JsonRequestBehavior.AllowGet);
 
                 }
+                else if (entitas == "BatchMix")
+                {
+                    return this.Json(new
+                    {
+                        data = db.BatchMix.Where(filter).ToList()
+
+                    }, JsonRequestBehavior.AllowGet);
+
+                }
                 else if (entitas == "BatchProduct")
                 {
                     db.Configuration.ProxyCreationEnabled = true;

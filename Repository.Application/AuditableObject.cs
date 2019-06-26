@@ -54,6 +54,10 @@ namespace Repository.Application.DataModel
     {
 
     }
+    public partial class ProductMixing : IAuditableObject
+    {
+
+    }
     public partial class DeliveryRequest : IAuditableObject
     {
     }

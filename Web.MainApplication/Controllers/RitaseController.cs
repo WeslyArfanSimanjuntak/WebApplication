@@ -209,7 +209,7 @@ namespace Web.MainApplication.Controllers
 
                                 });
 
-                                var productSite = db.ProductSite.Where(z => z.ProductId == z.ProductId && z.SiteName == rITASE.SITE).FirstOrDefault();
+                                var productSite = db.ProductSite.Where(z => z.ProductId == rITASE.PRODUCT && z.SiteName == rITASE.SITE).FirstOrDefault();
 
                                 if (productSite == null)
                                 {

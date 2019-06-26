@@ -45,7 +45,8 @@
                 <div class="form-group">
                     @Html.Label("Outcome Product", htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.TextBox("OutcomeProudct", null, htmlAttributes: new { @required = "required", @class = "form-control" })
+                        @Html.Hidden("OutcomeProudct", Model.OutcomeProudct)
+                        @Html.TextBox("OutcomeProudctDetail", null, htmlAttributes: new { @readonly = "readonly", @required = "required", @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.OutcomeProudct, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -69,7 +70,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.MixedBy, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.MixedBy, new { htmlAttributes = new {@readonly="readonly", @class = "form-control" } })
+                        @Html.EditorFor(model => model.MixedBy, new { htmlAttributes = new { @readonly = "readonly", @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.MixedBy, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -102,6 +103,60 @@
 
         $('#MixingTime').datetimepicker({
             format: 'MM/DD/YYYY HH:mm:ss'
+        });
+
+        $("#BatchMixCode").on("change", function () {
+
+            var selectedBatchMix = $("#BatchMixCode").val();
+
+            if (selectedBatchMix != "") {
+                AjaxCall(function (output) {
+
+                    console.log(output);
+                    $.each(output.data, function (key, value) {
+
+                        //$("#SourceProudct").append('<option value="' + value["EMPLOYEEID"] + '">' + value["EMPLOYEEID"] + " - " + value["EMPLOYEEFULLNAME"] + '</option>');
+                        AjaxCall(function (outpute) {
+                            console.log(outpute);
+                            $.each(outpute.data, function (keye, valuee) {
+                                $("#OutcomeProudct").val(valuee["PRODUCTID"]);
+                                $("#OutcomeProudctDetail").val(valuee["PRODUCTID"] + " - " + valuee["PRODUCTNAME"]);
+                            });
+
+                        }, entityApiUrl + '?entitas=PRODUCT&filter=PRODUCTID=="' + value["OutputProduct"] + '"');
+                    });
+
+                }, entityApiUrl + '?entitas=BatchMix&filter=BatchMixCode=="' + selectedBatchMix + '"');
+
+
+                //------------- Armada ---------
+                //AjaxCall(function (output) {
+                //    console.log(output);
+                //    $.each(output.data, function (key, value) {
+                //        $("#ARMADA").append('<option value="' + value["ARMADAID"] + '">' + value["ARMADAID"] + " - " + value["ARMADANAME"] + " - " + value["ARMADACAPACITYINKG"] + ' kg</option>');
+
+                //    });
+
+                //}, entityApiUrl + '?entitas=ARMADA&filter=SiteName=="' + selectedSite + '"');
+
+                //--------------- Product ------------
+                //AjaxCall(function (output) {
+
+                //    console.log(output);
+                //    $.each(output.data, function (keyProduct, valueProduct) {
+
+
+                //        $("#PRODUCT").append('<option value="' + valueProduct["PRODUCTID"] + '">' + valueProduct["PRODUCTNAME"]);
+
+                //    });
+
+                //}, entityApiUrl + '?entitas=PRODUCT&filter=TypeMaterial="Raw"');
+
+
+
+            }
+
+
         });
 
         @*
