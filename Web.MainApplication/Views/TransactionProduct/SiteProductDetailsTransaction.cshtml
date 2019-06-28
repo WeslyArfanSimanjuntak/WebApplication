@@ -69,6 +69,10 @@
                                 {
                                     @item.ProductAdjustment.AdjustmentTime.Value.ToShortDateString()
                                 }
+                                else if (item.MixingId != null)
+                                {
+                                    @item.ProductMixing.MixingTime.Value.ToShortDateString()
+                                }
                             }
                         </td>
                         <td>
@@ -91,6 +95,10 @@
                                 else if (item.AdjustmentId != null)
                                 {
                                     @Html.ActionLink(item.ProductAdjustment.AdjustmentNumber, "AdjustmentDetails", "TransactionProduct", new { id = item.AdjustmentId }, null)
+                                }
+                                else if (item.MixingId != null)
+                                {
+                                    @Html.ActionLink(item.ProductMixing.ProductMixingNumber, "MixingDetails", "TransactionProduct", new { id = item.MixingId }, null)
                                 }
                             }
                         </td>
@@ -234,7 +242,7 @@
         "aoColumns": [
             { "mData": "DeliveryRequestId", sType: "numeric" },
             { "mData": "DeliveryRequestNumber" },
-            { "oData" : "CONTRACT/ContractNumber"},
+            { "oData": "CONTRACT/ContractNumber" },
             { "mData": "DeliveryRequestTime", sType: 'date' },
             { "mData": "TokenToLoad" },
             { "mData": "IsActiveToken" },

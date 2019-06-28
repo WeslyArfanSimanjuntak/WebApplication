@@ -36,6 +36,7 @@ namespace Web.MainApplication.Controllers
         // GET: AspNetGroups/Create
         public ActionResult Create()
         {
+            ViewBag.IsActive = WebAppUtility.SelectListIsActive();
             return View();
         }
 
@@ -52,7 +53,7 @@ namespace Web.MainApplication.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
+            ViewBag.IsActive = WebAppUtility.SelectListIsActive(aspNetGroups.IsActive);
             return View(aspNetGroups);
         }
 
@@ -69,6 +70,8 @@ namespace Web.MainApplication.Controllers
                 return HttpNotFound();
             }
             ViewBag.Roles = db.AspNetRoles.ToList();
+            ViewBag.IsActive = WebAppUtility.SelectListIsActive(aspNetGroups.IsActive);
+
             return View(aspNetGroups);
         }
 
@@ -113,6 +116,8 @@ namespace Web.MainApplication.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.IsActive = WebAppUtility.SelectListIsActive(aspNetGroups.IsActive);
+
             return View(aspNetGroups);
         }
 

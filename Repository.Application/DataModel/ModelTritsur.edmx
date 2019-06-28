@@ -163,21 +163,21 @@
           <Property Name="ClientCompanyPIC" Type="varchar" MaxLength="50" />
           <Property Name="ClientCompanyPICPhoneNumber" Type="varchar" MaxLength="50" />
           <Property Name="ClientCompanyLeaderEmailAddress" Type="varchar" MaxLength="50" />
+          <Property Name="ClientNPWP" Type="varchar" MaxLength="50" />
+          <Property Name="ClientPhoneNumber" Type="varchar" MaxLength="50" />
+          <Property Name="ClientEmail" Type="varchar" MaxLength="50" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
+          <Property Name="UpdatedBy" Type="varchar" MaxLength="50" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="IsActive" Type="smallint" />
+          <Property Name="Remark" Type="varchar" MaxLength="512" />
           <Property Name="ClientCompanyPIC2" Type="varchar" MaxLength="50" />
           <Property Name="ClientCompanyPICPhoneNumber2" Type="varchar" MaxLength="50" />
           <Property Name="ClientCompanyLeaderEmailAddress2" Type="varchar" MaxLength="50" />
           <Property Name="ClientCompanyPIC3" Type="varchar" MaxLength="50" />
           <Property Name="ClientCompanyPICPhoneNumber3" Type="varchar" MaxLength="50" />
           <Property Name="ClientCompanyLeaderEmailAddress3" Type="varchar" MaxLength="50" />
-          <Property Name="ClientNPWP" Type="varchar" MaxLength="50" />
-          <Property Name="ClientPhoneNumber" Type="varchar" MaxLength="50" />
-          <Property Name="ClientEmail" Type="varchar" MaxLength="50" />
-          <Property Name="Remark" Type="varchar" MaxLength="512" />
-          <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
-          <Property Name="UpdatedBy" Type="varchar" MaxLength="50" />
-          <Property Name="CreatedDate" Type="datetime" />
-          <Property Name="UpdatedDate" Type="datetime" />
-          <Property Name="IsActive" Type="smallint" />
         </EntityType>
         <EntityType Name="CONTRACT">
           <Key>
@@ -256,12 +256,12 @@
           <Property Name="DeliveryRequestTime" Type="datetime" />
           <Property Name="TokenToLoad" Type="nchar" MaxLength="10" />
           <Property Name="IsActiveToken" Type="nchar" MaxLength="10" />
-          <Property Name="Status" Type="varchar" MaxLength="50" />
           <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
           <Property Name="UpdatedBy" Type="varchar" MaxLength="50" />
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="UpdatedDate" Type="datetime" />
           <Property Name="IsActive" Type="smallint" />
+          <Property Name="Status" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="DeliveryRequestProductDetailTransaction">
           <Key>
@@ -419,7 +419,7 @@
           <Property Name="ProductId" Type="varchar" MaxLength="25" />
           <Property Name="AdjustBy" Type="varchar" MaxLength="50" />
           <Property Name="Ammount" Type="float" />
-          <Property Name="AdjustmentTime" Type="datetime2" Precision="7" />
+          <Property Name="AdjustmentTime" Type="datetime" />
           <Property Name="Remark" Type="varchar" MaxLength="512" />
           <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
           <Property Name="UpdatedBy" Type="varchar" MaxLength="50" />
@@ -437,7 +437,7 @@
           <Property Name="BatchCode" Type="varchar" MaxLength="50" />
           <Property Name="SourceProudct" Type="varchar" MaxLength="25" />
           <Property Name="Ammount" Type="float" />
-          <Property Name="ConvertionTime" Type="datetime2" Precision="7" />
+          <Property Name="ConvertionTime" Type="datetime" />
           <Property Name="ConvertBy" Type="varchar" MaxLength="50" />
           <Property Name="Remark" Type="varchar" MaxLength="512" />
           <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
@@ -456,7 +456,7 @@
           <Property Name="BatchMixCode" Type="varchar" MaxLength="50" />
           <Property Name="OutcomeProudct" Type="varchar" MaxLength="25" />
           <Property Name="Ammount" Type="float" />
-          <Property Name="MixingTime" Type="datetime2" Precision="7" />
+          <Property Name="MixingTime" Type="datetime" />
           <Property Name="MixedBy" Type="varchar" MaxLength="50" />
           <Property Name="Remark" Type="varchar" MaxLength="512" />
           <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
@@ -486,7 +486,6 @@
           <Property Name="RITASEID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="RITASENUMBER" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="SITE" Type="varchar" MaxLength="50" />
-          <Property Name="SOURCEID" Type="int" />
           <Property Name="PRODUCT" Type="varchar" MaxLength="25" />
           <Property Name="DRIVERARMADA" Type="varchar" MaxLength="25" />
           <Property Name="ARMADA" Type="varchar" MaxLength="25" />
@@ -500,6 +499,7 @@
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="UpdatedDate" Type="datetime" />
           <Property Name="IsActive" Type="smallint" />
+          <Property Name="SOURCEID" Type="int" />
         </EntityType>
         <EntityType Name="SITE">
           <Key>
@@ -545,19 +545,22 @@
         <EntityType Name="TableSequence">
           <Key>
             <PropertyRef Name="Id" />
+            <PropertyRef Name="Year" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Year" Type="int" Nullable="false" />
-          <Property Name="DeliveryOrder" Type="bigint" />
-          <Property Name="DeliveryOrderInvoice" Type="bigint" />
-          <Property Name="DeliveryRequest" Type="bigint" />
-          <Property Name="ProductMixing" Type="bigint" />
+          <Property Name="LastSequenceNumber" Type="bigint" Nullable="false" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
+          <Property Name="UpdatedBy" Type="varchar" MaxLength="50" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="IsActive" Type="smallint" />
         </EntityType>
         <EntityType Name="TransactionCode">
           <Key>
-            <PropertyRef Name="TransactionCode" />
+            <PropertyRef Name="TransactionCode1" />
           </Key>
-          <Property Name="TransactionCode" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="TransactionCode1" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="TransactionName" Type="varchar" MaxLength="25" />
           <Property Name="CreditOrDebit" Type="varchar" MaxLength="25" />
           <Property Name="UserOrSystem" Type="varchar" MaxLength="25" />
@@ -583,6 +586,7 @@
           <Property Name="RitaseId" Type="int" />
           <Property Name="AdjustmentId" Type="bigint" />
           <Property Name="ConvertionId" Type="bigint" />
+          <Property Name="MixingId" Type="bigint" />
           <Property Name="Remark" Type="varchar" MaxLength="512" />
           <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
           <Property Name="UpdatedBy" Type="varchar" MaxLength="50" />
@@ -809,9 +813,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <!--Errors Found During Generation:
-warning 6035: The relationship 'FK_DeliveryOrderInvoice_ToDeliveryOrderNumber' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
-        <Association Name="FK_DeliveryOrderInvoice_ToDeliveryOrderNumber" />-->
         <Association Name="FK_DeliveryRequest_ToContract">
           <End Role="CONTRACT" Type="Self.CONTRACT" Multiplicity="0..1" />
           <End Role="DeliveryRequest" Type="Self.DeliveryRequest" Multiplicity="*" />
@@ -889,7 +890,7 @@ warning 6035: The relationship 'FK_DeliveryOrderInvoice_ToDeliveryOrderNumber' h
           <End Role="FinanceTransaction" Type="Self.FinanceTransaction" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TransactionCode">
-              <PropertyRef Name="TransactionCode" />
+              <PropertyRef Name="TransactionCode1" />
             </Principal>
             <Dependent Role="FinanceTransaction">
               <PropertyRef Name="TransactionCode" />
@@ -1184,6 +1185,18 @@ warning 6035: The relationship 'FK_DeliveryOrderInvoice_ToDeliveryOrderNumber' h
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TransactionProduct_ToProductMixing">
+          <End Role="ProductMixing" Type="Self.ProductMixing" Multiplicity="0..1" />
+          <End Role="TransactionProduct" Type="Self.TransactionProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductMixing">
+              <PropertyRef Name="ProductMixingId" />
+            </Principal>
+            <Dependent Role="TransactionProduct">
+              <PropertyRef Name="MixingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TransactionProduct_ToProductProductConvertion">
           <End Role="ProductConvertion" Type="Self.ProductConvertion" Multiplicity="0..1" />
           <End Role="TransactionProduct" Type="Self.TransactionProduct" Multiplicity="*" />
@@ -1232,7 +1245,6 @@ warning 6035: The relationship 'FK_DeliveryOrderInvoice_ToDeliveryOrderNumber' h
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="SPSelectDeliveryRequest" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="DB_TritsurModelStoreContainer">
           <EntitySet Name="ARMADA" EntityType="Self.ARMADA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetGroups" EntityType="Self.AspNetGroups" Schema="dbo" store:Type="Tables" />
@@ -1463,6 +1475,10 @@ warning 6035: The relationship 'FK_DeliveryOrderInvoice_ToDeliveryOrderNumber' h
             <End Role="ProductAdjustment" EntitySet="ProductAdjustment" />
             <End Role="TransactionProduct" EntitySet="TransactionProduct" />
           </AssociationSet>
+          <AssociationSet Name="FK_TransactionProduct_ToProductMixing" Association="Self.FK_TransactionProduct_ToProductMixing">
+            <End Role="ProductMixing" EntitySet="ProductMixing" />
+            <End Role="TransactionProduct" EntitySet="TransactionProduct" />
+          </AssociationSet>
           <AssociationSet Name="FK_TransactionProduct_ToProductProductConvertion" Association="Self.FK_TransactionProduct_ToProductProductConvertion">
             <End Role="ProductConvertion" EntitySet="ProductConvertion" />
             <End Role="TransactionProduct" EntitySet="TransactionProduct" />
@@ -1485,27 +1501,43 @@ warning 6035: The relationship 'FK_DeliveryOrderInvoice_ToDeliveryOrderNumber' h
     <edmx:ConceptualModels>
       <Schema Namespace="DB_TritsurModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="DB_TritsurEntities" annotation:LazyLoadingEnabled="true">
+          <FunctionImport Name="SPSelectDeliveryRequest" ReturnType="Collection(DB_TritsurModel.SPSelectDeliveryRequest_Result)" />
           <EntitySet Name="ARMADA" EntityType="DB_TritsurModel.ARMADA" />
           <EntitySet Name="AspNetGroups" EntityType="DB_TritsurModel.AspNetGroups" />
           <EntitySet Name="AspNetGroupUser" EntityType="DB_TritsurModel.AspNetGroupUser" />
           <EntitySet Name="AspNetRoleGroup" EntityType="DB_TritsurModel.AspNetRoleGroup" />
+          <EntitySet Name="AspNetRoles" EntityType="DB_TritsurModel.AspNetRoles" />
           <EntitySet Name="AspNetUsers" EntityType="DB_TritsurModel.AspNetUsers" />
           <EntitySet Name="BATCH" EntityType="DB_TritsurModel.BATCH" />
+          <EntitySet Name="BatchMix" EntityType="DB_TritsurModel.BatchMix" />
+          <EntitySet Name="BatchMixProduct" EntityType="DB_TritsurModel.BatchMixProduct" />
           <EntitySet Name="BatchProduct" EntityType="DB_TritsurModel.BatchProduct" />
           <EntitySet Name="CLIENT" EntityType="DB_TritsurModel.CLIENT" />
           <EntitySet Name="CONTRACT" EntityType="DB_TritsurModel.CONTRACT" />
           <EntitySet Name="ContractProduct" EntityType="DB_TritsurModel.ContractProduct" />
+          <EntitySet Name="DeliveryOrder" EntityType="DB_TritsurModel.DeliveryOrder" />
+          <EntitySet Name="DeliveryOrderInvoice" EntityType="DB_TritsurModel.DeliveryOrderInvoice" />
           <EntitySet Name="DeliveryRequest" EntityType="DB_TritsurModel.DeliveryRequest" />
           <EntitySet Name="DeliveryRequestProductDetailTransaction" EntityType="DB_TritsurModel.DeliveryRequestProductDetailTransaction" />
           <EntitySet Name="EMPLOYEE" EntityType="DB_TritsurModel.EMPLOYEE" />
+          <EntitySet Name="FinanceBalance" EntityType="DB_TritsurModel.FinanceBalance" />
+          <EntitySet Name="FinanceTransaction" EntityType="DB_TritsurModel.FinanceTransaction" />
+          <EntitySet Name="FinanceTransactionNostro" EntityType="DB_TritsurModel.FinanceTransactionNostro" />
+          <EntitySet Name="Menu" EntityType="DB_TritsurModel.Menu" />
+          <EntitySet Name="NostroBank" EntityType="DB_TritsurModel.NostroBank" />
+          <EntitySet Name="ParameterSetup" EntityType="DB_TritsurModel.ParameterSetup" />
           <EntitySet Name="PRODUCT" EntityType="DB_TritsurModel.PRODUCT" />
           <EntitySet Name="ProductAdjustment" EntityType="DB_TritsurModel.ProductAdjustment" />
           <EntitySet Name="ProductConvertion" EntityType="DB_TritsurModel.ProductConvertion" />
+          <EntitySet Name="ProductMixing" EntityType="DB_TritsurModel.ProductMixing" />
           <EntitySet Name="ProductSite" EntityType="DB_TritsurModel.ProductSite" />
           <EntitySet Name="RITASE" EntityType="DB_TritsurModel.RITASE" />
           <EntitySet Name="SITE" EntityType="DB_TritsurModel.SITE" />
+          <EntitySet Name="SOURCE" EntityType="DB_TritsurModel.SOURCE" />
           <EntitySet Name="StockProduct" EntityType="DB_TritsurModel.StockProduct" />
+          <EntitySet Name="TransactionCode" EntityType="DB_TritsurModel.TransactionCode" />
           <EntitySet Name="TransactionProduct" EntityType="DB_TritsurModel.TransactionProduct" />
+          <EntitySet Name="UserClientMapping" EntityType="DB_TritsurModel.UserClientMapping" />
           <AssociationSet Name="FK_ARMADA_ToSite" Association="DB_TritsurModel.FK_ARMADA_ToSite">
             <End Role="SITE" EntitySet="SITE" />
             <End Role="ARMADA" EntitySet="ARMADA" />
@@ -1526,6 +1558,22 @@ warning 6035: The relationship 'FK_DeliveryOrderInvoice_ToDeliveryOrderNumber' h
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetGroupUser" EntitySet="AspNetGroupUser" />
           </AssociationSet>
+          <AssociationSet Name="FK_AspNetRoleGroup_ToRoles" Association="DB_TritsurModel.FK_AspNetRoleGroup_ToRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetRoleGroup" EntitySet="AspNetRoleGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetRoles_ToAspNetRoles" Association="DB_TritsurModel.FK_AspNetRoles_ToAspNetRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetRoles1" EntitySet="AspNetRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Menu_ToMenuAspNetRoles" Association="DB_TritsurModel.FK_Menu_ToMenuAspNetRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="Menu" EntitySet="Menu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserClientMapping_ToAspNetUsers" Association="DB_TritsurModel.FK_UserClientMapping_ToAspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="UserClientMapping" EntitySet="UserClientMapping" />
+          </AssociationSet>
           <AssociationSet Name="FK_Batch_ToProduct" Association="DB_TritsurModel.FK_Batch_ToProduct">
             <End Role="PRODUCT" EntitySet="PRODUCT" />
             <End Role="BATCH" EntitySet="BATCH" />
@@ -1542,6 +1590,22 @@ warning 6035: The relationship 'FK_DeliveryOrderInvoice_ToDeliveryOrderNumber' h
             <End Role="BATCH" EntitySet="BATCH" />
             <End Role="RITASE" EntitySet="RITASE" />
           </AssociationSet>
+          <AssociationSet Name="FK_BatchMix_ToProduct" Association="DB_TritsurModel.FK_BatchMix_ToProduct">
+            <End Role="PRODUCT" EntitySet="PRODUCT" />
+            <End Role="BatchMix" EntitySet="BatchMix" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BatchMixProduct_ToBatchMix" Association="DB_TritsurModel.FK_BatchMixProduct_ToBatchMix">
+            <End Role="BatchMix" EntitySet="BatchMix" />
+            <End Role="BatchMixProduct" EntitySet="BatchMixProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductMixing_BatchMix" Association="DB_TritsurModel.FK_ProductMixing_BatchMix">
+            <End Role="BatchMix" EntitySet="BatchMix" />
+            <End Role="ProductMixing" EntitySet="ProductMixing" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BatchMixProduct_ToProduct" Association="DB_TritsurModel.FK_BatchMixProduct_ToProduct">
+            <End Role="PRODUCT" EntitySet="PRODUCT" />
+            <End Role="BatchMixProduct" EntitySet="BatchMixProduct" />
+          </AssociationSet>
           <AssociationSet Name="FK_BatchProduct_ToProduct" Association="DB_TritsurModel.FK_BatchProduct_ToProduct">
             <End Role="PRODUCT" EntitySet="PRODUCT" />
             <End Role="BatchProduct" EntitySet="BatchProduct" />
@@ -1549,6 +1613,10 @@ warning 6035: The relationship 'FK_DeliveryOrderInvoice_ToDeliveryOrderNumber' h
           <AssociationSet Name="FK_CONTRACT_ToClient" Association="DB_TritsurModel.FK_CONTRACT_ToClient">
             <End Role="CLIENT" EntitySet="CLIENT" />
             <End Role="CONTRACT" EntitySet="CONTRACT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserClientMapping_ToClient" Association="DB_TritsurModel.FK_UserClientMapping_ToClient">
+            <End Role="CLIENT" EntitySet="CLIENT" />
+            <End Role="UserClientMapping" EntitySet="UserClientMapping" />
           </AssociationSet>
           <AssociationSet Name="FK_CONTRACT_ToSite" Association="DB_TritsurModel.FK_CONTRACT_ToSite">
             <End Role="SITE" EntitySet="SITE" />
@@ -1562,9 +1630,21 @@ warning 6035: The relationship 'FK_DeliveryOrderInvoice_ToDeliveryOrderNumber' h
             <End Role="CONTRACT" EntitySet="CONTRACT" />
             <End Role="DeliveryRequest" EntitySet="DeliveryRequest" />
           </AssociationSet>
+          <AssociationSet Name="FK_FinanceBalance_ToContract" Association="DB_TritsurModel.FK_FinanceBalance_ToContract">
+            <End Role="CONTRACT" EntitySet="CONTRACT" />
+            <End Role="FinanceBalance" EntitySet="FinanceBalance" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FinanceTransaction_ToContract" Association="DB_TritsurModel.FK_FinanceTransaction_ToContract">
+            <End Role="CONTRACT" EntitySet="CONTRACT" />
+            <End Role="FinanceTransaction" EntitySet="FinanceTransaction" />
+          </AssociationSet>
           <AssociationSet Name="FK_ContractProduct_ToProduct" Association="DB_TritsurModel.FK_ContractProduct_ToProduct">
             <End Role="PRODUCT" EntitySet="PRODUCT" />
             <End Role="ContractProduct" EntitySet="ContractProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DeliveryOrder_ToDeliveryRequest" Association="DB_TritsurModel.FK_DeliveryOrder_ToDeliveryRequest">
+            <End Role="DeliveryRequest" EntitySet="DeliveryRequest" />
+            <End Role="DeliveryOrder" EntitySet="DeliveryOrder" />
           </AssociationSet>
           <AssociationSet Name="FK_DeliveryRequestProductDetailTransaction_ToDeliveryRequest" Association="DB_TritsurModel.FK_DeliveryRequestProductDetailTransaction_ToDeliveryRequest">
             <End Role="DeliveryRequest" EntitySet="DeliveryRequest" />
@@ -1582,6 +1662,22 @@ warning 6035: The relationship 'FK_DeliveryOrderInvoice_ToDeliveryOrderNumber' h
             <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
             <End Role="RITASE" EntitySet="RITASE" />
           </AssociationSet>
+          <AssociationSet Name="FK_FinanceTransaction_ToTransactionCode" Association="DB_TritsurModel.FK_FinanceTransaction_ToTransactionCode">
+            <End Role="TransactionCode" EntitySet="TransactionCode" />
+            <End Role="FinanceTransaction" EntitySet="FinanceTransaction" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FinanceTransactionNostro_ToFinanceTransaction" Association="DB_TritsurModel.FK_FinanceTransactionNostro_ToFinanceTransaction">
+            <End Role="FinanceTransaction" EntitySet="FinanceTransaction" />
+            <End Role="FinanceTransactionNostro" EntitySet="FinanceTransactionNostro" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FinanceTransactionNostro_ToNostro" Association="DB_TritsurModel.FK_FinanceTransactionNostro_ToNostro">
+            <End Role="NostroBank" EntitySet="NostroBank" />
+            <End Role="FinanceTransactionNostro" EntitySet="FinanceTransactionNostro" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Menu_ToMenuParent" Association="DB_TritsurModel.FK_Menu_ToMenuParent">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="Menu1" EntitySet="Menu" />
+          </AssociationSet>
           <AssociationSet Name="FK_ProductAdjustment_ToProduct" Association="DB_TritsurModel.FK_ProductAdjustment_ToProduct">
             <End Role="PRODUCT" EntitySet="PRODUCT" />
             <End Role="ProductAdjustment" EntitySet="ProductAdjustment" />
@@ -1589,6 +1685,10 @@ warning 6035: The relationship 'FK_DeliveryOrderInvoice_ToDeliveryOrderNumber' h
           <AssociationSet Name="FK_ProductConvertion_PRODUCT" Association="DB_TritsurModel.FK_ProductConvertion_PRODUCT">
             <End Role="PRODUCT" EntitySet="PRODUCT" />
             <End Role="ProductConvertion" EntitySet="ProductConvertion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductMixing_PRODUCT" Association="DB_TritsurModel.FK_ProductMixing_PRODUCT">
+            <End Role="PRODUCT" EntitySet="PRODUCT" />
+            <End Role="ProductMixing" EntitySet="ProductMixing" />
           </AssociationSet>
           <AssociationSet Name="FK_ProductSite_ToProduct" Association="DB_TritsurModel.FK_ProductSite_ToProduct">
             <End Role="PRODUCT" EntitySet="PRODUCT" />
@@ -1622,6 +1722,10 @@ warning 6035: The relationship 'FK_DeliveryOrderInvoice_ToDeliveryOrderNumber' h
             <End Role="ProductConvertion" EntitySet="ProductConvertion" />
             <End Role="TransactionProduct" EntitySet="TransactionProduct" />
           </AssociationSet>
+          <AssociationSet Name="FK_ProductMixing_SITE" Association="DB_TritsurModel.FK_ProductMixing_SITE">
+            <End Role="SITE" EntitySet="SITE" />
+            <End Role="ProductMixing" EntitySet="ProductMixing" />
+          </AssociationSet>
           <AssociationSet Name="FK_ProductSite_ToSite" Association="DB_TritsurModel.FK_ProductSite_ToSite">
             <End Role="SITE" EntitySet="SITE" />
             <End Role="ProductSite" EntitySet="ProductSite" />
@@ -1630,108 +1734,37 @@ warning 6035: The relationship 'FK_DeliveryOrderInvoice_ToDeliveryOrderNumber' h
             <End Role="SITE" EntitySet="SITE" />
             <End Role="RITASE" EntitySet="RITASE" />
           </AssociationSet>
-          <AssociationSet Name="FK_TransactionProduct_ToRitase" Association="DB_TritsurModel.FK_TransactionProduct_ToRitase">
-            <End Role="RITASE" EntitySet="RITASE" />
-            <End Role="TransactionProduct" EntitySet="TransactionProduct" />
-          </AssociationSet>
-          <EntitySet Name="UserClientMapping" EntityType="DB_TritsurModel.UserClientMapping" />
-          <AssociationSet Name="FK_UserClientMapping_ToAspNetUsers" Association="DB_TritsurModel.FK_UserClientMapping_ToAspNetUsers">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="UserClientMapping" EntitySet="UserClientMapping" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserClientMapping_ToClient" Association="DB_TritsurModel.FK_UserClientMapping_ToClient">
-            <End Role="CLIENT" EntitySet="CLIENT" />
-            <End Role="UserClientMapping" EntitySet="UserClientMapping" />
-          </AssociationSet>
-          <EntitySet Name="AspNetRoles" EntityType="DB_TritsurModel.AspNetRoles" />
-          <AssociationSet Name="FK_AspNetRoleGroup_ToRoles" Association="DB_TritsurModel.FK_AspNetRoleGroup_ToRoles">
-            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
-            <End Role="AspNetRoleGroup" EntitySet="AspNetRoleGroup" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AspNetRoles_ToAspNetRoles" Association="DB_TritsurModel.FK_AspNetRoles_ToAspNetRoles">
-            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
-            <End Role="AspNetRoles1" EntitySet="AspNetRoles" />
-          </AssociationSet>
-          <EntitySet Name="FinanceBalance" EntityType="DB_TritsurModel.FinanceBalance" />
-          <AssociationSet Name="FK_FinanceBalance_ToContract" Association="DB_TritsurModel.FK_FinanceBalance_ToContract">
-            <End Role="CONTRACT" EntitySet="CONTRACT" />
-            <End Role="FinanceBalance" EntitySet="FinanceBalance" />
-          </AssociationSet>
-          <EntitySet Name="FinanceTransaction" EntityType="DB_TritsurModel.FinanceTransaction" />
-          <EntitySet Name="FinanceTransactionNostro" EntityType="DB_TritsurModel.FinanceTransactionNostro" />
-          <EntitySet Name="NostroBank" EntityType="DB_TritsurModel.NostroBank" />
-          <EntitySet Name="TransactionCode" EntityType="DB_TritsurModel.TransactionCode" />
-          <AssociationSet Name="FK_FinanceTransaction_ToContract" Association="DB_TritsurModel.FK_FinanceTransaction_ToContract">
-            <End Role="CONTRACT" EntitySet="CONTRACT" />
-            <End Role="FinanceTransaction" EntitySet="FinanceTransaction" />
-          </AssociationSet>
-          <AssociationSet Name="FK_FinanceTransaction_ToTransactionCode" Association="DB_TritsurModel.FK_FinanceTransaction_ToTransactionCode">
-            <End Role="TransactionCode" EntitySet="TransactionCode" />
-            <End Role="FinanceTransaction" EntitySet="FinanceTransaction" />
-          </AssociationSet>
-          <AssociationSet Name="FK_FinanceTransactionNostro_ToFinanceTransaction" Association="DB_TritsurModel.FK_FinanceTransactionNostro_ToFinanceTransaction">
-            <End Role="FinanceTransaction" EntitySet="FinanceTransaction" />
-            <End Role="FinanceTransactionNostro" EntitySet="FinanceTransactionNostro" />
-          </AssociationSet>
-          <AssociationSet Name="FK_FinanceTransactionNostro_ToNostro" Association="DB_TritsurModel.FK_FinanceTransactionNostro_ToNostro">
-            <End Role="NostroBank" EntitySet="NostroBank" />
-            <End Role="FinanceTransactionNostro" EntitySet="FinanceTransactionNostro" />
-          </AssociationSet>
-          <FunctionImport Name="SPSelectDeliveryRequest" ReturnType="Collection(DB_TritsurModel.SPSelectDeliveryRequest_Result)" />
-          <EntitySet Name="Menu" EntityType="DB_TritsurModel.Menu" />
-          <AssociationSet Name="FK_Menu_ToMenuAspNetRoles" Association="DB_TritsurModel.FK_Menu_ToMenuAspNetRoles">
-            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
-            <End Role="Menu" EntitySet="Menu" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Menu_ToMenuParent" Association="DB_TritsurModel.FK_Menu_ToMenuParent">
-            <End Role="Menu" EntitySet="Menu" />
-            <End Role="Menu1" EntitySet="Menu" />
-          </AssociationSet>
-          <EntitySet Name="DeliveryOrder" EntityType="DB_TritsurModel.DeliveryOrder" />
-          <EntitySet Name="DeliveryOrderInvoice" EntityType="DB_TritsurModel.DeliveryOrderInvoice" />
-          <AssociationSet Name="FK_DeliveryOrder_ToDeliveryRequest" Association="DB_TritsurModel.FK_DeliveryOrder_ToDeliveryRequest">
-            <End Role="DeliveryRequest" EntitySet="DeliveryRequest" />
-            <End Role="DeliveryOrder" EntitySet="DeliveryOrder" />
-          </AssociationSet>
-          <EntitySet Name="TableSequence" EntityType="DB_TritsurModel.TableSequence" />
-          <EntitySet Name="ParameterSetup" EntityType="DB_TritsurModel.ParameterSetup" />
-          <EntitySet Name="SOURCE" EntityType="DB_TritsurModel.SOURCE" />
           <AssociationSet Name="FK_RITASE_RELATIONS_SOURCE" Association="DB_TritsurModel.FK_RITASE_RELATIONS_SOURCE">
             <End Role="SOURCE" EntitySet="SOURCE" />
             <End Role="RITASE" EntitySet="RITASE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransactionProduct_ToRitase" Association="DB_TritsurModel.FK_TransactionProduct_ToRitase">
+            <End Role="RITASE" EntitySet="RITASE" />
+            <End Role="TransactionProduct" EntitySet="TransactionProduct" />
           </AssociationSet>
           <AssociationSet Name="FK_SITE_ToSource" Association="DB_TritsurModel.FK_SITE_ToSource">
             <End Role="SOURCE" EntitySet="SOURCE" />
             <End Role="SITE" EntitySet="SITE" />
           </AssociationSet>
-          <EntitySet Name="BatchMix" EntityType="DB_TritsurModel.BatchMix" />
-          <EntitySet Name="BatchMixProduct" EntityType="DB_TritsurModel.BatchMixProduct" />
-          <AssociationSet Name="FK_BatchMix_ToProduct" Association="DB_TritsurModel.FK_BatchMix_ToProduct">
-            <End Role="PRODUCT" EntitySet="PRODUCT" />
-            <End Role="BatchMix" EntitySet="BatchMix" />
-          </AssociationSet>
-          <AssociationSet Name="FK_BatchMixProduct_ToBatchMix" Association="DB_TritsurModel.FK_BatchMixProduct_ToBatchMix">
-            <End Role="BatchMix" EntitySet="BatchMix" />
-            <End Role="BatchMixProduct" EntitySet="BatchMixProduct" />
-          </AssociationSet>
-          <AssociationSet Name="FK_BatchMixProduct_ToProduct" Association="DB_TritsurModel.FK_BatchMixProduct_ToProduct">
-            <End Role="PRODUCT" EntitySet="PRODUCT" />
-            <End Role="BatchMixProduct" EntitySet="BatchMixProduct" />
-          </AssociationSet>
-          <EntitySet Name="ProductMixing" EntityType="DB_TritsurModel.ProductMixing" />
-          <AssociationSet Name="FK_ProductMixing_BatchMix" Association="DB_TritsurModel.FK_ProductMixing_BatchMix">
-            <End Role="BatchMix" EntitySet="BatchMix" />
+          <EntitySet Name="TableSequence" EntityType="DB_TritsurModel.TableSequence" />
+          <AssociationSet Name="FK_TransactionProduct_ToProductMixing" Association="DB_TritsurModel.FK_TransactionProduct_ToProductMixing">
             <End Role="ProductMixing" EntitySet="ProductMixing" />
+            <End Role="TransactionProduct" EntitySet="TransactionProduct" />
           </AssociationSet>
-          <AssociationSet Name="FK_ProductMixing_PRODUCT" Association="DB_TritsurModel.FK_ProductMixing_PRODUCT">
-            <End Role="PRODUCT" EntitySet="PRODUCT" />
-            <End Role="ProductMixing" EntitySet="ProductMixing" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ProductMixing_SITE" Association="DB_TritsurModel.FK_ProductMixing_SITE">
-            <End Role="SITE" EntitySet="SITE" />
-            <End Role="ProductMixing" EntitySet="ProductMixing" />
-          </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
+        <ComplexType Name="SPSelectDeliveryRequest_Result">
+          <Property Type="Int64" Name="DeliveryRequestId" Nullable="false" />
+          <Property Type="String" Name="DeliveryRequestNumber" Nullable="false" MaxLength="50" />
+          <Property Type="Int64" Name="ContractId" Nullable="true" />
+          <Property Type="DateTime" Name="DeliveryRequestTime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="TokenToLoad" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="IsActiveToken" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="CreatedBy" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="UpdatedBy" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="UpdatedDate" Nullable="true" Precision="23" />
+          <Property Type="Int16" Name="IsActive" Nullable="true" />
+        </ComplexType>
         <EntityType Name="ARMADA">
           <Key>
             <PropertyRef Name="ARMADAID" />
@@ -1798,6 +1831,25 @@ warning 6035: The relationship 'FK_DeliveryOrderInvoice_ToDeliveryOrderNumber' h
           <NavigationProperty Name="AspNetGroups" Relationship="DB_TritsurModel.FK_AspNetRoleGroup_ToGroup" FromRole="AspNetRoleGroup" ToRole="AspNetGroups" />
           <NavigationProperty Name="AspNetRoles" Relationship="DB_TritsurModel.FK_AspNetRoleGroup_ToRoles" FromRole="AspNetRoleGroup" ToRole="AspNetRoles" />
         </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ParentId" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Remark" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Int16" />
+          <NavigationProperty Name="AspNetRoleGroup" Relationship="DB_TritsurModel.FK_AspNetRoleGroup_ToRoles" FromRole="AspNetRoles" ToRole="AspNetRoleGroup" />
+          <NavigationProperty Name="AspNetRoles1" Relationship="DB_TritsurModel.FK_AspNetRoles_ToAspNetRoles" FromRole="AspNetRoles" ToRole="AspNetRoles1" />
+          <NavigationProperty Name="AspNetRoles2" Relationship="DB_TritsurModel.FK_AspNetRoles_ToAspNetRoles" FromRole="AspNetRoles1" ToRole="AspNetRoles" />
+          <NavigationProperty Name="Menu" Relationship="DB_TritsurModel.FK_Menu_ToMenuAspNetRoles" FromRole="AspNetRoles" ToRole="Menu" />
+        </EntityType>
         <EntityType Name="AspNetUsers">
           <Key>
             <PropertyRef Name="Username" />
@@ -1834,6 +1886,38 @@ warning 6035: The relationship 'FK_DeliveryOrderInvoice_ToDeliveryOrderNumber' h
           <NavigationProperty Name="BatchProduct" Relationship="DB_TritsurModel.FK_BatchProduct_ToBatch" FromRole="BATCH" ToRole="BatchProduct" />
           <NavigationProperty Name="ProductConvertion" Relationship="DB_TritsurModel.FK_ProductConvertion_BATCH" FromRole="BATCH" ToRole="ProductConvertion" />
           <NavigationProperty Name="RITASE" Relationship="DB_TritsurModel.FK_RITASE_RELATIONS_BATCH" FromRole="BATCH" ToRole="RITASE" />
+        </EntityType>
+        <EntityType Name="BatchMix">
+          <Key>
+            <PropertyRef Name="BatchMixCode" />
+          </Key>
+          <Property Name="BatchMixCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BatchMixName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OutputProduct" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Int16" />
+          <NavigationProperty Name="PRODUCT" Relationship="DB_TritsurModel.FK_BatchMix_ToProduct" FromRole="BatchMix" ToRole="PRODUCT" />
+          <NavigationProperty Name="BatchMixProduct" Relationship="DB_TritsurModel.FK_BatchMixProduct_ToBatchMix" FromRole="BatchMix" ToRole="BatchMixProduct" />
+          <NavigationProperty Name="ProductMixing" Relationship="DB_TritsurModel.FK_ProductMixing_BatchMix" FromRole="BatchMix" ToRole="ProductMixing" />
+        </EntityType>
+        <EntityType Name="BatchMixProduct">
+          <Key>
+            <PropertyRef Name="BatchMixCode" />
+            <PropertyRef Name="ProductSourceId" />
+          </Key>
+          <Property Name="BatchMixCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ProductSourceId" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="ProductSourcePercentage" Type="Double" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Int16" />
+          <NavigationProperty Name="BatchMix" Relationship="DB_TritsurModel.FK_BatchMixProduct_ToBatchMix" FromRole="BatchMixProduct" ToRole="BatchMix" />
+          <NavigationProperty Name="PRODUCT" Relationship="DB_TritsurModel.FK_BatchMixProduct_ToProduct" FromRole="BatchMixProduct" ToRole="PRODUCT" />
         </EntityType>
         <EntityType Name="BatchProduct">
           <Key>
@@ -1872,8 +1956,6 @@ warning 6035: The relationship 'FK_DeliveryOrderInvoice_ToDeliveryOrderNumber' h
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
           <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
           <Property Name="IsActive" Type="Int16" />
-          <NavigationProperty Name="CONTRACT" Relationship="DB_TritsurModel.FK_CONTRACT_ToClient" FromRole="CLIENT" ToRole="CONTRACT" />
-          <NavigationProperty Name="UserClientMapping" Relationship="DB_TritsurModel.FK_UserClientMapping_ToClient" FromRole="CLIENT" ToRole="UserClientMapping" />
           <Property Name="Remark" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
           <Property Name="ClientCompanyPIC2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ClientCompanyPICPhoneNumber2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -1881,6 +1963,8 @@ warning 6035: The relationship 'FK_DeliveryOrderInvoice_ToDeliveryOrderNumber' h
           <Property Name="ClientCompanyPIC3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ClientCompanyPICPhoneNumber3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ClientCompanyLeaderEmailAddress3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CONTRACT" Relationship="DB_TritsurModel.FK_CONTRACT_ToClient" FromRole="CLIENT" ToRole="CONTRACT" />
+          <NavigationProperty Name="UserClientMapping" Relationship="DB_TritsurModel.FK_UserClientMapping_ToClient" FromRole="CLIENT" ToRole="UserClientMapping" />
         </EntityType>
         <EntityType Name="CONTRACT">
           <Key>
@@ -1927,6 +2011,37 @@ warning 6035: The relationship 'FK_DeliveryOrderInvoice_ToDeliveryOrderNumber' h
           <NavigationProperty Name="CONTRACT" Relationship="DB_TritsurModel.FK_ContractProduct_ToContract" FromRole="ContractProduct" ToRole="CONTRACT" />
           <NavigationProperty Name="PRODUCT" Relationship="DB_TritsurModel.FK_ContractProduct_ToProduct" FromRole="ContractProduct" ToRole="PRODUCT" />
         </EntityType>
+        <EntityType Name="DeliveryOrder">
+          <Key>
+            <PropertyRef Name="DeliveryOrderNumber" />
+            <PropertyRef Name="DeliveryRequestId" />
+          </Key>
+          <Property Name="DeliveryOrderNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DeliveryRequestId" Type="Int64" Nullable="false" />
+          <Property Name="Amount" Type="Double" />
+          <Property Name="Remark" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Int16" />
+          <NavigationProperty Name="DeliveryRequest" Relationship="DB_TritsurModel.FK_DeliveryOrder_ToDeliveryRequest" FromRole="DeliveryOrder" ToRole="DeliveryRequest" />
+        </EntityType>
+        <EntityType Name="DeliveryOrderInvoice">
+          <Key>
+            <PropertyRef Name="DeliveryOrderInvoiceNumber" />
+            <PropertyRef Name="DeliveryOrderNumber" />
+          </Key>
+          <Property Name="DeliveryOrderInvoiceNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DeliveryOrderNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Remark" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Int16" />
+        </EntityType>
         <EntityType Name="DeliveryRequest">
           <Key>
             <PropertyRef Name="DeliveryRequestId" />
@@ -1942,10 +2057,10 @@ warning 6035: The relationship 'FK_DeliveryOrderInvoice_ToDeliveryOrderNumber' h
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
           <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
           <Property Name="IsActive" Type="Int16" />
-          <NavigationProperty Name="CONTRACT" Relationship="DB_TritsurModel.FK_DeliveryRequest_ToContract" FromRole="DeliveryRequest" ToRole="CONTRACT" />
-          <NavigationProperty Name="DeliveryRequestProductDetailTransaction" Relationship="DB_TritsurModel.FK_DeliveryRequestProductDetailTransaction_ToDeliveryRequest" FromRole="DeliveryRequest" ToRole="DeliveryRequestProductDetailTransaction" />
           <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CONTRACT" Relationship="DB_TritsurModel.FK_DeliveryRequest_ToContract" FromRole="DeliveryRequest" ToRole="CONTRACT" />
           <NavigationProperty Name="DeliveryOrder" Relationship="DB_TritsurModel.FK_DeliveryOrder_ToDeliveryRequest" FromRole="DeliveryRequest" ToRole="DeliveryOrder" />
+          <NavigationProperty Name="DeliveryRequestProductDetailTransaction" Relationship="DB_TritsurModel.FK_DeliveryRequestProductDetailTransaction_ToDeliveryRequest" FromRole="DeliveryRequest" ToRole="DeliveryRequestProductDetailTransaction" />
         </EntityType>
         <EntityType Name="DeliveryRequestProductDetailTransaction">
           <Key>
@@ -1987,6 +2102,111 @@ warning 6035: The relationship 'FK_DeliveryOrderInvoice_ToDeliveryOrderNumber' h
           <NavigationProperty Name="SITE" Relationship="DB_TritsurModel.FK_EMPLOYEE_ToSite" FromRole="EMPLOYEE" ToRole="SITE" />
           <NavigationProperty Name="RITASE" Relationship="DB_TritsurModel.FK_RITASE_RELATIONS_EMPLOYEE" FromRole="EMPLOYEE" ToRole="RITASE" />
         </EntityType>
+        <EntityType Name="FinanceBalance">
+          <Key>
+            <PropertyRef Name="ContractId" />
+          </Key>
+          <Property Name="ContractId" Type="Int64" Nullable="false" />
+          <Property Name="ActualAmount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="AvailableAmount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Remark" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Int16" />
+          <NavigationProperty Name="CONTRACT" Relationship="DB_TritsurModel.FK_FinanceBalance_ToContract" FromRole="FinanceBalance" ToRole="CONTRACT" />
+        </EntityType>
+        <EntityType Name="FinanceTransaction">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TransactionNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ContractId" Type="Int64" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TransactionCode" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="ValueDate" Type="DateTime" Precision="3" />
+          <Property Name="DueDate" Type="DateTime" Precision="3" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="ReferenceNumber" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="Remark" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Int16" />
+          <NavigationProperty Name="CONTRACT" Relationship="DB_TritsurModel.FK_FinanceTransaction_ToContract" FromRole="FinanceTransaction" ToRole="CONTRACT" />
+          <NavigationProperty Name="TransactionCode1" Relationship="DB_TritsurModel.FK_FinanceTransaction_ToTransactionCode" FromRole="FinanceTransaction" ToRole="TransactionCode" />
+          <NavigationProperty Name="FinanceTransactionNostro" Relationship="DB_TritsurModel.FK_FinanceTransactionNostro_ToFinanceTransaction" FromRole="FinanceTransaction" ToRole="FinanceTransactionNostro" />
+        </EntityType>
+        <EntityType Name="FinanceTransactionNostro">
+          <Key>
+            <PropertyRef Name="CodeNostroBank" />
+            <PropertyRef Name="FinanceTransactionId" />
+          </Key>
+          <Property Name="CodeNostroBank" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="FinanceTransactionId" Type="Int64" Nullable="false" />
+          <Property Name="Remark" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Int16" />
+          <NavigationProperty Name="FinanceTransaction" Relationship="DB_TritsurModel.FK_FinanceTransactionNostro_ToFinanceTransaction" FromRole="FinanceTransactionNostro" ToRole="FinanceTransaction" />
+          <NavigationProperty Name="NostroBank" Relationship="DB_TritsurModel.FK_FinanceTransactionNostro_ToNostro" FromRole="FinanceTransactionNostro" ToRole="NostroBank" />
+        </EntityType>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="MenuId" />
+          </Key>
+          <Property Name="MenuId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MenuName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MenuParentId" Type="Int32" />
+          <Property Name="Sequence" Type="Int32" />
+          <Property Name="AspNetRoles" Type="Int32" />
+          <Property Name="MenuIClass" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MenuLevel" Type="Int32" />
+          <Property Name="Remark" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Int16" />
+          <NavigationProperty Name="AspNetRoles1" Relationship="DB_TritsurModel.FK_Menu_ToMenuAspNetRoles" FromRole="Menu" ToRole="AspNetRoles" />
+          <NavigationProperty Name="Menu1" Relationship="DB_TritsurModel.FK_Menu_ToMenuParent" FromRole="Menu" ToRole="Menu1" />
+          <NavigationProperty Name="Menu2" Relationship="DB_TritsurModel.FK_Menu_ToMenuParent" FromRole="Menu1" ToRole="Menu" />
+        </EntityType>
+        <EntityType Name="NostroBank">
+          <Key>
+            <PropertyRef Name="CodeNostroBank" />
+          </Key>
+          <Property Name="CodeNostroBank" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="AccountType" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="NostroBankName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="NostroBankDescription" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Remark" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Int16" />
+          <NavigationProperty Name="FinanceTransactionNostro" Relationship="DB_TritsurModel.FK_FinanceTransactionNostro_ToNostro" FromRole="NostroBank" ToRole="FinanceTransactionNostro" />
+        </EntityType>
+        <EntityType Name="ParameterSetup">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Value" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="DataType" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Remark" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Int16" />
+        </EntityType>
         <EntityType Name="PRODUCT">
           <Key>
             <PropertyRef Name="PRODUCTID" />
@@ -2002,18 +2222,18 @@ warning 6035: The relationship 'FK_DeliveryOrderInvoice_ToDeliveryOrderNumber' h
           <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
           <Property Name="IsActive" Type="Int16" />
           <NavigationProperty Name="BATCH" Relationship="DB_TritsurModel.FK_Batch_ToProduct" FromRole="PRODUCT" ToRole="BATCH" />
+          <NavigationProperty Name="BatchMix" Relationship="DB_TritsurModel.FK_BatchMix_ToProduct" FromRole="PRODUCT" ToRole="BatchMix" />
+          <NavigationProperty Name="BatchMixProduct" Relationship="DB_TritsurModel.FK_BatchMixProduct_ToProduct" FromRole="PRODUCT" ToRole="BatchMixProduct" />
           <NavigationProperty Name="BatchProduct" Relationship="DB_TritsurModel.FK_BatchProduct_ToProduct" FromRole="PRODUCT" ToRole="BatchProduct" />
           <NavigationProperty Name="ContractProduct" Relationship="DB_TritsurModel.FK_ContractProduct_ToProduct" FromRole="PRODUCT" ToRole="ContractProduct" />
           <NavigationProperty Name="DeliveryRequestProductDetailTransaction" Relationship="DB_TritsurModel.FK_DeliveryRequestProductDetailTransaction_ToProduct" FromRole="PRODUCT" ToRole="DeliveryRequestProductDetailTransaction" />
           <NavigationProperty Name="ProductAdjustment" Relationship="DB_TritsurModel.FK_ProductAdjustment_ToProduct" FromRole="PRODUCT" ToRole="ProductAdjustment" />
           <NavigationProperty Name="ProductConvertion" Relationship="DB_TritsurModel.FK_ProductConvertion_PRODUCT" FromRole="PRODUCT" ToRole="ProductConvertion" />
+          <NavigationProperty Name="ProductMixing" Relationship="DB_TritsurModel.FK_ProductMixing_PRODUCT" FromRole="PRODUCT" ToRole="ProductMixing" />
           <NavigationProperty Name="ProductSite" Relationship="DB_TritsurModel.FK_ProductSite_ToProduct" FromRole="PRODUCT" ToRole="ProductSite" />
           <NavigationProperty Name="RITASE" Relationship="DB_TritsurModel.FK_RITASE_RELATIONS_PRODUCT" FromRole="PRODUCT" ToRole="RITASE" />
           <NavigationProperty Name="StockProduct" Relationship="DB_TritsurModel.FK_StockProduct_ToProduct" FromRole="PRODUCT" ToRole="StockProduct" />
           <NavigationProperty Name="TransactionProduct" Relationship="DB_TritsurModel.FK_TransactionProduct_ToProduct" FromRole="PRODUCT" ToRole="TransactionProduct" />
-          <NavigationProperty Name="BatchMix" Relationship="DB_TritsurModel.FK_BatchMix_ToProduct" FromRole="PRODUCT" ToRole="BatchMix" />
-          <NavigationProperty Name="BatchMixProduct" Relationship="DB_TritsurModel.FK_BatchMixProduct_ToProduct" FromRole="PRODUCT" ToRole="BatchMixProduct" />
-          <NavigationProperty Name="ProductMixing" Relationship="DB_TritsurModel.FK_ProductMixing_PRODUCT" FromRole="PRODUCT" ToRole="ProductMixing" />
         </EntityType>
         <EntityType Name="ProductAdjustment">
           <Key>
@@ -2025,7 +2245,7 @@ warning 6035: The relationship 'FK_DeliveryOrderInvoice_ToDeliveryOrderNumber' h
           <Property Name="ProductId" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="AdjustBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Ammount" Type="Double" />
-          <Property Name="AdjustmentTime" Type="DateTime" Precision="7" />
+          <Property Name="AdjustmentTime" Type="DateTime" Precision="3" />
           <Property Name="Remark" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
           <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -2046,7 +2266,7 @@ warning 6035: The relationship 'FK_DeliveryOrderInvoice_ToDeliveryOrderNumber' h
           <Property Name="BatchCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="SourceProudct" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="Ammount" Type="Double" />
-          <Property Name="ConvertionTime" Type="DateTime" Precision="7" />
+          <Property Name="ConvertionTime" Type="DateTime" Precision="3" />
           <Property Name="ConvertBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Remark" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
           <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -2058,6 +2278,29 @@ warning 6035: The relationship 'FK_DeliveryOrderInvoice_ToDeliveryOrderNumber' h
           <NavigationProperty Name="PRODUCT" Relationship="DB_TritsurModel.FK_ProductConvertion_PRODUCT" FromRole="ProductConvertion" ToRole="PRODUCT" />
           <NavigationProperty Name="SITE1" Relationship="DB_TritsurModel.FK_ProductConvertion_SITE" FromRole="ProductConvertion" ToRole="SITE" />
           <NavigationProperty Name="TransactionProduct" Relationship="DB_TritsurModel.FK_TransactionProduct_ToProductProductConvertion" FromRole="ProductConvertion" ToRole="TransactionProduct" />
+        </EntityType>
+        <EntityType Name="ProductMixing">
+          <Key>
+            <PropertyRef Name="ProductMixingId" />
+          </Key>
+          <Property Name="ProductMixingId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductMixingNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Site" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BatchMixCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OutcomeProudct" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Ammount" Type="Double" />
+          <Property Name="MixingTime" Type="DateTime" Precision="3" />
+          <Property Name="MixedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Remark" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Int16" />
+          <NavigationProperty Name="BatchMix" Relationship="DB_TritsurModel.FK_ProductMixing_BatchMix" FromRole="ProductMixing" ToRole="BatchMix" />
+          <NavigationProperty Name="PRODUCT" Relationship="DB_TritsurModel.FK_ProductMixing_PRODUCT" FromRole="ProductMixing" ToRole="PRODUCT" />
+          <NavigationProperty Name="SITE1" Relationship="DB_TritsurModel.FK_ProductMixing_SITE" FromRole="ProductMixing" ToRole="SITE" />
+          <NavigationProperty Name="TransactionProduct" Relationship="DB_TritsurModel.FK_TransactionProduct_ToProductMixing" FromRole="ProductMixing" ToRole="TransactionProduct" />
         </EntityType>
         <EntityType Name="ProductSite">
           <Key>
@@ -2095,14 +2338,14 @@ warning 6035: The relationship 'FK_DeliveryOrderInvoice_ToDeliveryOrderNumber' h
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
           <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
           <Property Name="IsActive" Type="Int16" />
+          <Property Name="SOURCEID" Type="Int32" />
           <NavigationProperty Name="ARMADA1" Relationship="DB_TritsurModel.FK_RITASE_RELATIONS_ARMADA" FromRole="RITASE" ToRole="ARMADA" />
           <NavigationProperty Name="BATCH" Relationship="DB_TritsurModel.FK_RITASE_RELATIONS_BATCH" FromRole="RITASE" ToRole="BATCH" />
           <NavigationProperty Name="EMPLOYEE" Relationship="DB_TritsurModel.FK_RITASE_RELATIONS_EMPLOYEE" FromRole="RITASE" ToRole="EMPLOYEE" />
           <NavigationProperty Name="PRODUCT1" Relationship="DB_TritsurModel.FK_RITASE_RELATIONS_PRODUCT" FromRole="RITASE" ToRole="PRODUCT" />
           <NavigationProperty Name="SITE1" Relationship="DB_TritsurModel.FK_RITASE_RELATIONS_SITE" FromRole="RITASE" ToRole="SITE" />
-          <NavigationProperty Name="TransactionProduct" Relationship="DB_TritsurModel.FK_TransactionProduct_ToRitase" FromRole="RITASE" ToRole="TransactionProduct" />
-          <Property Name="SOURCEID" Type="Int32" />
           <NavigationProperty Name="SOURCE" Relationship="DB_TritsurModel.FK_RITASE_RELATIONS_SOURCE" FromRole="RITASE" ToRole="SOURCE" />
+          <NavigationProperty Name="TransactionProduct" Relationship="DB_TritsurModel.FK_TransactionProduct_ToRitase" FromRole="RITASE" ToRole="TransactionProduct" />
         </EntityType>
         <EntityType Name="SITE">
           <Key>
@@ -2122,10 +2365,27 @@ warning 6035: The relationship 'FK_DeliveryOrderInvoice_ToDeliveryOrderNumber' h
           <NavigationProperty Name="EMPLOYEE" Relationship="DB_TritsurModel.FK_EMPLOYEE_ToSite" FromRole="SITE" ToRole="EMPLOYEE" />
           <NavigationProperty Name="ProductAdjustment" Relationship="DB_TritsurModel.FK_ProductAdjustment_ToSite" FromRole="SITE" ToRole="ProductAdjustment" />
           <NavigationProperty Name="ProductConvertion" Relationship="DB_TritsurModel.FK_ProductConvertion_SITE" FromRole="SITE" ToRole="ProductConvertion" />
+          <NavigationProperty Name="ProductMixing" Relationship="DB_TritsurModel.FK_ProductMixing_SITE" FromRole="SITE" ToRole="ProductMixing" />
           <NavigationProperty Name="ProductSite" Relationship="DB_TritsurModel.FK_ProductSite_ToSite" FromRole="SITE" ToRole="ProductSite" />
           <NavigationProperty Name="RITASE" Relationship="DB_TritsurModel.FK_RITASE_RELATIONS_SITE" FromRole="SITE" ToRole="RITASE" />
           <NavigationProperty Name="SOURCE" Relationship="DB_TritsurModel.FK_SITE_ToSource" FromRole="SITE" ToRole="SOURCE" />
-          <NavigationProperty Name="ProductMixing" Relationship="DB_TritsurModel.FK_ProductMixing_SITE" FromRole="SITE" ToRole="ProductMixing" />
+        </EntityType>
+        <EntityType Name="SOURCE">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="Location" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Int16" />
+          <NavigationProperty Name="RITASE" Relationship="DB_TritsurModel.FK_RITASE_RELATIONS_SOURCE" FromRole="SOURCE" ToRole="RITASE" />
+          <NavigationProperty Name="SITE" Relationship="DB_TritsurModel.FK_SITE_ToSource" FromRole="SOURCE" ToRole="SITE" />
         </EntityType>
         <EntityType Name="StockProduct">
           <Key>
@@ -2139,6 +2399,24 @@ warning 6035: The relationship 'FK_DeliveryOrderInvoice_ToDeliveryOrderNumber' h
           <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
           <Property Name="IsActive" Type="Int16" />
           <NavigationProperty Name="PRODUCT" Relationship="DB_TritsurModel.FK_StockProduct_ToProduct" FromRole="StockProduct" ToRole="PRODUCT" />
+        </EntityType>
+        <EntityType Name="TransactionCode">
+          <Key>
+            <PropertyRef Name="TransactionCode1" />
+          </Key>
+          <Property Name="TransactionCode1" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="TransactionName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="CreditOrDebit" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="UserOrSystem" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Debit" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Credit" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Remark" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Int16" />
+          <NavigationProperty Name="FinanceTransaction" Relationship="DB_TritsurModel.FK_FinanceTransaction_ToTransactionCode" FromRole="TransactionCode" ToRole="FinanceTransaction" />
         </EntityType>
         <EntityType Name="TransactionProduct">
           <Key>
@@ -2163,6 +2441,25 @@ warning 6035: The relationship 'FK_DeliveryOrderInvoice_ToDeliveryOrderNumber' h
           <NavigationProperty Name="ProductAdjustment" Relationship="DB_TritsurModel.FK_TransactionProduct_ToProductAdjustment" FromRole="TransactionProduct" ToRole="ProductAdjustment" />
           <NavigationProperty Name="ProductConvertion" Relationship="DB_TritsurModel.FK_TransactionProduct_ToProductProductConvertion" FromRole="TransactionProduct" ToRole="ProductConvertion" />
           <NavigationProperty Name="RITASE" Relationship="DB_TritsurModel.FK_TransactionProduct_ToRitase" FromRole="TransactionProduct" ToRole="RITASE" />
+          <Property Name="MixingId" Type="Int64" />
+          <NavigationProperty Name="ProductMixing" Relationship="DB_TritsurModel.FK_TransactionProduct_ToProductMixing" FromRole="TransactionProduct" ToRole="ProductMixing" />
+        </EntityType>
+        <EntityType Name="UserClientMapping">
+          <Key>
+            <PropertyRef Name="UserName" />
+            <PropertyRef Name="ClientId" />
+          </Key>
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ClientId" Type="Int32" Nullable="false" />
+          <Property Name="ChangedPasswordCounter" Type="Int32" />
+          <Property Name="Remark" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Int16" />
+          <NavigationProperty Name="AspNetUsers" Relationship="DB_TritsurModel.FK_UserClientMapping_ToAspNetUsers" FromRole="UserClientMapping" ToRole="AspNetUsers" />
+          <NavigationProperty Name="CLIENT" Relationship="DB_TritsurModel.FK_UserClientMapping_ToClient" FromRole="UserClientMapping" ToRole="CLIENT" />
         </EntityType>
         <Association Name="FK_ARMADA_ToSite">
           <End Type="DB_TritsurModel.SITE" Role="SITE" Multiplicity="0..1" />
@@ -2224,6 +2521,54 @@ warning 6035: The relationship 'FK_DeliveryOrderInvoice_ToDeliveryOrderNumber' h
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_AspNetRoleGroup_ToRoles">
+          <End Type="DB_TritsurModel.AspNetRoles" Role="AspNetRoles" Multiplicity="1" />
+          <End Type="DB_TritsurModel.AspNetRoleGroup" Role="AspNetRoleGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetRoleGroup">
+              <PropertyRef Name="RolesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetRoles_ToAspNetRoles">
+          <End Type="DB_TritsurModel.AspNetRoles" Role="AspNetRoles" Multiplicity="0..1" />
+          <End Type="DB_TritsurModel.AspNetRoles" Role="AspNetRoles1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetRoles1">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Menu_ToMenuAspNetRoles">
+          <End Type="DB_TritsurModel.AspNetRoles" Role="AspNetRoles" Multiplicity="0..1" />
+          <End Type="DB_TritsurModel.Menu" Role="Menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Menu">
+              <PropertyRef Name="AspNetRoles" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserClientMapping_ToAspNetUsers">
+          <End Type="DB_TritsurModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
+          <End Type="DB_TritsurModel.UserClientMapping" Role="UserClientMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Username" />
+            </Principal>
+            <Dependent Role="UserClientMapping">
+              <PropertyRef Name="UserName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Batch_ToProduct">
           <End Type="DB_TritsurModel.PRODUCT" Role="PRODUCT" Multiplicity="0..1" />
           <End Type="DB_TritsurModel.BATCH" Role="BATCH" Multiplicity="*" />
@@ -2272,6 +2617,54 @@ warning 6035: The relationship 'FK_DeliveryOrderInvoice_ToDeliveryOrderNumber' h
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_BatchMix_ToProduct">
+          <End Type="DB_TritsurModel.PRODUCT" Role="PRODUCT" Multiplicity="0..1" />
+          <End Type="DB_TritsurModel.BatchMix" Role="BatchMix" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCT">
+              <PropertyRef Name="PRODUCTID" />
+            </Principal>
+            <Dependent Role="BatchMix">
+              <PropertyRef Name="OutputProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BatchMixProduct_ToBatchMix">
+          <End Type="DB_TritsurModel.BatchMix" Role="BatchMix" Multiplicity="1" />
+          <End Type="DB_TritsurModel.BatchMixProduct" Role="BatchMixProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BatchMix">
+              <PropertyRef Name="BatchMixCode" />
+            </Principal>
+            <Dependent Role="BatchMixProduct">
+              <PropertyRef Name="BatchMixCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductMixing_BatchMix">
+          <End Type="DB_TritsurModel.BatchMix" Role="BatchMix" Multiplicity="0..1" />
+          <End Type="DB_TritsurModel.ProductMixing" Role="ProductMixing" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BatchMix">
+              <PropertyRef Name="BatchMixCode" />
+            </Principal>
+            <Dependent Role="ProductMixing">
+              <PropertyRef Name="BatchMixCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BatchMixProduct_ToProduct">
+          <End Type="DB_TritsurModel.PRODUCT" Role="PRODUCT" Multiplicity="1" />
+          <End Type="DB_TritsurModel.BatchMixProduct" Role="BatchMixProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCT">
+              <PropertyRef Name="PRODUCTID" />
+            </Principal>
+            <Dependent Role="BatchMixProduct">
+              <PropertyRef Name="ProductSourceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_BatchProduct_ToProduct">
           <End Type="DB_TritsurModel.PRODUCT" Role="PRODUCT" Multiplicity="1" />
           <End Type="DB_TritsurModel.BatchProduct" Role="BatchProduct" Multiplicity="*" />
@@ -2293,6 +2686,18 @@ warning 6035: The relationship 'FK_DeliveryOrderInvoice_ToDeliveryOrderNumber' h
             </Principal>
             <Dependent Role="CONTRACT">
               <PropertyRef Name="ClientIdPK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserClientMapping_ToClient">
+          <End Type="DB_TritsurModel.CLIENT" Role="CLIENT" Multiplicity="1" />
+          <End Type="DB_TritsurModel.UserClientMapping" Role="UserClientMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENT">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserClientMapping">
+              <PropertyRef Name="ClientId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2332,6 +2737,30 @@ warning 6035: The relationship 'FK_DeliveryOrderInvoice_ToDeliveryOrderNumber' h
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_FinanceBalance_ToContract">
+          <End Type="DB_TritsurModel.CONTRACT" Role="CONTRACT" Multiplicity="1" />
+          <End Type="DB_TritsurModel.FinanceBalance" Role="FinanceBalance" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="CONTRACT">
+              <PropertyRef Name="ContractId" />
+            </Principal>
+            <Dependent Role="FinanceBalance">
+              <PropertyRef Name="ContractId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FinanceTransaction_ToContract">
+          <End Type="DB_TritsurModel.CONTRACT" Role="CONTRACT" Multiplicity="0..1" />
+          <End Type="DB_TritsurModel.FinanceTransaction" Role="FinanceTransaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CONTRACT">
+              <PropertyRef Name="ContractId" />
+            </Principal>
+            <Dependent Role="FinanceTransaction">
+              <PropertyRef Name="ContractId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ContractProduct_ToProduct">
           <End Type="DB_TritsurModel.PRODUCT" Role="PRODUCT" Multiplicity="1" />
           <End Type="DB_TritsurModel.ContractProduct" Role="ContractProduct" Multiplicity="*" />
@@ -2341,6 +2770,18 @@ warning 6035: The relationship 'FK_DeliveryOrderInvoice_ToDeliveryOrderNumber' h
             </Principal>
             <Dependent Role="ContractProduct">
               <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DeliveryOrder_ToDeliveryRequest">
+          <End Type="DB_TritsurModel.DeliveryRequest" Role="DeliveryRequest" Multiplicity="1" />
+          <End Type="DB_TritsurModel.DeliveryOrder" Role="DeliveryOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DeliveryRequest">
+              <PropertyRef Name="DeliveryRequestId" />
+            </Principal>
+            <Dependent Role="DeliveryOrder">
+              <PropertyRef Name="DeliveryRequestId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2392,6 +2833,54 @@ warning 6035: The relationship 'FK_DeliveryOrderInvoice_ToDeliveryOrderNumber' h
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_FinanceTransaction_ToTransactionCode">
+          <End Type="DB_TritsurModel.TransactionCode" Role="TransactionCode" Multiplicity="0..1" />
+          <End Type="DB_TritsurModel.FinanceTransaction" Role="FinanceTransaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TransactionCode">
+              <PropertyRef Name="TransactionCode1" />
+            </Principal>
+            <Dependent Role="FinanceTransaction">
+              <PropertyRef Name="TransactionCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FinanceTransactionNostro_ToFinanceTransaction">
+          <End Type="DB_TritsurModel.FinanceTransaction" Role="FinanceTransaction" Multiplicity="1" />
+          <End Type="DB_TritsurModel.FinanceTransactionNostro" Role="FinanceTransactionNostro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FinanceTransaction">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FinanceTransactionNostro">
+              <PropertyRef Name="FinanceTransactionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FinanceTransactionNostro_ToNostro">
+          <End Type="DB_TritsurModel.NostroBank" Role="NostroBank" Multiplicity="1" />
+          <End Type="DB_TritsurModel.FinanceTransactionNostro" Role="FinanceTransactionNostro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NostroBank">
+              <PropertyRef Name="CodeNostroBank" />
+            </Principal>
+            <Dependent Role="FinanceTransactionNostro">
+              <PropertyRef Name="CodeNostroBank" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Menu_ToMenuParent">
+          <End Type="DB_TritsurModel.Menu" Role="Menu" Multiplicity="0..1" />
+          <End Type="DB_TritsurModel.Menu" Role="Menu1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="MenuId" />
+            </Principal>
+            <Dependent Role="Menu1">
+              <PropertyRef Name="MenuParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ProductAdjustment_ToProduct">
           <End Type="DB_TritsurModel.PRODUCT" Role="PRODUCT" Multiplicity="0..1" />
           <End Type="DB_TritsurModel.ProductAdjustment" Role="ProductAdjustment" Multiplicity="*" />
@@ -2413,6 +2902,18 @@ warning 6035: The relationship 'FK_DeliveryOrderInvoice_ToDeliveryOrderNumber' h
             </Principal>
             <Dependent Role="ProductConvertion">
               <PropertyRef Name="SourceProudct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductMixing_PRODUCT">
+          <End Type="DB_TritsurModel.PRODUCT" Role="PRODUCT" Multiplicity="0..1" />
+          <End Type="DB_TritsurModel.ProductMixing" Role="ProductMixing" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCT">
+              <PropertyRef Name="PRODUCTID" />
+            </Principal>
+            <Dependent Role="ProductMixing">
+              <PropertyRef Name="OutcomeProudct" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2512,6 +3013,18 @@ warning 6035: The relationship 'FK_DeliveryOrderInvoice_ToDeliveryOrderNumber' h
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ProductMixing_SITE">
+          <End Type="DB_TritsurModel.SITE" Role="SITE" Multiplicity="0..1" />
+          <End Type="DB_TritsurModel.ProductMixing" Role="ProductMixing" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SITE">
+              <PropertyRef Name="SITENAME" />
+            </Principal>
+            <Dependent Role="ProductMixing">
+              <PropertyRef Name="Site" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ProductSite_ToSite">
           <End Type="DB_TritsurModel.SITE" Role="SITE" Multiplicity="1" />
           <End Type="DB_TritsurModel.ProductSite" Role="ProductSite" Multiplicity="*" />
@@ -2536,393 +3049,6 @@ warning 6035: The relationship 'FK_DeliveryOrderInvoice_ToDeliveryOrderNumber' h
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TransactionProduct_ToRitase">
-          <End Type="DB_TritsurModel.RITASE" Role="RITASE" Multiplicity="0..1" />
-          <End Type="DB_TritsurModel.TransactionProduct" Role="TransactionProduct" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="RITASE">
-              <PropertyRef Name="RITASEID" />
-            </Principal>
-            <Dependent Role="TransactionProduct">
-              <PropertyRef Name="RitaseId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="UserClientMapping">
-          <Key>
-            <PropertyRef Name="UserName" />
-            <PropertyRef Name="ClientId" />
-          </Key>
-          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ClientId" Type="Int32" Nullable="false" />
-          <Property Name="ChangedPasswordCounter" Type="Int32" />
-          <Property Name="Remark" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
-          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
-          <Property Name="IsActive" Type="Int16" />
-          <NavigationProperty Name="AspNetUsers" Relationship="DB_TritsurModel.FK_UserClientMapping_ToAspNetUsers" FromRole="UserClientMapping" ToRole="AspNetUsers" />
-          <NavigationProperty Name="CLIENT" Relationship="DB_TritsurModel.FK_UserClientMapping_ToClient" FromRole="UserClientMapping" ToRole="CLIENT" />
-        </EntityType>
-        <Association Name="FK_UserClientMapping_ToAspNetUsers">
-          <End Type="DB_TritsurModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
-          <End Type="DB_TritsurModel.UserClientMapping" Role="UserClientMapping" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Username" />
-            </Principal>
-            <Dependent Role="UserClientMapping">
-              <PropertyRef Name="UserName" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserClientMapping_ToClient">
-          <End Type="DB_TritsurModel.CLIENT" Role="CLIENT" Multiplicity="1" />
-          <End Type="DB_TritsurModel.UserClientMapping" Role="UserClientMapping" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CLIENT">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UserClientMapping">
-              <PropertyRef Name="ClientId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="AspNetRoles">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ParentId" Type="Int32" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Remark" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
-          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
-          <Property Name="IsActive" Type="Int16" />
-          <NavigationProperty Name="AspNetRoleGroup" Relationship="DB_TritsurModel.FK_AspNetRoleGroup_ToRoles" FromRole="AspNetRoles" ToRole="AspNetRoleGroup" />
-          <NavigationProperty Name="AspNetRoles1" Relationship="DB_TritsurModel.FK_AspNetRoles_ToAspNetRoles" FromRole="AspNetRoles" ToRole="AspNetRoles1" />
-          <NavigationProperty Name="AspNetRoles2" Relationship="DB_TritsurModel.FK_AspNetRoles_ToAspNetRoles" FromRole="AspNetRoles1" ToRole="AspNetRoles" />
-          <NavigationProperty Name="Menu" Relationship="DB_TritsurModel.FK_Menu_ToMenuAspNetRoles" FromRole="AspNetRoles" ToRole="Menu" />
-        </EntityType>
-        <Association Name="FK_AspNetRoleGroup_ToRoles">
-          <End Type="DB_TritsurModel.AspNetRoles" Role="AspNetRoles" Multiplicity="1" />
-          <End Type="DB_TritsurModel.AspNetRoleGroup" Role="AspNetRoleGroup" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetRoles">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AspNetRoleGroup">
-              <PropertyRef Name="RolesId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_AspNetRoles_ToAspNetRoles">
-          <End Type="DB_TritsurModel.AspNetRoles" Role="AspNetRoles" Multiplicity="0..1" />
-          <End Type="DB_TritsurModel.AspNetRoles" Role="AspNetRoles1" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetRoles">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AspNetRoles1">
-              <PropertyRef Name="ParentId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="FinanceBalance">
-          <Key>
-            <PropertyRef Name="ContractId" />
-          </Key>
-          <Property Name="ContractId" Type="Int64" Nullable="false" />
-          <Property Name="ActualAmount" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="AvailableAmount" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="Remark" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
-          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
-          <Property Name="IsActive" Type="Int16" />
-          <NavigationProperty Name="CONTRACT" Relationship="DB_TritsurModel.FK_FinanceBalance_ToContract" FromRole="FinanceBalance" ToRole="CONTRACT" />
-        </EntityType>
-        <Association Name="FK_FinanceBalance_ToContract">
-          <End Type="DB_TritsurModel.CONTRACT" Role="CONTRACT" Multiplicity="1" />
-          <End Type="DB_TritsurModel.FinanceBalance" Role="FinanceBalance" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="CONTRACT">
-              <PropertyRef Name="ContractId" />
-            </Principal>
-            <Dependent Role="FinanceBalance">
-              <PropertyRef Name="ContractId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="FinanceTransaction">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TransactionNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ContractId" Type="Int64" />
-          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="TransactionCode" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="ValueDate" Type="DateTime" Precision="3" />
-          <Property Name="DueDate" Type="DateTime" Precision="3" />
-          <Property Name="Date" Type="DateTime" Precision="3" />
-          <Property Name="ReferenceNumber" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
-          <Property Name="Remark" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
-          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
-          <Property Name="IsActive" Type="Int16" />
-          <NavigationProperty Name="CONTRACT" Relationship="DB_TritsurModel.FK_FinanceTransaction_ToContract" FromRole="FinanceTransaction" ToRole="CONTRACT" />
-          <NavigationProperty Name="TransactionCode1" Relationship="DB_TritsurModel.FK_FinanceTransaction_ToTransactionCode" FromRole="FinanceTransaction" ToRole="TransactionCode" />
-          <NavigationProperty Name="FinanceTransactionNostro" Relationship="DB_TritsurModel.FK_FinanceTransactionNostro_ToFinanceTransaction" FromRole="FinanceTransaction" ToRole="FinanceTransactionNostro" />
-        </EntityType>
-        <EntityType Name="FinanceTransactionNostro">
-          <Key>
-            <PropertyRef Name="CodeNostroBank" />
-            <PropertyRef Name="FinanceTransactionId" />
-          </Key>
-          <Property Name="CodeNostroBank" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="FinanceTransactionId" Type="Int64" Nullable="false" />
-          <Property Name="Remark" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
-          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
-          <Property Name="IsActive" Type="Int16" />
-          <NavigationProperty Name="FinanceTransaction" Relationship="DB_TritsurModel.FK_FinanceTransactionNostro_ToFinanceTransaction" FromRole="FinanceTransactionNostro" ToRole="FinanceTransaction" />
-          <NavigationProperty Name="NostroBank" Relationship="DB_TritsurModel.FK_FinanceTransactionNostro_ToNostro" FromRole="FinanceTransactionNostro" ToRole="NostroBank" />
-        </EntityType>
-        <EntityType Name="NostroBank">
-          <Key>
-            <PropertyRef Name="CodeNostroBank" />
-          </Key>
-          <Property Name="CodeNostroBank" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="AccountType" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="NostroBankName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="NostroBankDescription" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="Remark" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
-          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
-          <Property Name="IsActive" Type="Int16" />
-          <NavigationProperty Name="FinanceTransactionNostro" Relationship="DB_TritsurModel.FK_FinanceTransactionNostro_ToNostro" FromRole="NostroBank" ToRole="FinanceTransactionNostro" />
-        </EntityType>
-        <EntityType Name="TransactionCode">
-          <Key>
-            <PropertyRef Name="TransactionCode1" />
-          </Key>
-          <Property Name="TransactionCode1" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="TransactionName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="CreditOrDebit" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="UserOrSystem" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="Debit" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="Credit" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="Remark" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
-          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
-          <Property Name="IsActive" Type="Int16" />
-          <NavigationProperty Name="FinanceTransaction" Relationship="DB_TritsurModel.FK_FinanceTransaction_ToTransactionCode" FromRole="TransactionCode" ToRole="FinanceTransaction" />
-        </EntityType>
-        <Association Name="FK_FinanceTransaction_ToContract">
-          <End Type="DB_TritsurModel.CONTRACT" Role="CONTRACT" Multiplicity="0..1" />
-          <End Type="DB_TritsurModel.FinanceTransaction" Role="FinanceTransaction" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CONTRACT">
-              <PropertyRef Name="ContractId" />
-            </Principal>
-            <Dependent Role="FinanceTransaction">
-              <PropertyRef Name="ContractId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_FinanceTransaction_ToTransactionCode">
-          <End Type="DB_TritsurModel.TransactionCode" Role="TransactionCode" Multiplicity="0..1" />
-          <End Type="DB_TritsurModel.FinanceTransaction" Role="FinanceTransaction" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TransactionCode">
-              <PropertyRef Name="TransactionCode1" />
-            </Principal>
-            <Dependent Role="FinanceTransaction">
-              <PropertyRef Name="TransactionCode" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_FinanceTransactionNostro_ToFinanceTransaction">
-          <End Type="DB_TritsurModel.FinanceTransaction" Role="FinanceTransaction" Multiplicity="1" />
-          <End Type="DB_TritsurModel.FinanceTransactionNostro" Role="FinanceTransactionNostro" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="FinanceTransaction">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="FinanceTransactionNostro">
-              <PropertyRef Name="FinanceTransactionId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_FinanceTransactionNostro_ToNostro">
-          <End Type="DB_TritsurModel.NostroBank" Role="NostroBank" Multiplicity="1" />
-          <End Type="DB_TritsurModel.FinanceTransactionNostro" Role="FinanceTransactionNostro" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="NostroBank">
-              <PropertyRef Name="CodeNostroBank" />
-            </Principal>
-            <Dependent Role="FinanceTransactionNostro">
-              <PropertyRef Name="CodeNostroBank" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <ComplexType Name="SPSelectDeliveryRequest_Result">
-          <Property Type="Int64" Name="DeliveryRequestId" Nullable="false" />
-          <Property Type="String" Name="DeliveryRequestNumber" Nullable="false" MaxLength="50" />
-          <Property Type="Int64" Name="ContractId" Nullable="true" />
-          <Property Type="DateTime" Name="DeliveryRequestTime" Nullable="true" Precision="23" />
-          <Property Type="String" Name="TokenToLoad" Nullable="true" MaxLength="10" />
-          <Property Type="String" Name="IsActiveToken" Nullable="true" MaxLength="10" />
-          <Property Type="String" Name="CreatedBy" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="UpdatedBy" Nullable="true" MaxLength="50" />
-          <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
-          <Property Type="DateTime" Name="UpdatedDate" Nullable="true" Precision="23" />
-          <Property Type="Int16" Name="IsActive" Nullable="true" />
-        </ComplexType>
-        <EntityType Name="Menu">
-          <Key>
-            <PropertyRef Name="MenuId" />
-          </Key>
-          <Property Name="MenuId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MenuName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="MenuParentId" Type="Int32" />
-          <Property Name="Sequence" Type="Int32" />
-          <Property Name="AspNetRoles" Type="Int32" />
-          <Property Name="MenuIClass" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="MenuLevel" Type="Int32" />
-          <Property Name="Remark" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
-          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
-          <Property Name="IsActive" Type="Int16" />
-          <NavigationProperty Name="AspNetRoles1" Relationship="DB_TritsurModel.FK_Menu_ToMenuAspNetRoles" FromRole="Menu" ToRole="AspNetRoles" />
-          <NavigationProperty Name="Menu1" Relationship="DB_TritsurModel.FK_Menu_ToMenuParent" FromRole="Menu" ToRole="Menu1" />
-          <NavigationProperty Name="Menu2" Relationship="DB_TritsurModel.FK_Menu_ToMenuParent" FromRole="Menu1" ToRole="Menu" />
-        </EntityType>
-        <Association Name="FK_Menu_ToMenuAspNetRoles">
-          <End Type="DB_TritsurModel.AspNetRoles" Role="AspNetRoles" Multiplicity="0..1" />
-          <End Type="DB_TritsurModel.Menu" Role="Menu" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetRoles">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Menu">
-              <PropertyRef Name="AspNetRoles" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Menu_ToMenuParent">
-          <End Type="DB_TritsurModel.Menu" Role="Menu" Multiplicity="0..1" />
-          <End Type="DB_TritsurModel.Menu" Role="Menu1" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Menu">
-              <PropertyRef Name="MenuId" />
-            </Principal>
-            <Dependent Role="Menu1">
-              <PropertyRef Name="MenuParentId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="DeliveryOrder">
-          <Key>
-            <PropertyRef Name="DeliveryOrderNumber" />
-            <PropertyRef Name="DeliveryRequestId" />
-          </Key>
-          <Property Name="DeliveryOrderNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="DeliveryRequestId" Type="Int64" Nullable="false" />
-          <Property Name="Amount" Type="Double" />
-          <Property Name="Remark" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
-          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
-          <Property Name="IsActive" Type="Int16" />
-          <NavigationProperty Name="DeliveryRequest" Relationship="DB_TritsurModel.FK_DeliveryOrder_ToDeliveryRequest" FromRole="DeliveryOrder" ToRole="DeliveryRequest" />
-        </EntityType>
-        <EntityType Name="DeliveryOrderInvoice">
-          <Key>
-            <PropertyRef Name="DeliveryOrderInvoiceNumber" />
-            <PropertyRef Name="DeliveryOrderNumber" />
-          </Key>
-          <Property Name="DeliveryOrderInvoiceNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="DeliveryOrderNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Remark" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
-          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
-          <Property Name="IsActive" Type="Int16" />
-        </EntityType>
-        <Association Name="FK_DeliveryOrder_ToDeliveryRequest">
-          <End Type="DB_TritsurModel.DeliveryRequest" Role="DeliveryRequest" Multiplicity="1" />
-          <End Type="DB_TritsurModel.DeliveryOrder" Role="DeliveryOrder" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DeliveryRequest">
-              <PropertyRef Name="DeliveryRequestId" />
-            </Principal>
-            <Dependent Role="DeliveryOrder">
-              <PropertyRef Name="DeliveryRequestId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="TableSequence">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Year" Type="Int32" Nullable="false" />
-          <Property Name="DeliveryOrder" Type="Int64" />
-          <Property Name="DeliveryOrderInvoice" Type="Int64" />
-          <Property Name="DeliveryRequest" Type="Int64" />
-          <Property Name="ProductMixing" Type="Int64" />
-        </EntityType>
-        <EntityType Name="ParameterSetup">
-          <Key>
-            <PropertyRef Name="Name" />
-          </Key>
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Value" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
-          <Property Name="DataType" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Remark" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
-          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
-          <Property Name="IsActive" Type="Int16" />
-        </EntityType>
-        <EntityType Name="SOURCE">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Address" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
-          <Property Name="Location" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
-          <Property Name="Description" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
-          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
-          <Property Name="IsActive" Type="Int16" />
-          <NavigationProperty Name="RITASE" Relationship="DB_TritsurModel.FK_RITASE_RELATIONS_SOURCE" FromRole="SOURCE" ToRole="RITASE" />
-          <NavigationProperty Name="SITE" Relationship="DB_TritsurModel.FK_SITE_ToSource" FromRole="SOURCE" ToRole="SITE" />
-        </EntityType>
         <Association Name="FK_RITASE_RELATIONS_SOURCE">
           <End Type="DB_TritsurModel.SOURCE" Role="SOURCE" Multiplicity="0..1" />
           <End Type="DB_TritsurModel.RITASE" Role="RITASE" Multiplicity="*" />
@@ -2932,6 +3058,18 @@ warning 6035: The relationship 'FK_DeliveryOrderInvoice_ToDeliveryOrderNumber' h
             </Principal>
             <Dependent Role="RITASE">
               <PropertyRef Name="SOURCEID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransactionProduct_ToRitase">
+          <End Type="DB_TritsurModel.RITASE" Role="RITASE" Multiplicity="0..1" />
+          <End Type="DB_TritsurModel.TransactionProduct" Role="TransactionProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RITASE">
+              <PropertyRef Name="RITASEID" />
+            </Principal>
+            <Dependent Role="TransactionProduct">
+              <PropertyRef Name="RitaseId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2947,129 +3085,29 @@ warning 6035: The relationship 'FK_DeliveryOrderInvoice_ToDeliveryOrderNumber' h
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="BatchMix">
+        <EntityType Name="TableSequence">
           <Key>
-            <PropertyRef Name="BatchMixCode" />
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Year" />
           </Key>
-          <Property Name="BatchMixCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="BatchMixName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="OutputProduct" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Year" Type="Int32" Nullable="false" />
+          <Property Name="LastSequenceNumber" Type="Int64" Nullable="false" />
           <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
           <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
           <Property Name="IsActive" Type="Int16" />
-          <NavigationProperty Name="PRODUCT" Relationship="DB_TritsurModel.FK_BatchMix_ToProduct" FromRole="BatchMix" ToRole="PRODUCT" />
-          <NavigationProperty Name="BatchMixProduct" Relationship="DB_TritsurModel.FK_BatchMixProduct_ToBatchMix" FromRole="BatchMix" ToRole="BatchMixProduct" />
-          <NavigationProperty Name="ProductMixing" Relationship="DB_TritsurModel.FK_ProductMixing_BatchMix" FromRole="BatchMix" ToRole="ProductMixing" />
         </EntityType>
-        <EntityType Name="BatchMixProduct">
-          <Key>
-            <PropertyRef Name="BatchMixCode" />
-            <PropertyRef Name="ProductSourceId" />
-          </Key>
-          <Property Name="BatchMixCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ProductSourceId" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="ProductSourcePercentage" Type="Double" />
-          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
-          <Property Name="IsActive" Type="Int16" />
-          <NavigationProperty Name="BatchMix" Relationship="DB_TritsurModel.FK_BatchMixProduct_ToBatchMix" FromRole="BatchMixProduct" ToRole="BatchMix" />
-          <NavigationProperty Name="PRODUCT" Relationship="DB_TritsurModel.FK_BatchMixProduct_ToProduct" FromRole="BatchMixProduct" ToRole="PRODUCT" />
-        </EntityType>
-        <Association Name="FK_BatchMix_ToProduct">
-          <End Type="DB_TritsurModel.PRODUCT" Role="PRODUCT" Multiplicity="0..1" />
-          <End Type="DB_TritsurModel.BatchMix" Role="BatchMix" Multiplicity="*" />
+        <Association Name="FK_TransactionProduct_ToProductMixing">
+          <End Type="DB_TritsurModel.ProductMixing" Role="ProductMixing" Multiplicity="0..1" />
+          <End Type="DB_TritsurModel.TransactionProduct" Role="TransactionProduct" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="PRODUCT">
-              <PropertyRef Name="PRODUCTID" />
+            <Principal Role="ProductMixing">
+              <PropertyRef Name="ProductMixingId" />
             </Principal>
-            <Dependent Role="BatchMix">
-              <PropertyRef Name="OutputProduct" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_BatchMixProduct_ToBatchMix">
-          <End Type="DB_TritsurModel.BatchMix" Role="BatchMix" Multiplicity="1" />
-          <End Type="DB_TritsurModel.BatchMixProduct" Role="BatchMixProduct" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BatchMix">
-              <PropertyRef Name="BatchMixCode" />
-            </Principal>
-            <Dependent Role="BatchMixProduct">
-              <PropertyRef Name="BatchMixCode" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_BatchMixProduct_ToProduct">
-          <End Type="DB_TritsurModel.PRODUCT" Role="PRODUCT" Multiplicity="1" />
-          <End Type="DB_TritsurModel.BatchMixProduct" Role="BatchMixProduct" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PRODUCT">
-              <PropertyRef Name="PRODUCTID" />
-            </Principal>
-            <Dependent Role="BatchMixProduct">
-              <PropertyRef Name="ProductSourceId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="ProductMixing">
-          <Key>
-            <PropertyRef Name="ProductMixingId" />
-          </Key>
-          <Property Name="ProductMixingId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ProductMixingNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Site" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="BatchMixCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="OutcomeProudct" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="Ammount" Type="Double" />
-          <Property Name="MixingTime" Type="DateTime" Precision="7" />
-          <Property Name="MixedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Remark" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
-          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
-          <Property Name="IsActive" Type="Int16" />
-          <NavigationProperty Name="BatchMix" Relationship="DB_TritsurModel.FK_ProductMixing_BatchMix" FromRole="ProductMixing" ToRole="BatchMix" />
-          <NavigationProperty Name="PRODUCT" Relationship="DB_TritsurModel.FK_ProductMixing_PRODUCT" FromRole="ProductMixing" ToRole="PRODUCT" />
-          <NavigationProperty Name="SITE1" Relationship="DB_TritsurModel.FK_ProductMixing_SITE" FromRole="ProductMixing" ToRole="SITE" />
-        </EntityType>
-        <Association Name="FK_ProductMixing_BatchMix">
-          <End Type="DB_TritsurModel.BatchMix" Role="BatchMix" Multiplicity="0..1" />
-          <End Type="DB_TritsurModel.ProductMixing" Role="ProductMixing" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BatchMix">
-              <PropertyRef Name="BatchMixCode" />
-            </Principal>
-            <Dependent Role="ProductMixing">
-              <PropertyRef Name="BatchMixCode" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ProductMixing_PRODUCT">
-          <End Type="DB_TritsurModel.PRODUCT" Role="PRODUCT" Multiplicity="0..1" />
-          <End Type="DB_TritsurModel.ProductMixing" Role="ProductMixing" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PRODUCT">
-              <PropertyRef Name="PRODUCTID" />
-            </Principal>
-            <Dependent Role="ProductMixing">
-              <PropertyRef Name="OutcomeProudct" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ProductMixing_SITE">
-          <End Type="DB_TritsurModel.SITE" Role="SITE" Multiplicity="0..1" />
-          <End Type="DB_TritsurModel.ProductMixing" Role="ProductMixing" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SITE">
-              <PropertyRef Name="SITENAME" />
-            </Principal>
-            <Dependent Role="ProductMixing">
-              <PropertyRef Name="Site" />
+            <Dependent Role="TransactionProduct">
+              <PropertyRef Name="MixingId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3139,6 +3177,22 @@ warning 6035: The relationship 'FK_DeliveryOrderInvoice_ToDeliveryOrderNumber' h
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="DB_TritsurModel.AspNetRoles">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="AspNetUsers">
             <EntityTypeMapping TypeName="DB_TritsurModel.AspNetUsers">
               <MappingFragment StoreEntitySet="AspNetUsers">
@@ -3169,6 +3223,34 @@ warning 6035: The relationship 'FK_DeliveryOrderInvoice_ToDeliveryOrderNumber' h
                 <ScalarProperty Name="RawProduct" ColumnName="RawProduct" />
                 <ScalarProperty Name="BatchName" ColumnName="BatchName" />
                 <ScalarProperty Name="BatchCode" ColumnName="BatchCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BatchMix">
+            <EntityTypeMapping TypeName="DB_TritsurModel.BatchMix">
+              <MappingFragment StoreEntitySet="BatchMix">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="OutputProduct" ColumnName="OutputProduct" />
+                <ScalarProperty Name="BatchMixName" ColumnName="BatchMixName" />
+                <ScalarProperty Name="BatchMixCode" ColumnName="BatchMixCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BatchMixProduct">
+            <EntityTypeMapping TypeName="DB_TritsurModel.BatchMixProduct">
+              <MappingFragment StoreEntitySet="BatchMixProduct">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ProductSourcePercentage" ColumnName="ProductSourcePercentage" />
+                <ScalarProperty Name="ProductSourceId" ColumnName="ProductSourceId" />
+                <ScalarProperty Name="BatchMixCode" ColumnName="BatchMixCode" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3254,6 +3336,36 @@ warning 6035: The relationship 'FK_DeliveryOrderInvoice_ToDeliveryOrderNumber' h
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="DeliveryOrder">
+            <EntityTypeMapping TypeName="DB_TritsurModel.DeliveryOrder">
+              <MappingFragment StoreEntitySet="DeliveryOrder">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="DeliveryRequestId" ColumnName="DeliveryRequestId" />
+                <ScalarProperty Name="DeliveryOrderNumber" ColumnName="DeliveryOrderNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DeliveryOrderInvoice">
+            <EntityTypeMapping TypeName="DB_TritsurModel.DeliveryOrderInvoice">
+              <MappingFragment StoreEntitySet="DeliveryOrderInvoice">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="DeliveryOrderNumber" ColumnName="DeliveryOrderNumber" />
+                <ScalarProperty Name="DeliveryOrderInvoiceNumber" ColumnName="DeliveryOrderInvoiceNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="DeliveryRequest">
             <EntityTypeMapping TypeName="DB_TritsurModel.DeliveryRequest">
               <MappingFragment StoreEntitySet="DeliveryRequest">
@@ -3307,6 +3419,106 @@ warning 6035: The relationship 'FK_DeliveryOrderInvoice_ToDeliveryOrderNumber' h
                 <ScalarProperty Name="EMPLOYEEAGE" ColumnName="EMPLOYEEAGE" />
                 <ScalarProperty Name="EMPLOYEENAME" ColumnName="EMPLOYEENAME" />
                 <ScalarProperty Name="EMPLOYEEID" ColumnName="EMPLOYEEID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FinanceBalance">
+            <EntityTypeMapping TypeName="DB_TritsurModel.FinanceBalance">
+              <MappingFragment StoreEntitySet="FinanceBalance">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="AvailableAmount" ColumnName="AvailableAmount" />
+                <ScalarProperty Name="ActualAmount" ColumnName="ActualAmount" />
+                <ScalarProperty Name="ContractId" ColumnName="ContractId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FinanceTransaction">
+            <EntityTypeMapping TypeName="DB_TritsurModel.FinanceTransaction">
+              <MappingFragment StoreEntitySet="FinanceTransaction">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="ReferenceNumber" ColumnName="ReferenceNumber" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+                <ScalarProperty Name="ValueDate" ColumnName="ValueDate" />
+                <ScalarProperty Name="TransactionCode" ColumnName="TransactionCode" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="ContractId" ColumnName="ContractId" />
+                <ScalarProperty Name="TransactionNumber" ColumnName="TransactionNumber" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FinanceTransactionNostro">
+            <EntityTypeMapping TypeName="DB_TritsurModel.FinanceTransactionNostro">
+              <MappingFragment StoreEntitySet="FinanceTransactionNostro">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="FinanceTransactionId" ColumnName="FinanceTransactionId" />
+                <ScalarProperty Name="CodeNostroBank" ColumnName="CodeNostroBank" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Menu">
+            <EntityTypeMapping TypeName="DB_TritsurModel.Menu">
+              <MappingFragment StoreEntitySet="Menu">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="MenuLevel" ColumnName="MenuLevel" />
+                <ScalarProperty Name="MenuIClass" ColumnName="MenuIClass" />
+                <ScalarProperty Name="AspNetRoles" ColumnName="AspNetRoles" />
+                <ScalarProperty Name="Sequence" ColumnName="Sequence" />
+                <ScalarProperty Name="MenuParentId" ColumnName="MenuParentId" />
+                <ScalarProperty Name="MenuName" ColumnName="MenuName" />
+                <ScalarProperty Name="MenuId" ColumnName="MenuId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NostroBank">
+            <EntityTypeMapping TypeName="DB_TritsurModel.NostroBank">
+              <MappingFragment StoreEntitySet="NostroBank">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="NostroBankDescription" ColumnName="NostroBankDescription" />
+                <ScalarProperty Name="NostroBankName" ColumnName="NostroBankName" />
+                <ScalarProperty Name="AccountType" ColumnName="AccountType" />
+                <ScalarProperty Name="CodeNostroBank" ColumnName="CodeNostroBank" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ParameterSetup">
+            <EntityTypeMapping TypeName="DB_TritsurModel.ParameterSetup">
+              <MappingFragment StoreEntitySet="ParameterSetup">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="DataType" ColumnName="DataType" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3365,6 +3577,26 @@ warning 6035: The relationship 'FK_DeliveryOrderInvoice_ToDeliveryOrderNumber' h
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="ProductMixing">
+            <EntityTypeMapping TypeName="DB_TritsurModel.ProductMixing">
+              <MappingFragment StoreEntitySet="ProductMixing">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="MixedBy" ColumnName="MixedBy" />
+                <ScalarProperty Name="MixingTime" ColumnName="MixingTime" />
+                <ScalarProperty Name="Ammount" ColumnName="Ammount" />
+                <ScalarProperty Name="OutcomeProudct" ColumnName="OutcomeProudct" />
+                <ScalarProperty Name="BatchMixCode" ColumnName="BatchMixCode" />
+                <ScalarProperty Name="Site" ColumnName="Site" />
+                <ScalarProperty Name="ProductMixingNumber" ColumnName="ProductMixingNumber" />
+                <ScalarProperty Name="ProductMixingId" ColumnName="ProductMixingId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="ProductSite">
             <EntityTypeMapping TypeName="DB_TritsurModel.ProductSite">
               <MappingFragment StoreEntitySet="ProductSite">
@@ -3417,6 +3649,22 @@ warning 6035: The relationship 'FK_DeliveryOrderInvoice_ToDeliveryOrderNumber' h
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="SOURCE">
+            <EntityTypeMapping TypeName="DB_TritsurModel.SOURCE">
+              <MappingFragment StoreEntitySet="SOURCE">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="StockProduct">
             <EntityTypeMapping TypeName="DB_TritsurModel.StockProduct">
               <MappingFragment StoreEntitySet="StockProduct">
@@ -3430,9 +3678,28 @@ warning 6035: The relationship 'FK_DeliveryOrderInvoice_ToDeliveryOrderNumber' h
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="TransactionCode">
+            <EntityTypeMapping TypeName="DB_TritsurModel.TransactionCode">
+              <MappingFragment StoreEntitySet="TransactionCode">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="Credit" ColumnName="Credit" />
+                <ScalarProperty Name="Debit" ColumnName="Debit" />
+                <ScalarProperty Name="UserOrSystem" ColumnName="UserOrSystem" />
+                <ScalarProperty Name="CreditOrDebit" ColumnName="CreditOrDebit" />
+                <ScalarProperty Name="TransactionName" ColumnName="TransactionName" />
+                <ScalarProperty Name="TransactionCode1" ColumnName="TransactionCode1" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="TransactionProduct">
             <EntityTypeMapping TypeName="DB_TritsurModel.TransactionProduct">
               <MappingFragment StoreEntitySet="TransactionProduct">
+                <ScalarProperty Name="MixingId" ColumnName="MixingId" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
@@ -3466,260 +3733,17 @@ warning 6035: The relationship 'FK_DeliveryOrderInvoice_ToDeliveryOrderNumber' h
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="AspNetRoles">
-            <EntityTypeMapping TypeName="DB_TritsurModel.AspNetRoles">
-              <MappingFragment StoreEntitySet="AspNetRoles">
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="Remark" ColumnName="Remark" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="FinanceBalance">
-            <EntityTypeMapping TypeName="DB_TritsurModel.FinanceBalance">
-              <MappingFragment StoreEntitySet="FinanceBalance">
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="Remark" ColumnName="Remark" />
-                <ScalarProperty Name="AvailableAmount" ColumnName="AvailableAmount" />
-                <ScalarProperty Name="ActualAmount" ColumnName="ActualAmount" />
-                <ScalarProperty Name="ContractId" ColumnName="ContractId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="FinanceTransaction">
-            <EntityTypeMapping TypeName="DB_TritsurModel.FinanceTransaction">
-              <MappingFragment StoreEntitySet="FinanceTransaction">
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="Remark" ColumnName="Remark" />
-                <ScalarProperty Name="ReferenceNumber" ColumnName="ReferenceNumber" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="DueDate" ColumnName="DueDate" />
-                <ScalarProperty Name="ValueDate" ColumnName="ValueDate" />
-                <ScalarProperty Name="TransactionCode" ColumnName="TransactionCode" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="ContractId" ColumnName="ContractId" />
-                <ScalarProperty Name="TransactionNumber" ColumnName="TransactionNumber" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="FinanceTransactionNostro">
-            <EntityTypeMapping TypeName="DB_TritsurModel.FinanceTransactionNostro">
-              <MappingFragment StoreEntitySet="FinanceTransactionNostro">
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="Remark" ColumnName="Remark" />
-                <ScalarProperty Name="FinanceTransactionId" ColumnName="FinanceTransactionId" />
-                <ScalarProperty Name="CodeNostroBank" ColumnName="CodeNostroBank" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="NostroBank">
-            <EntityTypeMapping TypeName="DB_TritsurModel.NostroBank">
-              <MappingFragment StoreEntitySet="NostroBank">
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="Remark" ColumnName="Remark" />
-                <ScalarProperty Name="NostroBankDescription" ColumnName="NostroBankDescription" />
-                <ScalarProperty Name="NostroBankName" ColumnName="NostroBankName" />
-                <ScalarProperty Name="AccountType" ColumnName="AccountType" />
-                <ScalarProperty Name="CodeNostroBank" ColumnName="CodeNostroBank" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TransactionCode">
-            <EntityTypeMapping TypeName="DB_TritsurModel.TransactionCode">
-              <MappingFragment StoreEntitySet="TransactionCode">
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="Remark" ColumnName="Remark" />
-                <ScalarProperty Name="Credit" ColumnName="Credit" />
-                <ScalarProperty Name="Debit" ColumnName="Debit" />
-                <ScalarProperty Name="UserOrSystem" ColumnName="UserOrSystem" />
-                <ScalarProperty Name="CreditOrDebit" ColumnName="CreditOrDebit" />
-                <ScalarProperty Name="TransactionName" ColumnName="TransactionName" />
-                <ScalarProperty Name="TransactionCode1" ColumnName="TransactionCode" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="SPSelectDeliveryRequest" FunctionName="DB_TritsurModel.Store.SPSelectDeliveryRequest">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="DB_TritsurModel.SPSelectDeliveryRequest_Result">
-                <ScalarProperty Name="DeliveryRequestId" ColumnName="DeliveryRequestId" />
-                <ScalarProperty Name="DeliveryRequestNumber" ColumnName="DeliveryRequestNumber" />
-                <ScalarProperty Name="ContractId" ColumnName="ContractId" />
-                <ScalarProperty Name="DeliveryRequestTime" ColumnName="DeliveryRequestTime" />
-                <ScalarProperty Name="TokenToLoad" ColumnName="TokenToLoad" />
-                <ScalarProperty Name="IsActiveToken" ColumnName="IsActiveToken" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <EntitySetMapping Name="Menu">
-            <EntityTypeMapping TypeName="DB_TritsurModel.Menu">
-              <MappingFragment StoreEntitySet="Menu">
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="Remark" ColumnName="Remark" />
-                <ScalarProperty Name="MenuLevel" ColumnName="MenuLevel" />
-                <ScalarProperty Name="MenuIClass" ColumnName="MenuIClass" />
-                <ScalarProperty Name="AspNetRoles" ColumnName="AspNetRoles" />
-                <ScalarProperty Name="Sequence" ColumnName="Sequence" />
-                <ScalarProperty Name="MenuParentId" ColumnName="MenuParentId" />
-                <ScalarProperty Name="MenuName" ColumnName="MenuName" />
-                <ScalarProperty Name="MenuId" ColumnName="MenuId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DeliveryOrder">
-            <EntityTypeMapping TypeName="DB_TritsurModel.DeliveryOrder">
-              <MappingFragment StoreEntitySet="DeliveryOrder">
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="Remark" ColumnName="Remark" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="DeliveryRequestId" ColumnName="DeliveryRequestId" />
-                <ScalarProperty Name="DeliveryOrderNumber" ColumnName="DeliveryOrderNumber" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DeliveryOrderInvoice">
-            <EntityTypeMapping TypeName="DB_TritsurModel.DeliveryOrderInvoice">
-              <MappingFragment StoreEntitySet="DeliveryOrderInvoice">
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="Remark" ColumnName="Remark" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="DeliveryOrderNumber" ColumnName="DeliveryOrderNumber" />
-                <ScalarProperty Name="DeliveryOrderInvoiceNumber" ColumnName="DeliveryOrderInvoiceNumber" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="TableSequence">
             <EntityTypeMapping TypeName="DB_TritsurModel.TableSequence">
               <MappingFragment StoreEntitySet="TableSequence">
-                <ScalarProperty Name="ProductMixing" ColumnName="ProductMixing" />
-                <ScalarProperty Name="DeliveryRequest" ColumnName="DeliveryRequest" />
-                <ScalarProperty Name="DeliveryOrderInvoice" ColumnName="DeliveryOrderInvoice" />
-                <ScalarProperty Name="DeliveryOrder" ColumnName="DeliveryOrder" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastSequenceNumber" ColumnName="LastSequenceNumber" />
                 <ScalarProperty Name="Year" ColumnName="Year" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ParameterSetup">
-            <EntityTypeMapping TypeName="DB_TritsurModel.ParameterSetup">
-              <MappingFragment StoreEntitySet="ParameterSetup">
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="Remark" ColumnName="Remark" />
-                <ScalarProperty Name="DataType" ColumnName="DataType" />
-                <ScalarProperty Name="Value" ColumnName="Value" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="SOURCE">
-            <EntityTypeMapping TypeName="DB_TritsurModel.SOURCE">
-              <MappingFragment StoreEntitySet="SOURCE">
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Location" ColumnName="Location" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="BatchMix">
-            <EntityTypeMapping TypeName="DB_TritsurModel.BatchMix">
-              <MappingFragment StoreEntitySet="BatchMix">
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="OutputProduct" ColumnName="OutputProduct" />
-                <ScalarProperty Name="BatchMixName" ColumnName="BatchMixName" />
-                <ScalarProperty Name="BatchMixCode" ColumnName="BatchMixCode" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="BatchMixProduct">
-            <EntityTypeMapping TypeName="DB_TritsurModel.BatchMixProduct">
-              <MappingFragment StoreEntitySet="BatchMixProduct">
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="ProductSourcePercentage" ColumnName="ProductSourcePercentage" />
-                <ScalarProperty Name="ProductSourceId" ColumnName="ProductSourceId" />
-                <ScalarProperty Name="BatchMixCode" ColumnName="BatchMixCode" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ProductMixing">
-            <EntityTypeMapping TypeName="DB_TritsurModel.ProductMixing">
-              <MappingFragment StoreEntitySet="ProductMixing">
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="Remark" ColumnName="Remark" />
-                <ScalarProperty Name="MixedBy" ColumnName="MixedBy" />
-                <ScalarProperty Name="MixingTime" ColumnName="MixingTime" />
-                <ScalarProperty Name="Ammount" ColumnName="Ammount" />
-                <ScalarProperty Name="OutcomeProudct" ColumnName="OutcomeProudct" />
-                <ScalarProperty Name="BatchMixCode" ColumnName="BatchMixCode" />
-                <ScalarProperty Name="Site" ColumnName="Site" />
-                <ScalarProperty Name="ProductMixingNumber" ColumnName="ProductMixingNumber" />
-                <ScalarProperty Name="ProductMixingId" ColumnName="ProductMixingId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

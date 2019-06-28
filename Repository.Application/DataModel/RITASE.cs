@@ -43,8 +43,8 @@ namespace Repository.Application.DataModel
         public virtual EMPLOYEE EMPLOYEE { get; set; }
         public virtual PRODUCT PRODUCT1 { get; set; }
         public virtual SITE SITE1 { get; set; }
+        public virtual SOURCE SOURCE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TransactionProduct> TransactionProduct { get; set; }
-        public virtual SOURCE SOURCE { get; set; }
     }
 }

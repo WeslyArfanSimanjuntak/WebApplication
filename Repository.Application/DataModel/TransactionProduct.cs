@@ -29,10 +29,12 @@ namespace Repository.Application.DataModel
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public Nullable<short> IsActive { get; set; }
+        public Nullable<long> MixingId { get; set; }
     
         public virtual PRODUCT PRODUCT { get; set; }
         public virtual ProductAdjustment ProductAdjustment { get; set; }
         public virtual ProductConvertion ProductConvertion { get; set; }
         public virtual RITASE RITASE { get; set; }
+        public virtual ProductMixing ProductMixing { get; set; }
     }
 }

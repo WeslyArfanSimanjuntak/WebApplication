@@ -14,11 +14,13 @@ namespace Repository.Application.DataModel
     
     public partial class TableSequence
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         public int Year { get; set; }
-        public Nullable<long> DeliveryOrder { get; set; }
-        public Nullable<long> DeliveryOrderInvoice { get; set; }
-        public Nullable<long> DeliveryRequest { get; set; }
-        public Nullable<long> ProductMixing { get; set; }
+        public long LastSequenceNumber { get; set; }
+        public string CreatedBy { get; set; }
+        public string UpdatedBy { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
+        public Nullable<System.DateTime> UpdatedDate { get; set; }
+        public Nullable<short> IsActive { get; set; }
     }
 }

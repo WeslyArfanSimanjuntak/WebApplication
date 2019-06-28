@@ -14,6 +14,12 @@ namespace Repository.Application.DataModel
     
     public partial class ProductMixing
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public ProductMixing()
+        {
+            this.TransactionProduct = new HashSet<TransactionProduct>();
+        }
+    
         public long ProductMixingId { get; set; }
         public string ProductMixingNumber { get; set; }
         public string Site { get; set; }
@@ -32,5 +38,7 @@ namespace Repository.Application.DataModel
         public virtual BatchMix BatchMix { get; set; }
         public virtual PRODUCT PRODUCT { get; set; }
         public virtual SITE SITE1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TransactionProduct> TransactionProduct { get; set; }
     }
 }

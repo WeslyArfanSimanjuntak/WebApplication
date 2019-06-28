@@ -217,6 +217,9 @@
   <data name="UnAthorizedDefaultPath" xml:space="preserve">
     <value>/Home/Unauthorized</value>
   </data>
+  <data name="UnAuthorizedRole" xml:space="preserve">
+    <value>Account/Register</value>
+  </data>
   <data name="ViewDataPathKey" xml:space="preserve">
     <value>17/02/2018</value>
   </data>

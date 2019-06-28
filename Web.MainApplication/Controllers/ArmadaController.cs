@@ -53,7 +53,7 @@ namespace Web.MainApplication.Controllers
             });
 
             ViewBag.SITENAME = new SelectList(selectListSite, "Value", "Text");
-
+            ViewBag.IsActive = WebAppUtility.SelectListIsActive();
             return View();
         }
 
@@ -62,7 +62,7 @@ namespace Web.MainApplication.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "SITENAME,ARMADAID,ARMADANAME,ARMADACAPACITYINKG,ARMADATOTALTIRE,ARMADACOLOR,ARMADAMERK")] ARMADA aRMADA)
+        public ActionResult Create([Bind(Include = "IsActive,SITENAME,ARMADAID,ARMADANAME,ARMADACAPACITYINKG,ARMADATOTALTIRE,ARMADACOLOR,ARMADAMERK")] ARMADA aRMADA)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace Web.MainApplication.Controllers
                 });
 
             });
-
+            ViewBag.IsActive = WebAppUtility.SelectListIsActive(aRMADA.IsActive);
             ViewBag.SiteName = new SelectList(selectListSite, "Value", "Text");
             return View(aRMADA);
         }
@@ -109,6 +109,7 @@ namespace Web.MainApplication.Controllers
                 siteNameList.AddItemValText(x.SITENAME, x.SITENAME + " - " + x.SITEADDRESS);
             });
             ViewBag.SITENAME = siteNameList.ToSelectList(aRMADA.SITENAME);
+            ViewBag.IsActive = WebAppUtility.SelectListIsActive(aRMADA.IsActive);
             return View(aRMADA);
         }
 
@@ -131,6 +132,7 @@ namespace Web.MainApplication.Controllers
             {
                 siteNameList.AddItemValText(x.SITENAME, x.SITENAME + " - " + x.SITEADDRESS);
             });
+            ViewBag.IsActive = WebAppUtility.SelectListIsActive(aRMADA.IsActive);
             return View(aRMADA);
         }
 

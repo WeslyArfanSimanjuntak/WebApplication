@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -66,6 +67,12 @@ namespace Web.MainApplication.Controllers
             {
                 return HttpNotFound();
             }
+            var sliIsActive = new List<SelectListItem>();
+            sliIsActive.AddBlank();
+            sliIsActive.AddItemValText("1", "Active");
+            sliIsActive.AddItemValText("0", "Non-active");
+            ViewBag.IsActive = WebAppUtility.SelectListIsActive(sOURCE.IsActive);
+            //sliIsActive.ToSelectList(sOURCE.IsActive);
             return View(sOURCE);
         }
 
@@ -74,7 +81,7 @@ namespace Web.MainApplication.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Address,Location,Description")] SOURCE sOURCE)
+        public ActionResult Edit([Bind(Include = "Id,Name,Address,Location,Description,IsActive")] SOURCE sOURCE)
         {
             if (ModelState.IsValid)
             {

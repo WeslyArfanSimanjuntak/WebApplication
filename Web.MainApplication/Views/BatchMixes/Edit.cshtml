@@ -1,85 +1,144 @@
 ﻿@model Repository.Application.DataModel.BatchMix
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Create";
 }
 
-<h2>Edit</h2>
+<div class="box box-solid">
+    <div class="box-header with-border">
+        <h3 class="box-title">
+            Edit - Batch Mix
+        </h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>BatchMix</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.BatchMixCode)
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.BatchMixName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.BatchMixName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.BatchMixName, "", new { @class = "text-danger" })
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.BatchMixCode, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.BatchMixCode, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                    @Html.ValidationMessageFor(model => model.BatchMixCode, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.BatchMixName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.BatchMixName, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                    @Html.ValidationMessageFor(model => model.BatchMixName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.OutputProduct, "Output Product", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("OutputProduct", (SelectList)ViewBag.MatureProduct, null, htmlAttributes: new { @class = "form-control", @required = "required" })
+                    @Html.ValidationMessageFor(model => model.OutputProduct, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-2 control-label">
+                    <input type="button" id="btnDelete" value="Delete" class="btn btn-default" />
+                    <input type="button" id="btnAdd" value="Add" class="btn btn-default" />
+                </div>
+                <div class="col-md-10">
+                    <label id="lblTotalProductMature" class="h4"></label>
+                    @Html.Hidden("totalComposedProduct")
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.IsActive, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("IsActive", null, htmlAttributes: new { @class = "form-control", @required = "required" })
+                    @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div id="productMatureList">
+                @{int counter = 1;
+                    List<SelectList> listSelect = new List<SelectList>();
+                    foreach (var item in Model.BatchMixProduct.OrderBy(x => x.ProductSourcePercentage))
+                    {
+
+                        listSelect.Add(new SelectList(((SelectList)ViewBag.RawProduct).ToList(), "Value", "Text", item.ProductSourceId));
+
+                        <div id="MatureProductFormChild_@counter">
+                            <div class="form-group">
+                                @Html.Label("", "Composed Product " + counter, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.DropDownList("ComposedProductChild_" + counter.ToString(), listSelect.ElementAt(counter - 1), new { @class = "form-control", @required = "required" })
+                                    @*@Html.ValidationMessageFor(model => model., "", new { @class = "text-danger" })*@
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.OutputProduct, "Percentage ", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.TextBox("ProductPercentageChild_" + counter, item.ProductSourcePercentage, htmlAttributes: new { @class = "form-control money-format2", @required = "required", @maxlength = "6" })
+                                    @*  @Html.ValidationMessageFor(model => model.RawProduct, "", new { @class = "text-danger" })*@
+                                </div>
+                            </div>
+                        </div>
+                        counter++;
+                    }
+
+                }
+
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
             </div>
         </div>
+        }
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.OutputProduct, "OutputProduct", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("OutputProduct", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.OutputProduct, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.CreatedBy, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CreatedBy, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CreatedBy, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.UpdatedBy, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.UpdatedBy, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.UpdatedBy, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.CreatedDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CreatedDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CreatedDate, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.UpdatedDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.UpdatedDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.UpdatedDate, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.IsActive, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.IsActive, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
+        <div class="box-footer">
+            @Html.ActionLink("Back to List", "Index")
         </div>
     </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
 </div>
+
+<script type="text/javascript">
+    (function ($) {
+        $("#ProductPercentageChild_1").number(true, 2);
+        $("#lblTotalProductMature").html("Total Source Product : <strong>" + $("#productMatureList").children().length + "</strong>");
+        $("#totalComposedProduct").val($("#productMatureList").children().length);
+        $("#btnAdd").on("click", function () {
+            $("#productMatureList").append($("#MatureProductFormChild_1").clone());
+            $("#productMatureList").children().last().hide().show('slow', function () {
+                $("#lblTotalProductMature").html("Total Source Product : <strong>" + $("#productMatureList").children().length + "</strong>");
+                $("#totalComposedProduct").val($("#productMatureList").children().length);
+            });
+            $("#productMatureList").children().last().attr("id", "MatureProductFormChild_" + $("#productMatureList").children().length);
+            $("#productMatureList").children().last().find("label:first").html("Composed Product " + $("#productMatureList").children().length);
+            $("#productMatureList").children().last().find("select:first").attr("name", "ComposedProductChild_" + $("#productMatureList").children().length).attr("id", "ComposedProductChild_" + $("#productMatureList").children().length).val("");
+            $("#productMatureList").children().last().find("input:first").attr("name", "ProductPercentageChild_" + $("#productMatureList").children().length).attr("id", "ProductPercentageChild_" + $("#productMatureList").children().length).val("").number(true, 2);
+            $("#MatureProductFormChild_" + $("#productMatureList").children().length).find("input:first").attr("name" + "ProductPercentageChild_" + $("#productMatureList").children().length);
+
+        });
+
+        $("#btnDelete").on("click", function () {
+            if ($("#productMatureList").children().length > 1) {
+                $("#productMatureList").children().last().hide('slow', function () {
+                    $(this).remove();
+                    $("#lblTotalProductMature").html("Total Source Product : <strong>" + $("#productMatureList").children().length + "</strong>");
+                    $("#totalComposedProduct").val($("#productMatureList").children().length);
+                });
+            }
+
+
+
+        });
+    }(jQuery));
+</script>

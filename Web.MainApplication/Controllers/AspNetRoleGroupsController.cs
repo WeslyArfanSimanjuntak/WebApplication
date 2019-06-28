@@ -45,6 +45,7 @@ namespace Web.MainApplication.Controllers
                 sliRoles.AddItemValText(x.Id.ToString(), x.ParentId != null ? x.AspNetRoles2.Name + "-" + x.Name : x.Name);
             });
             sliRoles.OrderBy(x => x.Text);
+            ViewBag.IsActive = WebAppUtility.SelectListIsActive( );
             ViewBag.RolesId = sliRoles.ToSelectList();
             return View();
         }
@@ -65,6 +66,7 @@ namespace Web.MainApplication.Controllers
 
             ViewBag.GroupName = new SelectList(db.AspNetGroups, "GroupName", "GroupDescription", aspNetRoleGroup.GroupName);
             ViewBag.RolesId = new SelectList(db.AspNetRoles, "Id", "Name", aspNetRoleGroup.RolesId);
+            ViewBag.IsActive = WebAppUtility.SelectListIsActive(aspNetRoleGroup.IsActive);
             return View(aspNetRoleGroup);
         }
 
@@ -82,6 +84,7 @@ namespace Web.MainApplication.Controllers
             }
             ViewBag.GroupName = new SelectList(db.AspNetGroups, "GroupName", "GroupDescription", aspNetRoleGroup.GroupName);
             ViewBag.RolesId = new SelectList(db.AspNetRoles, "Id", "Name", aspNetRoleGroup.RolesId);
+            ViewBag.IsActive = WebAppUtility.SelectListIsActive(aspNetRoleGroup.IsActive);
             return View(aspNetRoleGroup);
         }
 
@@ -100,6 +103,7 @@ namespace Web.MainApplication.Controllers
             }
             ViewBag.GroupName = new SelectList(db.AspNetGroups, "GroupName", "GroupDescription", aspNetRoleGroup.GroupName);
             ViewBag.RolesId = new SelectList(db.AspNetRoles, "Id", "Name", aspNetRoleGroup.RolesId);
+            ViewBag.IsActive = WebAppUtility.SelectListIsActive(aspNetRoleGroup.IsActive);
             return View(aspNetRoleGroup);
         }
 

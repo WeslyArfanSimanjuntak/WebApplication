@@ -406,8 +406,8 @@ namespace System.Web.Mvc
         // dbcontex extention
         public static long DeliveryOrderSequence(this DB_TritsurEntities db)
         {
-            var sequence = db.TableSequence.Where(x => x.Year == DateTime.Now.Year).FirstOrDefault().DeliveryOrder;
-            return sequence.HasValue ? sequence.Value : 0;
+            var sequence = db.TableSequence.Where(x =>x.Id =="DeliveryRequest" && x.Year == DateTime.Now.Year).FirstOrDefault().LastSequenceNumber;
+            return sequence;
 
         }
         public static float ParamSetupTonToM3(this DB_TritsurEntities db)
@@ -418,17 +418,28 @@ namespace System.Web.Mvc
         }
         public static long DeliveryOrderInvoiceSequence(this DB_TritsurEntities db)
         {
-            var sequence = db.TableSequence.Where(x => x.Year == DateTime.Now.Year).FirstOrDefault().DeliveryOrderInvoice;
-            return sequence.HasValue ? sequence.Value : 0;
+            var sequence = db.TableSequence.Where(x => x.Id== "DeliveryOrderInvoice" && x.Year == DateTime.Now.Year).FirstOrDefault().LastSequenceNumber;
+            return sequence;
 
         }
-        public static long ProductMixing(this DB_TritsurEntities db)
+        public static long ProductMixingSequence(this DB_TritsurEntities db)
         {
-            var sequence = db.TableSequence.Where(x => x.Year == DateTime.Now.Year).FirstOrDefault().ProductMixing;
-            return sequence.HasValue ? sequence.Value : 0;
+            var sequence = db.TableSequence.Where(x => x.Id== "ProductMixing" && x.Year == DateTime.Now.Year).FirstOrDefault().LastSequenceNumber;
+            return sequence;
 
         }
+        public static long RitaseSequence(this DB_TritsurEntities db)
+        {
+            var sequence = db.TableSequence.Where(x => x.Id == "Ritase" && x.Year == DateTime.Now.Year).FirstOrDefault().LastSequenceNumber;
+            return sequence;
 
+        }
+        public static void RitaseSequencePlusOne(this DB_TritsurEntities db)
+        {
+            var sequence = db.TableSequence.Where(x => x.Id == "Ritase" && x.Year == DateTime.Now.Year).FirstOrDefault();
+            sequence.LastSequenceNumber++;
+            db.Entry(sequence).State = Data.Entity.EntityState.Modified;
+        }
     }
 
     public class DecimalModelBinder : IModelBinder
@@ -467,6 +478,19 @@ namespace System.Web.Mvc
         public const string DeliveryOrder = "DeliveryOrder";
         public const string DeliveryOrderInvoice = "DeliveryOrderInvoice";
         public const string DeliveryRequest = "DeliveryRequest";
+
+    }
+    public static class Message
+    {
+        public const string CreateSuccess = "Data Created Succesfully";
+        public const string CreateFail = "Data Failed To Create";
+
+        public const string UpdateSuccess = "Data Updated Succesfully";
+        public const string UpdateFail = "Data Failed To Update";
+
+        public const string DeleteSuccess = "Data Deleted Succesfully";
+        public const string DeleteFail = "Data Failed To Delete";
+
 
     }
 

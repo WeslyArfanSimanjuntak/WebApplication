@@ -22,9 +22,9 @@ namespace Repository.Application.DataModel
             this.EMPLOYEE = new HashSet<EMPLOYEE>();
             this.ProductAdjustment = new HashSet<ProductAdjustment>();
             this.ProductConvertion = new HashSet<ProductConvertion>();
+            this.ProductMixing = new HashSet<ProductMixing>();
             this.ProductSite = new HashSet<ProductSite>();
             this.RITASE = new HashSet<RITASE>();
-            this.ProductMixing = new HashSet<ProductMixing>();
         }
     
         public string SITENAME { get; set; }
@@ -48,11 +48,11 @@ namespace Repository.Application.DataModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductConvertion> ProductConvertion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ProductMixing> ProductMixing { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductSite> ProductSite { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RITASE> RITASE { get; set; }
         public virtual SOURCE SOURCE { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ProductMixing> ProductMixing { get; set; }
     }
 }
