@@ -185,7 +185,7 @@ namespace Web.MainApplication.Controllers
                 sb.AppendLine("<span>" + menu.MenuName + "</span>");
                 sb.AppendLine("<span class=\"pull-right-container\"></span>");
                 sb.AppendLine("<i class=\"fa fa-angle-left pull-right\"></i>");
-                sb.AppendLine("</span>");
+                //sb.AppendLine("</span>");
                 sb.AppendLine("</a>");
                 sb.AppendLine("<ul class=\"treeview-menu\" id=\"ul_" + menu.MenuName + "\">");
                 foreach (var menuItem in menu.Menu1.OrderBy(x => x.Sequence))

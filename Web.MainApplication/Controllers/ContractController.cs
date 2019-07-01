@@ -102,13 +102,13 @@ namespace Web.MainApplication.Controllers
             sliQuantityBasedOn.AddItemValText("m3","M3");
             sliQuantityBasedOn.AddItemValText("ton", "Ton");
             ViewBag.sliQuantityBasedOn = sliQuantityBasedOn;
+
             var sliPpn = new List<SelectListItem>();
             sliPpn.AddBlank();
             ViewBag.IsActive = WebAppUtility.SelectListIsActive(contract.IsActive);
 
             sliPpn.AddItemValText("Y", "Yes");
             sliPpn.AddItemValText("N", "No");
-            ViewBag.sliQuantityBasedOn = sliQuantityBasedOn;
             ViewBag.sliPpn = sliPpn;
             return View(contract);
         }
@@ -118,7 +118,7 @@ namespace Web.MainApplication.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ContractId,ContractNumber,Line,StartPeriode,EndPeriode,ClientIdPK,EffectiveDate,MaxExpiredDR,SiteName,Remark,Value")] CONTRACT cONTRACT)
+        public ActionResult Create([Bind(Include = "ContractId,ContractNumber,Line,StartPeriode,EndPeriode,ClientIdPK,EffectiveDate,MaxExpiredDR,SiteName,Remark,Value,QuantityBasedOn,IsusedPpn")] CONTRACT cONTRACT)
         {
             var totalProduct = Request.Params["totalProduct"];
             if (totalProduct == null)
@@ -243,6 +243,22 @@ namespace Web.MainApplication.Controllers
             float.TryParse((string)db.ParameterSetup.Where(x => x.Name == "Convertion(ton to m3)").FirstOrDefault().Value, out convertTonToM3);
             ViewBag.TonUnitToM3Unit = convertTonToM3;
             ViewBag.IsActive = WebAppUtility.SelectListIsActive(cONTRACT.IsActive);
+
+
+
+            var sliQuantityBasedOn = new List<SelectListItem>();
+            sliQuantityBasedOn.AddBlank();
+            sliQuantityBasedOn.AddItemValText("m3", "M3");
+            sliQuantityBasedOn.AddItemValText("ton", "Ton");
+            ViewBag.sliQuantityBasedOn = sliQuantityBasedOn.ToSelectList(cONTRACT.QuantityBasedOn);
+
+            var sliPpn = new List<SelectListItem>();
+            sliPpn.AddBlank();
+            ViewBag.IsActive = WebAppUtility.SelectListIsActive(cONTRACT.IsActive);
+
+            sliPpn.AddItemValText("1", "Yes");
+            sliPpn.AddItemValText("0", "No");
+            ViewBag.sliPpn = sliPpn.ToSelectList(cONTRACT.IsusedPpn);
 
             return View(cONTRACT);
         }

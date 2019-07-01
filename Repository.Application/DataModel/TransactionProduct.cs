@@ -23,18 +23,18 @@ namespace Repository.Application.DataModel
         public Nullable<int> RitaseId { get; set; }
         public Nullable<long> AdjustmentId { get; set; }
         public Nullable<long> ConvertionId { get; set; }
+        public Nullable<long> MixingId { get; set; }
         public string Remark { get; set; }
         public string CreatedBy { get; set; }
         public string UpdatedBy { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public Nullable<short> IsActive { get; set; }
-        public Nullable<long> MixingId { get; set; }
     
         public virtual PRODUCT PRODUCT { get; set; }
         public virtual ProductAdjustment ProductAdjustment { get; set; }
         public virtual ProductConvertion ProductConvertion { get; set; }
-        public virtual RITASE RITASE { get; set; }
         public virtual ProductMixing ProductMixing { get; set; }
+        public virtual RITASE RITASE { get; set; }
     }
 }

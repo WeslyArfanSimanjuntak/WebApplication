@@ -32,6 +32,8 @@ namespace Repository.Application.DataModel
         public Nullable<System.DateTime> EndPeriode { get; set; }
         public Nullable<int> MaxExpiredDR { get; set; }
         public string SiteName { get; set; }
+        public string QuantityBasedOn { get; set; }
+        public Nullable<short> IsusedPpn { get; set; }
         public string Remark { get; set; }
         public string CreatedBy { get; set; }
         public string UpdatedBy { get; set; }

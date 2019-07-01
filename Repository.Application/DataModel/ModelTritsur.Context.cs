@@ -60,10 +60,10 @@ namespace Repository.Application.DataModel
         public virtual DbSet<SITE> SITE { get; set; }
         public virtual DbSet<SOURCE> SOURCE { get; set; }
         public virtual DbSet<StockProduct> StockProduct { get; set; }
+        public virtual DbSet<TableSequence> TableSequence { get; set; }
         public virtual DbSet<TransactionCode> TransactionCode { get; set; }
         public virtual DbSet<TransactionProduct> TransactionProduct { get; set; }
         public virtual DbSet<UserClientMapping> UserClientMapping { get; set; }
-        public virtual DbSet<TableSequence> TableSequence { get; set; }
     
         public virtual ObjectResult<SPSelectDeliveryRequest_Result> SPSelectDeliveryRequest()
         {
