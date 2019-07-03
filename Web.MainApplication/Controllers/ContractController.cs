@@ -81,12 +81,14 @@ namespace Web.MainApplication.Controllers
 
               });
             ViewBag.ClientIdPK = new SelectList(selectList, "Value", "Text");
-            new List<ContractProduct>().Add(new ContractProduct()
+
+            contract.ContractProduct = new List<ContractProduct>();
+            contract.ContractProduct.Add(new ContractProduct()
             {
                 Amount = 0,
                 PricePerTon = 0
+
             });
-            contract.ContractProduct = new List<ContractProduct>();
             var lsiProduct = new List<SelectListItem>();
             lsiProduct.AddBlank();
             db.PRODUCT.ToList().ForEach(x =>
@@ -99,7 +101,7 @@ namespace Web.MainApplication.Controllers
             ViewBag.TonUnitToM3Unit = convertTonToM3;
             var sliQuantityBasedOn = new List<SelectListItem>();
             sliQuantityBasedOn.AddBlank();
-            sliQuantityBasedOn.AddItemValText("m3","M3");
+            sliQuantityBasedOn.AddItemValText("m3", "M3");
             sliQuantityBasedOn.AddItemValText("ton", "Ton");
             ViewBag.sliQuantityBasedOn = sliQuantityBasedOn;
 
@@ -418,7 +420,8 @@ namespace Web.MainApplication.Controllers
             {
                 WarningMessagesAdd("Password Length must be greater than 10 character");
             }
-            if (Request.Params["sliGroup"] == null) {
+            if (Request.Params["sliGroup"] == null)
+            {
 
                 WarningMessagesAdd("Group User can be blank");
             }

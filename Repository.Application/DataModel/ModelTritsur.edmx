@@ -210,7 +210,10 @@
           <Property Name="ContractId" Type="bigint" Nullable="false" />
           <Property Name="ProductId" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="Amount" Type="float" />
-          <Property Name="PricePerTon" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="PricePerTon" Type="decimal" Precision="18" Scale="3" />
+          <Property Name="DiscountPersen" Type="decimal" Precision="5" Scale="3" />
+          <Property Name="MarketingFeePersen" Type="decimal" Precision="5" Scale="3" />
+          <Property Name="DiscountIdr" Type="decimal" Precision="18" Scale="3" />
           <Property Name="Remark" Type="varchar" MaxLength="512" />
           <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
           <Property Name="UpdatedBy" Type="varchar" MaxLength="50" />
@@ -2005,7 +2008,7 @@
           <Property Name="ContractId" Type="Int64" Nullable="false" />
           <Property Name="ProductId" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="Amount" Type="Double" />
-          <Property Name="PricePerTon" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="PricePerTon" Type="Decimal" Precision="18" Scale="3" />
           <Property Name="Remark" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
           <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -2014,6 +2017,9 @@
           <Property Name="IsActive" Type="Int16" />
           <NavigationProperty Name="CONTRACT" Relationship="DB_TritsurModel.FK_ContractProduct_ToContract" FromRole="ContractProduct" ToRole="CONTRACT" />
           <NavigationProperty Name="PRODUCT" Relationship="DB_TritsurModel.FK_ContractProduct_ToProduct" FromRole="ContractProduct" ToRole="PRODUCT" />
+          <Property Name="DiscountPersen" Type="Decimal" Precision="5" Scale="3" />
+          <Property Name="MarketingFeePersen" Type="Decimal" Precision="5" Scale="3" />
+          <Property Name="DiscountIdr" Type="Decimal" Precision="18" Scale="3" />
         </EntityType>
         <EntityType Name="DeliveryOrder">
           <Key>
@@ -3329,6 +3335,9 @@
           <EntitySetMapping Name="ContractProduct">
             <EntityTypeMapping TypeName="DB_TritsurModel.ContractProduct">
               <MappingFragment StoreEntitySet="ContractProduct">
+                <ScalarProperty Name="DiscountIdr" ColumnName="DiscountIdr" />
+                <ScalarProperty Name="MarketingFeePersen" ColumnName="MarketingFeePersen" />
+                <ScalarProperty Name="DiscountPersen" ColumnName="DiscountPersen" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />

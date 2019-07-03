@@ -24,6 +24,9 @@ namespace Repository.Application.DataModel
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public Nullable<short> IsActive { get; set; }
+        public Nullable<decimal> DiscountPersen { get; set; }
+        public Nullable<decimal> MarketingFeePersen { get; set; }
+        public Nullable<decimal> DiscountIdr { get; set; }
     
         public virtual CONTRACT CONTRACT { get; set; }
         public virtual PRODUCT PRODUCT { get; set; }
