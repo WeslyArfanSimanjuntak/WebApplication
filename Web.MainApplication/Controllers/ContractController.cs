@@ -176,6 +176,8 @@ namespace Web.MainApplication.Controllers
             {
                 WarningMessagesAdd("Duplicate Product.");
             }
+
+
             if (ModelState.IsValid && WarningMessages().Count == 0)
             {
                 using (var transaction = db.Database.BeginTransaction())

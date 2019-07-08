@@ -68,10 +68,16 @@ namespace Web.MainApplication.Controllers
 
             if (ModelState.IsValid)
             {
+
+                if (cLIENT.ClientType.ToLower() == "company")
+                {
+                    cLIENT.ClientName = cLIENT.ClientCompanyName;
+                }
+                cLIENT.SetPropertyCreate();
                 db.CLIENT.Add(cLIENT);
                 db.SaveChanges();
                 SuccessMessagesAdd("Client Id \"" + cLIENT.ClientId + "\" Inserted");
-                
+
                 return RedirectToAction("Index");
             }
             List<SelectListItem> clientType = new List<SelectListItem>();
