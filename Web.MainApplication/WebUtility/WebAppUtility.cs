@@ -440,6 +440,32 @@ namespace System.Web.Mvc
             sequence.LastSequenceNumber++;
             db.Entry(sequence).State = Data.Entity.EntityState.Modified;
         }
+        public static List<string> MessageToList(this Exception e)
+        {
+            var retval = new List<string>();
+            if (e.Message != null)
+            {
+                retval.Add(e.Message);
+            }
+            if (e.GetType().Name == "DbEntityValidationException")
+            {
+                var ex = (Data.Entity.Validation.DbEntityValidationException)e;
+                ex.EntityValidationErrors.ToList().ForEach(x =>
+                {
+                    x.ValidationErrors.ToList().ForEach(z =>
+                    {
+                        retval.Add(z.ErrorMessage);
+                    });
+                });
+            }
+            if (e.InnerException != null)
+            {
+                retval.AddRange(e.InnerException.MessageToList());
+            }
+            return retval;
+
+        }
+
     }
 
     public class DecimalModelBinder : IModelBinder

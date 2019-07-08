@@ -16,8 +16,18 @@ namespace Web.MainApplication.Controllers
         // GET: Contract
         public ActionResult Index()
         {
-            var cONTRACT = db.CONTRACT;
-            return View(cONTRACT.ToList());
+            try
+            {
+
+                var cONTRACT = db.CONTRACT;
+                return View(cONTRACT.ToList());
+            }
+            catch (Exception e)
+            {
+                ErrorMessagesAdd(e.MessageToList());
+
+                return View("Error");
+            }
         }
 
         public ActionResult IndexClientContract()

@@ -223,6 +223,7 @@
       <DependentUpon>ModelTritsur.edmx</DependentUpon>
       <LastGenOutput>ModelTritsur.Context.cs</LastGenOutput>
     </Content>
+    <Content Include="DataModel\ModelTritsur.edmx.sql" />
     <Content Include="DataModel\ModelTritsur.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ModelTritsur.edmx</DependentUpon>

@@ -43,7 +43,7 @@
             </dt>
 
             <dd class="money-format h4">
-                @(Model.FinanceBalance.ActualAmount + Model.FinanceBalance.AvailableAmount)
+                @*@(Model.FinanceBalance.ActualAmount + Model.FinanceBalance.AvailableAmount)*@
             </dd>
 
             <dt>
@@ -75,7 +75,7 @@
             </dt>
 
             <dd>
-                @Html.ActionLink(Model.CLIENT.ClientName, "Details", "Client", new { id = Model.ClientIdPK }, null)
+                @*@Html.ActionLink(Model.CLIENT.ClientName, "Details", "Client", new { id = Model.ClientIdPK }, null)*@
             </dd>
 
 

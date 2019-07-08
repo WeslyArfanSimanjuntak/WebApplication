@@ -9,14 +9,14 @@ namespace Web.MainApplication.Controllers
     {
         internal void ClearMessage()
         {
-           
+
 
         }
         public BaseController()
         {
         }
-        
-        
+
+
         public List<string> ErrorMessagesAdd(string message)
         {
             var allMessage = (List<string>)TempData["MessageError1402"];
@@ -29,6 +29,22 @@ namespace Web.MainApplication.Controllers
             else
             {
                 allMessage.Add(message);
+                TempData["MessageError1402"] = allMessage;
+            }
+            return allMessage;
+        }
+        public List<string> ErrorMessagesAdd(List<string> messages)
+        {
+            var allMessage = (List<string>)TempData["MessageError1402"];
+            if (allMessage == null)
+            {
+                allMessage = new List<string>();
+                allMessage.AddRange(messages);
+                TempData["MessageError1402"] = allMessage;
+            }
+            else
+            {
+                allMessage.AddRange(messages);
                 TempData["MessageError1402"] = allMessage;
             }
             return allMessage;
@@ -63,6 +79,22 @@ namespace Web.MainApplication.Controllers
             }
             return allMessage;
         }
+        public List<string> WarningMessagesAdd(List<string> messages)
+        {
+            var allMessage = (List<string>)TempData["MessageWarning1402"];
+            if (allMessage == null)
+            {
+                allMessage = new List<string>();
+                allMessage.AddRange(messages);
+                TempData["MessageWarning1402"] = allMessage;
+            }
+            else
+            {
+                allMessage.AddRange(messages);
+                TempData["MessageWarning1402"] = allMessage;
+            }
+            return allMessage;
+        }
         public List<string> WarningMessages()
         {
             var allMessage = (List<string>)TempData["MessageWarning1402"];
@@ -93,6 +125,22 @@ namespace Web.MainApplication.Controllers
             }
             return allMessage;
         }
+        public List<string> InfoMessagesAdd(List<string> messages)
+        {
+            var allMessage = (List<string>)TempData["MessageInfo1402"];
+            if (allMessage == null)
+            {
+                allMessage = new List<string>();
+                allMessage.AddRange(messages);
+                TempData["MessageInfo1402"] = allMessage;
+            }
+            else
+            {
+                allMessage.AddRange(messages);
+                TempData["MessageInfo1402"] = allMessage;
+            }
+            return allMessage;
+        }
         public List<string> InfoMessages()
         {
             var allMessage = (List<string>)TempData["MessageInfo1402"];
@@ -119,6 +167,22 @@ namespace Web.MainApplication.Controllers
             else
             {
                 allMessage.Add(message);
+                TempData["MessageSuccess1402"] = allMessage;
+            }
+            return allMessage;
+        }
+        public List<string> SuccessMessagesAdd(List<string> messages)
+        {
+            var allMessage = (List<string>)TempData["MessageSuccess1402"];
+            if (allMessage == null)
+            {
+                allMessage = new List<string>();
+                allMessage.AddRange(messages);
+                TempData["MessageSuccess1402"] = allMessage;
+            }
+            else
+            {
+                allMessage.AddRange(messages);
                 TempData["MessageSuccess1402"] = allMessage;
             }
             return allMessage;
