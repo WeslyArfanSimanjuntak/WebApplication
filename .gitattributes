@@ -61,3 +61,12 @@
 #*.PDF   diff=astextplain
 #*.rtf   diff=astextplain
 #*.RTF   diff=astextplain
+
+# Add by Wesly 8 July 2019
+*.yml lockable
+*.sln lockable
+*.csproj lockable
+*.cs lockable
+*.js lockable
+*.cshtml lockable
+*.html lockable
