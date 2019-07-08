@@ -75,7 +75,10 @@
             </dt>
 
             <dd>
-                @Html.ActionLink(Model.CLIENT.ClientName, "Details", "Client", new { id = Model.ClientIdPK }, null)
+                @{
+                    string linkText = Model.CLIENT.ClientId + " - " + Model.CLIENT.ClientType.ToLower() == "company" ? Model.CLIENT.ClientCompanyName : (Model.CLIENT.ClientName != null ? Model.CLIENT.ClientName : "Details");
+                }
+                @Html.ActionLink(linkText, "Details", "Client", new { id = Model.ClientIdPK }, null)
             </dd>
 
 
@@ -140,7 +143,7 @@
         @Html.ActionLinkAuthorized("Back to List |", "Index")
         @Html.ActionLinkAuthorized("Back to List Client Contract", "indexclientcontract")
         @Html.ActionLinkAuthorized("Deposit", "Deposit", "FinanceTransaction", new { contractId = Model.ContractId }, htmlAttributes: new { @class = "btn btn-default" })
-        @Html.ActionLinkAuthorized("Create Delivery Request", "CreateDeliveryRequestClient", "DeliveryRequest", new { contractId = Model.ContractId  }, htmlAttributes: new { @class = "btn btn-default" }) 
+        @Html.ActionLinkAuthorized("Create Delivery Request", "CreateDeliveryRequestClient", "DeliveryRequest", new { contractId = Model.ContractId }, htmlAttributes: new { @class = "btn btn-default" })
 
         @{
             var userMapping = Model.CLIENT.UserClientMapping.Where(x => x.ClientId == Model.ClientIdPK).FirstOrDefault();
