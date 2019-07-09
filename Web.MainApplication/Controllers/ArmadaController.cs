@@ -11,6 +11,7 @@ namespace Web.MainApplication.Controllers
     public class ArmadaController : BaseController
     {
         private DB_TritsurEntities db = new DB_TritsurEntities();
+        // add command after line 13 from visual studio
 
         // GET: Armada
         public ActionResult Index()
