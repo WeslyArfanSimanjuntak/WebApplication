@@ -1,0 +1,99 @@
+﻿@model IEnumerable<Repository.Application.DataModel.NostroBank>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.BankId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BankBranchCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NostroBankName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NostroAccountNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NostroAccountName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BankCategory)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Remark)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UpdatedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UpdatedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.BankId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BankBranchCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NostroBankName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NostroAccountNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NostroAccountName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BankCategory)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Remark)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UpdatedBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UpdatedDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsActive)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.NostroBankId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.NostroBankId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.NostroBankId })
+        </td>
+    </tr>
+}
+
+</table>

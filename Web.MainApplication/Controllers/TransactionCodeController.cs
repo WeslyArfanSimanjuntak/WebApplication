@@ -1,126 +1,111 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
+﻿using Repository.Application.DataModel;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using Repository.Application.DataModel;
-using EntityState = System.Data.Entity.EntityState;
 
 namespace Web.MainApplication.Controllers
 {
-    public class NostroBankController : BaseController
+    public class TransactionCodeController : BaseController
     {
         private DB_TritsurEntities db = new DB_TritsurEntities();
 
-        // GET: NostroBank
+        // GET: TransactionCode
         public ActionResult Index()
         {
-            return View(db.NostroBank.ToList());
+            return View(db.TransactionCode.ToList());
         }
 
-        // GET: NostroBank/Details/5
+        // GET: TransactionCode/Details/5
         public ActionResult Details(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            NostroBank nostroBank = db.NostroBank.Find(id);
-            if (nostroBank == null)
+            TransactionCode transactionCode = db.TransactionCode.Find(id);
+            if (transactionCode == null)
             {
                 return HttpNotFound();
             }
-            return View(nostroBank);
+            return View(transactionCode);
         }
 
-        // GET: NostroBank/Create
+        // GET: TransactionCode/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: NostroBank/Create
+        // POST: TransactionCode/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "NostroBankId,BankId,BankBranchCode,NostroBankName,NostroAccountNumber,NostroAccountName,BankCategory,Remark,CreatedBy,UpdatedBy,CreatedDate,UpdatedDate,IsActive")] NostroBank nostroBank)
+        public ActionResult Create([Bind(Include = "TransactionCode1,TransactionName,CreditOrDebit,UserOrSystem,Debit,Credit,Remark,CreatedBy,UpdatedBy,CreatedDate,UpdatedDate,IsActive")] TransactionCode transactionCode)
         {
             if (ModelState.IsValid)
             {
-                try
-                {
-                    nostroBank.SetPropertyCreate();
-                    db.NostroBank.Add(nostroBank);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-                }
-                catch (Exception e)
-                {
-                    WarningMessagesAdd(e.MessageToList());
-                }
-                
+                db.TransactionCode.Add(transactionCode);
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
 
-            return View(nostroBank);
+            return View(transactionCode);
         }
 
-        // GET: NostroBank/Edit/5
+        // GET: TransactionCode/Edit/5
         public ActionResult Edit(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            NostroBank nostroBank = db.NostroBank.Find(id);
-            if (nostroBank == null)
+            TransactionCode transactionCode = db.TransactionCode.Find(id);
+            if (transactionCode == null)
             {
                 return HttpNotFound();
             }
-            return View(nostroBank);
+            return View(transactionCode);
         }
 
-        // POST: NostroBank/Edit/5
+        // POST: TransactionCode/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "NostroBankId,BankId,BankBranchCode,NostroBankName,NostroAccountNumber,NostroAccountName,BankCategory,Remark,CreatedBy,UpdatedBy,CreatedDate,UpdatedDate,IsActive")] NostroBank nostroBank)
+        public ActionResult Edit([Bind(Include = "TransactionCode1,TransactionName,CreditOrDebit,UserOrSystem,Debit,Credit,Remark,CreatedBy,UpdatedBy,CreatedDate,UpdatedDate,IsActive")] TransactionCode transactionCode)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(nostroBank).State = EntityState.Modified;
+                db.Entry(transactionCode).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(nostroBank);
+            return View(transactionCode);
         }
 
-        // GET: NostroBank/Delete/5
+        // GET: TransactionCode/Delete/5
         public ActionResult Delete(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            NostroBank nostroBank = db.NostroBank.Find(id);
-            if (nostroBank == null)
+            TransactionCode transactionCode = db.TransactionCode.Find(id);
+            if (transactionCode == null)
             {
                 return HttpNotFound();
             }
-            return View(nostroBank);
+            return View(transactionCode);
         }
 
-        // POST: NostroBank/Delete/5
+        // POST: TransactionCode/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            NostroBank nostroBank = db.NostroBank.Find(id);
-            db.NostroBank.Remove(nostroBank);
+            TransactionCode transactionCode = db.TransactionCode.Find(id);
+            db.TransactionCode.Remove(transactionCode);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
