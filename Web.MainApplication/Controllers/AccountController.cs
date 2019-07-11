@@ -45,36 +45,45 @@ namespace Web.MainApplication.Controllers
         [HttpPost]
         public ActionResult Login(LoginViewModelWebApp model)
         {
-            string returnUrl = Request.Params["returnUrl"] != null ? Request.Params["returnUrl"] : null;
-            string userName = model.UserName;
-            string password = model.Password;
+            try
+            {
 
-            string passwordHash = Encriptor.SHA1(password);
-            var aspNetUser = this.db.AspNetUsers.Where(x => x.Username == userName).ToList().Where(x => x.Username == userName).FirstOrDefault();
-            if (aspNetUser == null)
-            {
-                WarningMessagesAdd("Username is not Exist");
-            }
-            else
-            {
-                if (aspNetUser.Password == passwordHash)
+                string returnUrl = Request.Params["returnUrl"] != null ? Request.Params["returnUrl"] : null;
+                string userName = model.UserName;
+                string password = model.Password;
+
+                string passwordHash = Encriptor.SHA1(password);
+                var aspNetUser = this.db.AspNetUsers.Where(x => x.Username == userName).ToList().Where(x => x.Username == userName).FirstOrDefault();
+                if (aspNetUser == null)
                 {
-                    SignIn(this.GetClaims(aspNetUser));
+                    WarningMessagesAdd("Username is not Exist");
                 }
                 else
                 {
-                    WarningMessagesAdd("Password is not Match");
+                    if (aspNetUser.Password == passwordHash)
+                    {
+                        SignIn(this.GetClaims(aspNetUser));
+                    }
+                    else
+                    {
+                        WarningMessagesAdd("Password is not Match");
+                    }
                 }
+                if (WarningMessages().Count > 0)
+                {
+                    return View();
+                }
+                if (returnUrl != null)
+                {
+                    return Redirect(returnUrl);
+                }
+                return RedirectToAction("Index", "Home");
             }
-            if (WarningMessages().Count > 0)
+            catch (Exception e)
             {
+                ErrorMessagesAdd(e.MessageToList());
                 return View();
             }
-            if (returnUrl != null)
-            {
-                return Redirect(returnUrl);
-            }
-            return RedirectToAction("Index", "Home");
         }
 
         [HttpPost]

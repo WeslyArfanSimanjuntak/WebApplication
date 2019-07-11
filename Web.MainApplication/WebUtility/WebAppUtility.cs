@@ -10,7 +10,7 @@ using System.Web.Mvc.Html;
 using System.Web.Routing;
 using Web.MainApplication.Controllers;
 using Web.MainApplication.WebUtility;
-
+using Web.MainApplication.Resources;
 namespace System.Web.Mvc
 {
     public static class WebAppUtility
@@ -496,6 +496,38 @@ namespace System.Web.Mvc
             return actualValue;
         }
     }
+
+    public class DateTimeModelBinder : IModelBinder
+    {
+        public object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
+        {
+            ValueProviderResult valueResult = bindingContext.ValueProvider
+                .GetValue(bindingContext.ModelName);
+
+            ModelState modelState = new ModelState { Value = valueResult };
+
+            object actualValue = null;
+
+            if (valueResult.AttemptedValue != string.Empty)
+            {
+                var type = valueResult.GetType();
+                try
+                {
+                    var newDate = DateTime.Parse(valueResult.AttemptedValue, new CultureInfo(SystemResources.CultureInfoNameOfTransformator));
+                    actualValue = newDate;
+                }
+                catch (FormatException e)
+                {
+                    modelState.Errors.Add(e);
+                }
+            }
+
+            bindingContext.ModelState.Add(bindingContext.ModelName, modelState);
+
+            return actualValue;
+        }
+    }
+
     public class EntityEnum
     {
 

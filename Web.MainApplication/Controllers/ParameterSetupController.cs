@@ -16,6 +16,8 @@ namespace Web.MainApplication.Controllers
     {
         private DB_TritsurEntities db = new DB_TritsurEntities();
 
+
+
         // GET: api/ParameterSetup
         public IQueryable<ParameterSetup> GetParameterSetup()
         {
