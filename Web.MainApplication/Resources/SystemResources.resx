@@ -138,6 +138,9 @@
   <data name="CompanyWebSite" xml:space="preserve">
     <value>tritsur.com</value>
   </data>
+  <data name="CultureInfoNameOfTransformator" xml:space="preserve">
+    <value>id-ID</value>
+  </data>
   <data name="DefaultAuthenticationTypes_ApplicationCookie" xml:space="preserve">
     <value>ApplicationCookie</value>
   </data>

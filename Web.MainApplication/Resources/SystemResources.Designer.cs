@@ -124,6 +124,15 @@ namespace Web.MainApplication.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to id-ID.
+        /// </summary>
+        public static string CultureInfoNameOfTransformator {
+            get {
+                return ResourceManager.GetString("CultureInfoNameOfTransformator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ApplicationCookie.
         /// </summary>
         public static string DefaultAuthenticationTypes_ApplicationCookie {
