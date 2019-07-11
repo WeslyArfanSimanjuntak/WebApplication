@@ -243,7 +243,7 @@
     <Compile Include="Controllers\BaseOdataController.cs" />
     <Compile Include="Controllers\BatchController.cs" />
     <Compile Include="Controllers\BatchMixesController.cs" />
-    <Compile Include="Controllers\ClientNostroBanksController.cs" />
+    <Compile Include="Controllers\ClientController.cs" />
     <Compile Include="Controllers\ContractController.cs" />
     <Compile Include="Controllers\DeliveryOrderController.cs" />
     <Compile Include="Controllers\DeliveryOrderInvoiceController.cs" />
