@@ -17,6 +17,7 @@ namespace Repository.Application.DataModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public CLIENT()
         {
+            this.ClientNostroBank = new HashSet<ClientNostroBank>();
             this.CONTRACT = new HashSet<CONTRACT>();
             this.UserClientMapping = new HashSet<UserClientMapping>();
         }
@@ -46,6 +47,8 @@ namespace Repository.Application.DataModel
         public string ClientCompanyPICPhoneNumber3 { get; set; }
         public string ClientCompanyLeaderEmailAddress3 { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ClientNostroBank> ClientNostroBank { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CONTRACT> CONTRACT { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -38,6 +38,7 @@ namespace Repository.Application.DataModel
         public virtual DbSet<BatchMixProduct> BatchMixProduct { get; set; }
         public virtual DbSet<BatchProduct> BatchProduct { get; set; }
         public virtual DbSet<CLIENT> CLIENT { get; set; }
+        public virtual DbSet<ClientNostroBank> ClientNostroBank { get; set; }
         public virtual DbSet<CONTRACT> CONTRACT { get; set; }
         public virtual DbSet<ContractProduct> ContractProduct { get; set; }
         public virtual DbSet<DeliveryOrder> DeliveryOrder { get; set; }

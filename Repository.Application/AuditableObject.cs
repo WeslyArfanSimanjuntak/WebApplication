@@ -121,6 +121,9 @@ namespace Repository.Application.DataModel
     public partial class BatchMixProduct : IAuditableObject
     {
     }
+    public partial class ClientNostroBank : IAuditableObject
+    {
+    }
 
 
 }

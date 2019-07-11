@@ -92,6 +92,9 @@
     <Compile Include="DataModel\CLIENT.cs">
       <DependentUpon>ModelTritsur.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataModel\ClientNostroBank.cs">
+      <DependentUpon>ModelTritsur.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataModel\CONTRACT.cs">
       <DependentUpon>ModelTritsur.tt</DependentUpon>
     </Compile>

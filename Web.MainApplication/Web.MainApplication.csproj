@@ -243,7 +243,7 @@
     <Compile Include="Controllers\BaseOdataController.cs" />
     <Compile Include="Controllers\BatchController.cs" />
     <Compile Include="Controllers\BatchMixesController.cs" />
-    <Compile Include="Controllers\ClientController.cs" />
+    <Compile Include="Controllers\ClientNostroBanksController.cs" />
     <Compile Include="Controllers\ContractController.cs" />
     <Compile Include="Controllers\DeliveryOrderController.cs" />
     <Compile Include="Controllers\DeliveryOrderInvoiceController.cs" />
@@ -529,6 +529,11 @@
     <Content Include="Views\TransactionCode\Details.cshtml" />
     <Content Include="Views\TransactionCode\Edit.cshtml" />
     <Content Include="Views\TransactionCode\Index.cshtml" />
+    <Content Include="Views\Client\ClientNostroBank.cshtml" />
+    <Content Include="Views\Client\ClientNostroBankCreate.cshtml" />
+    <Content Include="Views\Client\ClientNostroBankDelete.cshtml" />
+    <Content Include="Views\Client\ClientNostroBankEdit.cshtml" />
+    <Content Include="Views\Client\ClientNostroBankDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

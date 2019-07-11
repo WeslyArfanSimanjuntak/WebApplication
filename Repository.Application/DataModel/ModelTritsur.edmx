@@ -179,6 +179,26 @@
           <Property Name="ClientCompanyPICPhoneNumber3" Type="varchar" MaxLength="50" />
           <Property Name="ClientCompanyLeaderEmailAddress3" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="ClientNostroBank">
+          <Key>
+            <PropertyRef Name="ClientNostroBankId" />
+            <PropertyRef Name="Client" />
+          </Key>
+          <Property Name="ClientNostroBankId" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Client" Type="int" Nullable="false" />
+          <Property Name="BankId" Type="varchar" MaxLength="25" />
+          <Property Name="BankBranchCode" Type="varchar" MaxLength="50" />
+          <Property Name="NostroBankName" Type="varchar" MaxLength="50" />
+          <Property Name="NostroAccountNumber" Type="varchar" MaxLength="50" />
+          <Property Name="NostroAccountName" Type="varchar" MaxLength="50" />
+          <Property Name="BankCategory" Type="varchar" MaxLength="50" />
+          <Property Name="Remark" Type="varchar" MaxLength="512" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
+          <Property Name="UpdatedBy" Type="varchar" MaxLength="50" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="IsActive" Type="smallint" />
+        </EntityType>
         <EntityType Name="CONTRACT">
           <Key>
             <PropertyRef Name="ContractId" />
@@ -761,6 +781,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ClientNostroBank_ToClient">
+          <End Role="CLIENT" Type="Self.CLIENT" Multiplicity="1" />
+          <End Role="ClientNostroBank" Type="Self.ClientNostroBank" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENT">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClientNostroBank">
+              <PropertyRef Name="Client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_CONTRACT_ToClient">
           <End Role="CLIENT" Type="Self.CLIENT" Multiplicity="0..1" />
           <End Role="CONTRACT" Type="Self.CONTRACT" Multiplicity="*" />
@@ -1265,6 +1297,7 @@
           <EntitySet Name="BatchMixProduct" EntityType="Self.BatchMixProduct" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BatchProduct" EntityType="Self.BatchProduct" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CLIENT" EntityType="Self.CLIENT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClientNostroBank" EntityType="Self.ClientNostroBank" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CONTRACT" EntityType="Self.CONTRACT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ContractProduct" EntityType="Self.ContractProduct" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DeliveryOrder" EntityType="Self.DeliveryOrder" Schema="dbo" store:Type="Tables" />
@@ -1338,6 +1371,10 @@
           <AssociationSet Name="FK_BatchProduct_ToProduct" Association="Self.FK_BatchProduct_ToProduct">
             <End Role="PRODUCT" EntitySet="PRODUCT" />
             <End Role="BatchProduct" EntitySet="BatchProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClientNostroBank_ToClient" Association="Self.FK_ClientNostroBank_ToClient">
+            <End Role="CLIENT" EntitySet="CLIENT" />
+            <End Role="ClientNostroBank" EntitySet="ClientNostroBank" />
           </AssociationSet>
           <AssociationSet Name="FK_CONTRACT_ToClient" Association="Self.FK_CONTRACT_ToClient">
             <End Role="CLIENT" EntitySet="CLIENT" />
@@ -1521,6 +1558,7 @@
           <EntitySet Name="BatchMixProduct" EntityType="DB_TritsurModel.BatchMixProduct" />
           <EntitySet Name="BatchProduct" EntityType="DB_TritsurModel.BatchProduct" />
           <EntitySet Name="CLIENT" EntityType="DB_TritsurModel.CLIENT" />
+          <EntitySet Name="ClientNostroBank" EntityType="DB_TritsurModel.ClientNostroBank" />
           <EntitySet Name="CONTRACT" EntityType="DB_TritsurModel.CONTRACT" />
           <EntitySet Name="ContractProduct" EntityType="DB_TritsurModel.ContractProduct" />
           <EntitySet Name="DeliveryOrder" EntityType="DB_TritsurModel.DeliveryOrder" />
@@ -1618,6 +1656,10 @@
           <AssociationSet Name="FK_BatchProduct_ToProduct" Association="DB_TritsurModel.FK_BatchProduct_ToProduct">
             <End Role="PRODUCT" EntitySet="PRODUCT" />
             <End Role="BatchProduct" EntitySet="BatchProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClientNostroBank_ToClient" Association="DB_TritsurModel.FK_ClientNostroBank_ToClient">
+            <End Role="CLIENT" EntitySet="CLIENT" />
+            <End Role="ClientNostroBank" EntitySet="ClientNostroBank" />
           </AssociationSet>
           <AssociationSet Name="FK_CONTRACT_ToClient" Association="DB_TritsurModel.FK_CONTRACT_ToClient">
             <End Role="CLIENT" EntitySet="CLIENT" />
@@ -1971,8 +2013,30 @@
           <Property Name="ClientCompanyPIC3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ClientCompanyPICPhoneNumber3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ClientCompanyLeaderEmailAddress3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ClientNostroBank" Relationship="DB_TritsurModel.FK_ClientNostroBank_ToClient" FromRole="CLIENT" ToRole="ClientNostroBank" />
           <NavigationProperty Name="CONTRACT" Relationship="DB_TritsurModel.FK_CONTRACT_ToClient" FromRole="CLIENT" ToRole="CONTRACT" />
           <NavigationProperty Name="UserClientMapping" Relationship="DB_TritsurModel.FK_UserClientMapping_ToClient" FromRole="CLIENT" ToRole="UserClientMapping" />
+        </EntityType>
+        <EntityType Name="ClientNostroBank">
+          <Key>
+            <PropertyRef Name="ClientNostroBankId" />
+            <PropertyRef Name="Client" />
+          </Key>
+          <Property Name="ClientNostroBankId" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Client" Type="Int32" Nullable="false" />
+          <Property Name="BankId" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="BankBranchCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NostroBankName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NostroAccountNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NostroAccountName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BankCategory" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Remark" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Int16" />
+          <NavigationProperty Name="CLIENT1" Relationship="DB_TritsurModel.FK_ClientNostroBank_ToClient" FromRole="ClientNostroBank" ToRole="CLIENT" />
         </EntityType>
         <EntityType Name="CONTRACT">
           <Key>
@@ -2707,6 +2771,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ClientNostroBank_ToClient">
+          <End Type="DB_TritsurModel.CLIENT" Role="CLIENT" Multiplicity="1" />
+          <End Type="DB_TritsurModel.ClientNostroBank" Role="ClientNostroBank" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENT">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClientNostroBank">
+              <PropertyRef Name="Client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_CONTRACT_ToClient">
           <End Type="DB_TritsurModel.CLIENT" Role="CLIENT" Multiplicity="0..1" />
           <End Type="DB_TritsurModel.CONTRACT" Role="CONTRACT" Multiplicity="*" />
@@ -3311,6 +3387,26 @@
                 <ScalarProperty Name="ClientName" ColumnName="ClientName" />
                 <ScalarProperty Name="ClientId" ColumnName="ClientId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClientNostroBank">
+            <EntityTypeMapping TypeName="DB_TritsurModel.ClientNostroBank">
+              <MappingFragment StoreEntitySet="ClientNostroBank">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="BankCategory" ColumnName="BankCategory" />
+                <ScalarProperty Name="NostroAccountName" ColumnName="NostroAccountName" />
+                <ScalarProperty Name="NostroAccountNumber" ColumnName="NostroAccountNumber" />
+                <ScalarProperty Name="NostroBankName" ColumnName="NostroBankName" />
+                <ScalarProperty Name="BankBranchCode" ColumnName="BankBranchCode" />
+                <ScalarProperty Name="BankId" ColumnName="BankId" />
+                <ScalarProperty Name="Client" ColumnName="Client" />
+                <ScalarProperty Name="ClientNostroBankId" ColumnName="ClientNostroBankId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
