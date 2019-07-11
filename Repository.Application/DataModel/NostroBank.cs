@@ -20,10 +20,13 @@ namespace Repository.Application.DataModel
             this.FinanceTransactionNostro = new HashSet<FinanceTransactionNostro>();
         }
     
-        public string CodeNostroBank { get; set; }
-        public string AccountType { get; set; }
+        public string NostroBankId { get; set; }
+        public string BankId { get; set; }
+        public string BankBranchCode { get; set; }
         public string NostroBankName { get; set; }
-        public string NostroBankDescription { get; set; }
+        public string NostroAccountNumber { get; set; }
+        public string NostroAccountName { get; set; }
+        public string BankCategory { get; set; }
         public string Remark { get; set; }
         public string CreatedBy { get; set; }
         public string UpdatedBy { get; set; }

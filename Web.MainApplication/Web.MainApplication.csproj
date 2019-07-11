@@ -262,6 +262,7 @@
     <Compile Include="Controllers\RitaseController.cs" />
     <Compile Include="Controllers\SiteController.cs" />
     <Compile Include="Controllers\SourceController.cs" />
+    <Compile Include="Controllers\TransactionCodeController.cs" />
     <Compile Include="Controllers\TransactionProductController.cs" />
     <Compile Include="Controllers\UserManagementController.cs" />
     <Compile Include="Global.asax.cs">
@@ -518,6 +519,16 @@
     <Content Include="Views\BatchMixes\Edit.cshtml" />
     <Content Include="Views\BatchMixes\Index.cshtml" />
     <Content Include="Views\BatchMixes\View.cshtml" />
+    <Content Include="Views\NostroBank\Create.cshtml" />
+    <Content Include="Views\NostroBank\Delete.cshtml" />
+    <Content Include="Views\NostroBank\Details.cshtml" />
+    <Content Include="Views\NostroBank\Edit.cshtml" />
+    <Content Include="Views\NostroBank\Index.cshtml" />
+    <Content Include="Views\TransactionCode\Create.cshtml" />
+    <Content Include="Views\TransactionCode\Delete.cshtml" />
+    <Content Include="Views\TransactionCode\Details.cshtml" />
+    <Content Include="Views\TransactionCode\Edit.cshtml" />
+    <Content Include="Views\TransactionCode\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -14,7 +14,7 @@ namespace Repository.Application.DataModel
     
     public partial class FinanceTransactionNostro
     {
-        public string CodeNostroBank { get; set; }
+        public string NostroBankId { get; set; }
         public long FinanceTransactionId { get; set; }
         public string Remark { get; set; }
         public string CreatedBy { get; set; }

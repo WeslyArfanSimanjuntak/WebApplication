@@ -46,7 +46,7 @@ namespace Web.MainApplication.Controllers
             lsliNostroBank.AddBlank();
             db.NostroBank.ToList().ForEach(x =>
             {
-                lsliNostroBank.AddItemValText(x.CodeNostroBank, x.NostroBankName);
+                lsliNostroBank.AddItemValText(x.NostroBankId, x.NostroBankName);
             });
             ViewBag.NostroBank = lsliNostroBank.ToSelectList();
             return View(financeTransaction);
@@ -94,7 +94,7 @@ namespace Web.MainApplication.Controllers
                         db.SaveChanges();
                         var ftNostro = new FinanceTransactionNostro();
                         ftNostro.FinanceTransactionId = financeTransaction.Id;
-                        ftNostro.CodeNostroBank = Request.Params["NostroBank"];
+                        ftNostro.NostroBankId = Request.Params["NostroBank"];
                         ftNostro.SetPropertyCreate();
                         db.FinanceTransactionNostro.Add(ftNostro);
                         db.SaveChanges();
@@ -104,7 +104,7 @@ namespace Web.MainApplication.Controllers
                     }
                     catch (Exception e)
                     {
-                        ErrorMessagesAdd(e.Message);
+                        ErrorMessagesAdd(e.MessageToList());
                         transaction.Rollback();
                     }
 
@@ -115,6 +115,14 @@ namespace Web.MainApplication.Controllers
             var lastFinanceTransaction = db.FinanceTransaction.OrderByDescending(x => x.Id).FirstOrDefault();
             financeTransaction.TransactionNumber = WebAppUtility.FinanceTransactionNumberGenerator(lastFinanceTransaction != null ? lastFinanceTransaction.Id + 1 : 1);
             financeTransaction.Amount = 0;
+
+            var lsliNostroBank = new List<SelectListItem>();
+            lsliNostroBank.AddBlank();
+            db.NostroBank.ToList().ForEach(x =>
+            {
+                lsliNostroBank.AddItemValText(x.NostroBankId, x.NostroBankName);
+            });
+            ViewBag.NostroBank = lsliNostroBank.ToSelectList();
             return View(financeTransaction);
         }
 

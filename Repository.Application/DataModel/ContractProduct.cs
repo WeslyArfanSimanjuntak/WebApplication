@@ -18,15 +18,15 @@ namespace Repository.Application.DataModel
         public string ProductId { get; set; }
         public Nullable<double> Amount { get; set; }
         public Nullable<decimal> PricePerTon { get; set; }
+        public Nullable<decimal> DiscountPersen { get; set; }
+        public Nullable<decimal> MarketingFeePersen { get; set; }
+        public Nullable<decimal> DiscountIdr { get; set; }
         public string Remark { get; set; }
         public string CreatedBy { get; set; }
         public string UpdatedBy { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public Nullable<short> IsActive { get; set; }
-        public Nullable<decimal> DiscountPersen { get; set; }
-        public Nullable<decimal> MarketingFeePersen { get; set; }
-        public Nullable<decimal> DiscountIdr { get; set; }
     
         public virtual CONTRACT CONTRACT { get; set; }
         public virtual PRODUCT PRODUCT { get; set; }
