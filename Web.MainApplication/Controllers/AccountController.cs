@@ -137,10 +137,10 @@ namespace Web.MainApplication.Controllers
                         roles.Add(item.AspNetRoles.AspNetRoles2.Name + "/" + item.AspNetRoles.Name);
 
                     }
-                    else if (item.AspNetRoles.Type.ToLower() == "controller")
-                    {
-                        roles.Add(item.AspNetRoles.Name + "/index");
-                    }
+                    //else if (item.AspNetRoles.Type.ToLower() == "controller")
+                    //{
+                    //    roles.Add(item.AspNetRoles.Name + "/index");
+                    //}
                 }
 
             }

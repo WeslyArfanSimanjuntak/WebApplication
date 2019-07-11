@@ -16,6 +16,7 @@ namespace Web.MainApplication.Controllers
         public ActionResult Index()
         {
             var aspNetRoles = db.AspNetRoles.Include(a => a.AspNetRoles2);
+            
             return View(aspNetRoles.ToList());
         }
 
@@ -39,10 +40,10 @@ namespace Web.MainApplication.Controllers
         {
             var selectList = new List<SelectListItem>();
             selectList.AddBlank();
-            db.AspNetRoles.Where(x => x.Type == "Controller").OrderBy(x=>x.Name).ToList().ForEach(x =>
-            {
-                selectList.AddItemValText(x.Id.ToString(), x.Name);
-            });
+            db.AspNetRoles.Where(x => x.Type == "Controller").OrderBy(x => x.Name).ToList().ForEach(x =>
+              {
+                  selectList.AddItemValText(x.Id.ToString(), x.Name);
+              });
             var selectListTypeController = new List<SelectListItem>();
             selectListTypeController.AddBlank();
             selectListTypeController.AddItemValText("Controller", "Controller");
@@ -68,10 +69,31 @@ namespace Web.MainApplication.Controllers
             }
             if (ModelState.IsValid && WarningMessages().Count == 0)
             {
-                aspNetRoles.SetPropertyCreate();
-                db.AspNetRoles.Add(aspNetRoles);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    aspNetRoles.SetPropertyCreate();
+                    db.AspNetRoles.Add(aspNetRoles);
+                    aspNetRoles.SetPropertyCreate();
+                    db.SaveChanges();
+                    if (aspNetRoles.Type.ToLower() == "controller")
+                    {
+                        var aspNetRolesIndex = new AspNetRoles();
+                        aspNetRolesIndex.Name = "Index";
+                        aspNetRolesIndex.Type = "Function";
+                        aspNetRolesIndex.ParentId = aspNetRoles.Id;
+                        aspNetRolesIndex.SetPropertyCreate();
+                        db.AspNetRoles.Add(aspNetRolesIndex);
+                    }
+
+                   
+                    WarningMessagesAdd("Inserting success");
+                    return RedirectToAction("Index");
+                }
+                catch (System.Exception e)
+                {
+                    WarningMessagesAdd(e.MessageToList());
+                }
+
             }
 
             var selectList = new List<SelectListItem>();

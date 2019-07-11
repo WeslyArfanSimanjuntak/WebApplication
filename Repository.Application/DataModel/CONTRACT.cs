@@ -24,7 +24,7 @@ namespace Repository.Application.DataModel
     
         public long ContractId { get; set; }
         public string ContractNumber { get; set; }
-        public Nullable<int> ClientIdPK { get; set; }
+        public int ClientIdPK { get; set; }
         public Nullable<decimal> Value { get; set; }
         public Nullable<decimal> Line { get; set; }
         public Nullable<System.DateTime> StartPeriode { get; set; }

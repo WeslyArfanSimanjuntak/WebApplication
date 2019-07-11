@@ -168,6 +168,7 @@ namespace Web.MainApplication.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.IdClient = id;
             return View(clientNostroBank.ToList());
 
         }

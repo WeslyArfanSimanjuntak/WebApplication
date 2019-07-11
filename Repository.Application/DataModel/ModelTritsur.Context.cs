@@ -48,6 +48,7 @@ namespace Repository.Application.DataModel
         public virtual DbSet<EMPLOYEE> EMPLOYEE { get; set; }
         public virtual DbSet<FinanceBalance> FinanceBalance { get; set; }
         public virtual DbSet<FinanceTransaction> FinanceTransaction { get; set; }
+        public virtual DbSet<FinanceTransactionClientNostro> FinanceTransactionClientNostro { get; set; }
         public virtual DbSet<FinanceTransactionNostro> FinanceTransactionNostro { get; set; }
         public virtual DbSet<Menu> Menu { get; set; }
         public virtual DbSet<NostroBank> NostroBank { get; set; }

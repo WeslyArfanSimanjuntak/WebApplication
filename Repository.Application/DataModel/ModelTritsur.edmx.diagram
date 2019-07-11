@@ -5,44 +5,45 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="354da32ef2414f1098e2dc189244a1d0" Name="Diagram1" ZoomLevel="77">
-        <EntityTypeShape EntityType="DB_TritsurModel.ARMADA" Width="1.5" PointX="3" PointY="16.625" />
-        <EntityTypeShape EntityType="DB_TritsurModel.AspNetGroups" Width="1.5" PointX="3.75" PointY="1.5" />
-        <EntityTypeShape EntityType="DB_TritsurModel.AspNetGroupUser" Width="1.5" PointX="12.75" PointY="32.625" />
-        <EntityTypeShape EntityType="DB_TritsurModel.AspNetRoleGroup" Width="1.5" PointX="6" PointY="5.5" />
-        <EntityTypeShape EntityType="DB_TritsurModel.AspNetRoles" Width="1.5" PointX="3.75" PointY="6.125" />
-        <EntityTypeShape EntityType="DB_TritsurModel.AspNetUsers" Width="1.5" PointX="4.5" PointY="69" />
-        <EntityTypeShape EntityType="DB_TritsurModel.BATCH" Width="1.5" PointX="3" PointY="44.375" />
-        <EntityTypeShape EntityType="DB_TritsurModel.BatchMix" Width="1.5" PointX="3" PointY="48.5" />
-        <EntityTypeShape EntityType="DB_TritsurModel.BatchMixProduct" Width="1.5" PointX="11.25" PointY="37.25" />
-        <EntityTypeShape EntityType="DB_TritsurModel.BatchProduct" Width="1.5" PointX="8.25" PointY="35.25" />
-        <EntityTypeShape EntityType="DB_TritsurModel.CLIENT" Width="1.5" PointX="1.5" PointY="52.75" />
-        <EntityTypeShape EntityType="DB_TritsurModel.ClientNostroBank" Width="1.5" PointX="3.75" PointY="54.875" />
-        <EntityTypeShape EntityType="DB_TritsurModel.CONTRACT" Width="1.5" PointX="1.5" PointY="6.75" />
-        <EntityTypeShape EntityType="DB_TritsurModel.ContractProduct" Width="1.5" PointX="6" PointY="26.5" />
-        <EntityTypeShape EntityType="DB_TritsurModel.DeliveryOrder" Width="1.5" PointX="3" PointY="65" />
-        <EntityTypeShape EntityType="DB_TritsurModel.DeliveryOrderInvoice" Width="1.5" PointX="8.75" PointY="12.625" />
-        <EntityTypeShape EntityType="DB_TritsurModel.DeliveryRequest" Width="1.5" PointX="0.75" PointY="16.5" />
-        <EntityTypeShape EntityType="DB_TritsurModel.DeliveryRequestProductDetailTransaction" Width="1.5" PointX="3" PointY="21.5" />
-        <EntityTypeShape EntityType="DB_TritsurModel.EMPLOYEE" Width="1.5" PointX="3" PointY="60" />
-        <EntityTypeShape EntityType="DB_TritsurModel.FinanceBalance" Width="1.5" PointX="3.75" PointY="11.375" />
-        <EntityTypeShape EntityType="DB_TritsurModel.FinanceTransaction" Width="1.5" PointX="8.75" PointY="7.25" />
-        <EntityTypeShape EntityType="DB_TritsurModel.FinanceTransactionNostro" Width="1.5" PointX="11" PointY="8" />
-        <EntityTypeShape EntityType="DB_TritsurModel.Menu" Width="1.5" PointX="6" PointY="9.625" />
-        <EntityTypeShape EntityType="DB_TritsurModel.NostroBank" Width="1.5" PointX="8.75" PointY="2.625" />
-        <EntityTypeShape EntityType="DB_TritsurModel.ParameterSetup" Width="1.5" PointX="10.75" PointY="3.625" />
-        <EntityTypeShape EntityType="DB_TritsurModel.PRODUCT" Width="1.5" PointX="0.75" PointY="25.75" />
-        <EntityTypeShape EntityType="DB_TritsurModel.ProductAdjustment" Width="1.5" PointX="3" PointY="26.5" />
-        <EntityTypeShape EntityType="DB_TritsurModel.ProductConvertion" Width="1.5" PointX="5.25" PointY="34.5" />
-        <EntityTypeShape EntityType="DB_TritsurModel.ProductMixing" Width="1.5" PointX="8.25" PointY="39.5" />
-        <EntityTypeShape EntityType="DB_TritsurModel.ProductSite" Width="1.5" PointX="3" PointY="32" />
-        <EntityTypeShape EntityType="DB_TritsurModel.RITASE" Width="1.5" PointX="5.25" PointY="40" />
-        <EntityTypeShape EntityType="DB_TritsurModel.SITE" Width="1.5" PointX="1.5" PointY="0.75" />
-        <EntityTypeShape EntityType="DB_TritsurModel.SOURCE" Width="1.5" PointX="1.5" PointY="36.75" />
-        <EntityTypeShape EntityType="DB_TritsurModel.StockProduct" Width="1.5" PointX="3" PointY="41.125" />
-        <EntityTypeShape EntityType="DB_TritsurModel.TableSequence" Width="1.5" PointX="10.75" PointY="12.625" />
-        <EntityTypeShape EntityType="DB_TritsurModel.TransactionCode" Width="1.5" PointX="6.5" PointY="15.75" />
-        <EntityTypeShape EntityType="DB_TritsurModel.TransactionProduct" Width="1.5" PointX="10.5" PointY="31.125" />
-        <EntityTypeShape EntityType="DB_TritsurModel.UserClientMapping" Width="1.5" PointX="6.75" PointY="54.375" />
+        <EntityTypeShape EntityType="DB_TritsurModel.ARMADA" Width="1.5" PointX="3" PointY="19.875" />
+        <EntityTypeShape EntityType="DB_TritsurModel.AspNetGroups" Width="1.5" PointX="12.75" PointY="1.875" />
+        <EntityTypeShape EntityType="DB_TritsurModel.AspNetGroupUser" Width="1.5" PointX="15" PointY="0.75" />
+        <EntityTypeShape EntityType="DB_TritsurModel.AspNetRoleGroup" Width="1.5" PointX="15" PointY="4.875" />
+        <EntityTypeShape EntityType="DB_TritsurModel.AspNetRoles" Width="1.5" PointX="12.75" PointY="6.5" />
+        <EntityTypeShape EntityType="DB_TritsurModel.AspNetUsers" Width="1.5" PointX="8.5" PointY="4.625" />
+        <EntityTypeShape EntityType="DB_TritsurModel.BATCH" Width="1.5" PointX="3" PointY="28.5" />
+        <EntityTypeShape EntityType="DB_TritsurModel.BatchMix" Width="1.5" PointX="3" PointY="48.875" />
+        <EntityTypeShape EntityType="DB_TritsurModel.BatchMixProduct" Width="1.5" PointX="5.25" PointY="37.625" />
+        <EntityTypeShape EntityType="DB_TritsurModel.BatchProduct" Width="1.5" PointX="8.25" PointY="27.625" />
+        <EntityTypeShape EntityType="DB_TritsurModel.CLIENT" Width="1.5" PointX="3.5" PointY="12.5" />
+        <EntityTypeShape EntityType="DB_TritsurModel.ClientNostroBank" Width="1.5" PointX="5.75" PointY="4.375" />
+        <EntityTypeShape EntityType="DB_TritsurModel.CONTRACT" Width="1.5" PointX="5.75" PointY="10.125" />
+        <EntityTypeShape EntityType="DB_TritsurModel.ContractProduct" Width="1.5" PointX="8" PointY="22" />
+        <EntityTypeShape EntityType="DB_TritsurModel.DeliveryOrder" Width="1.5" PointX="8" PointY="42.5" />
+        <EntityTypeShape EntityType="DB_TritsurModel.DeliveryOrderInvoice" Width="1.5" PointX="0.75" PointY="4" />
+        <EntityTypeShape EntityType="DB_TritsurModel.DeliveryRequest" Width="1.5" PointX="5.75" PointY="42" />
+        <EntityTypeShape EntityType="DB_TritsurModel.DeliveryRequestProductDetailTransaction" Width="1.5" PointX="8" PointY="32" />
+        <EntityTypeShape EntityType="DB_TritsurModel.EMPLOYEE" Width="1.5" PointX="3" PointY="33.375" />
+        <EntityTypeShape EntityType="DB_TritsurModel.FinanceBalance" Width="1.5" PointX="8" PointY="9.625" />
+        <EntityTypeShape EntityType="DB_TritsurModel.FinanceTransaction" Width="1.5" PointX="8" PointY="13.625" />
+        <EntityTypeShape EntityType="DB_TritsurModel.FinanceTransactionClientNostro" Width="1.5" PointX="10.25" PointY="9.75" />
+        <EntityTypeShape EntityType="DB_TritsurModel.FinanceTransactionNostro" Width="1.5" PointX="13.25" PointY="14.5" />
+        <EntityTypeShape EntityType="DB_TritsurModel.Menu" Width="1.5" PointX="15" PointY="9" />
+        <EntityTypeShape EntityType="DB_TritsurModel.NostroBank" Width="1.5" PointX="11" PointY="18.125" />
+        <EntityTypeShape EntityType="DB_TritsurModel.ParameterSetup" Width="1.5" PointX="0.75" PointY="12" />
+        <EntityTypeShape EntityType="DB_TritsurModel.PRODUCT" Width="1.5" PointX="0.75" PointY="26.25" />
+        <EntityTypeShape EntityType="DB_TritsurModel.ProductAdjustment" Width="1.5" PointX="6" PointY="26.875" />
+        <EntityTypeShape EntityType="DB_TritsurModel.ProductConvertion" Width="1.5" PointX="5.25" PointY="31.875" />
+        <EntityTypeShape EntityType="DB_TritsurModel.ProductMixing" Width="1.5" PointX="8.25" PointY="36.875" />
+        <EntityTypeShape EntityType="DB_TritsurModel.ProductSite" Width="1.5" PointX="3" PointY="24.5" />
+        <EntityTypeShape EntityType="DB_TritsurModel.RITASE" Width="1.5" PointX="5.25" PointY="20.25" />
+        <EntityTypeShape EntityType="DB_TritsurModel.SITE" Width="1.5" PointX="3.5" PointY="7.25" />
+        <EntityTypeShape EntityType="DB_TritsurModel.SOURCE" Width="1.5" PointX="1.25" PointY="7.875" />
+        <EntityTypeShape EntityType="DB_TritsurModel.StockProduct" Width="1.5" PointX="3" PointY="41" />
+        <EntityTypeShape EntityType="DB_TritsurModel.TableSequence" Width="1.5" PointX="0.75" PointY="16" />
+        <EntityTypeShape EntityType="DB_TritsurModel.TransactionCode" Width="1.5" PointX="5.75" PointY="47.25" />
+        <EntityTypeShape EntityType="DB_TritsurModel.TransactionProduct" Width="1.5" PointX="10.5" PointY="28.25" />
+        <EntityTypeShape EntityType="DB_TritsurModel.UserClientMapping" Width="1.5" PointX="10.75" PointY="14" />
         <AssociationConnector Association="DB_TritsurModel.FK_ARMADA_ToSite" />
         <AssociationConnector Association="DB_TritsurModel.FK_RITASE_RELATIONS_ARMADA" />
         <AssociationConnector Association="DB_TritsurModel.FK_AspNetGroupUser_ToGroup" />
@@ -64,6 +65,7 @@
         <AssociationConnector Association="DB_TritsurModel.FK_ClientNostroBank_ToClient" />
         <AssociationConnector Association="DB_TritsurModel.FK_CONTRACT_ToClient" />
         <AssociationConnector Association="DB_TritsurModel.FK_UserClientMapping_ToClient" />
+        <AssociationConnector Association="DB_TritsurModel.FK_FinanceTransactionClientNostro_ToClientNostro" />
         <AssociationConnector Association="DB_TritsurModel.FK_CONTRACT_ToSite" />
         <AssociationConnector Association="DB_TritsurModel.FK_ContractProduct_ToContract" />
         <AssociationConnector Association="DB_TritsurModel.FK_DeliveryRequest_ToContract" />
@@ -76,6 +78,7 @@
         <AssociationConnector Association="DB_TritsurModel.FK_EMPLOYEE_ToSite" />
         <AssociationConnector Association="DB_TritsurModel.FK_RITASE_RELATIONS_EMPLOYEE" />
         <AssociationConnector Association="DB_TritsurModel.FK_FinanceTransaction_ToTransactionCode" />
+        <AssociationConnector Association="DB_TritsurModel.FK_FinanceTransactionClientNostro_ToFinanceTransaction" />
         <AssociationConnector Association="DB_TritsurModel.FK_FinanceTransactionNostro_ToFinanceTransaction" />
         <AssociationConnector Association="DB_TritsurModel.FK_FinanceTransactionNostro_ToNostro" />
         <AssociationConnector Association="DB_TritsurModel.FK_Menu_ToMenuParent" />

@@ -205,7 +205,7 @@
           </Key>
           <Property Name="ContractId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ContractNumber" Type="varchar" MaxLength="50" />
-          <Property Name="ClientIdPK" Type="int" />
+          <Property Name="ClientIdPK" Type="int" Nullable="false" />
           <Property Name="Value" Type="decimal" Precision="18" Scale="0" />
           <Property Name="Line" Type="decimal" Precision="18" Scale="0" />
           <Property Name="StartPeriode" Type="datetime" />
@@ -351,6 +351,22 @@
           <Property Name="DueDate" Type="datetime" />
           <Property Name="Date" Type="datetime" />
           <Property Name="ReferenceNumber" Type="varchar" MaxLength="128" />
+          <Property Name="Remark" Type="varchar" MaxLength="512" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
+          <Property Name="UpdatedBy" Type="varchar" MaxLength="50" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="IsActive" Type="smallint" />
+        </EntityType>
+        <EntityType Name="FinanceTransactionClientNostro">
+          <Key>
+            <PropertyRef Name="ClientNostroBankId" />
+            <PropertyRef Name="Client" />
+            <PropertyRef Name="FinanceTransactionId" />
+          </Key>
+          <Property Name="ClientNostroBankId" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Client" Type="int" Nullable="false" />
+          <Property Name="FinanceTransactionId" Type="bigint" Nullable="false" />
           <Property Name="Remark" Type="varchar" MaxLength="512" />
           <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
           <Property Name="UpdatedBy" Type="varchar" MaxLength="50" />
@@ -794,7 +810,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CONTRACT_ToClient">
-          <End Role="CLIENT" Type="Self.CLIENT" Multiplicity="0..1" />
+          <End Role="CLIENT" Type="Self.CLIENT" Multiplicity="1" />
           <End Role="CONTRACT" Type="Self.CONTRACT" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="CLIENT">
@@ -934,6 +950,32 @@
             </Principal>
             <Dependent Role="FinanceTransaction">
               <PropertyRef Name="TransactionCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FinanceTransactionClientNostro_ToClientNostro">
+          <End Role="ClientNostroBank" Type="Self.ClientNostroBank" Multiplicity="1" />
+          <End Role="FinanceTransactionClientNostro" Type="Self.FinanceTransactionClientNostro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClientNostroBank">
+              <PropertyRef Name="ClientNostroBankId" />
+              <PropertyRef Name="Client" />
+            </Principal>
+            <Dependent Role="FinanceTransactionClientNostro">
+              <PropertyRef Name="ClientNostroBankId" />
+              <PropertyRef Name="Client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FinanceTransactionClientNostro_ToFinanceTransaction">
+          <End Role="FinanceTransaction" Type="Self.FinanceTransaction" Multiplicity="1" />
+          <End Role="FinanceTransactionClientNostro" Type="Self.FinanceTransactionClientNostro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FinanceTransaction">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FinanceTransactionClientNostro">
+              <PropertyRef Name="FinanceTransactionId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1307,6 +1349,7 @@
           <EntitySet Name="EMPLOYEE" EntityType="Self.EMPLOYEE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FinanceBalance" EntityType="Self.FinanceBalance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FinanceTransaction" EntityType="Self.FinanceTransaction" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FinanceTransactionClientNostro" EntityType="Self.FinanceTransactionClientNostro" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FinanceTransactionNostro" EntityType="Self.FinanceTransactionNostro" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NostroBank" EntityType="Self.NostroBank" Schema="dbo" store:Type="Tables" />
@@ -1423,6 +1466,14 @@
           <AssociationSet Name="FK_FinanceTransaction_ToTransactionCode" Association="Self.FK_FinanceTransaction_ToTransactionCode">
             <End Role="TransactionCode" EntitySet="TransactionCode" />
             <End Role="FinanceTransaction" EntitySet="FinanceTransaction" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FinanceTransactionClientNostro_ToClientNostro" Association="Self.FK_FinanceTransactionClientNostro_ToClientNostro">
+            <End Role="ClientNostroBank" EntitySet="ClientNostroBank" />
+            <End Role="FinanceTransactionClientNostro" EntitySet="FinanceTransactionClientNostro" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FinanceTransactionClientNostro_ToFinanceTransaction" Association="Self.FK_FinanceTransactionClientNostro_ToFinanceTransaction">
+            <End Role="FinanceTransaction" EntitySet="FinanceTransaction" />
+            <End Role="FinanceTransactionClientNostro" EntitySet="FinanceTransactionClientNostro" />
           </AssociationSet>
           <AssociationSet Name="FK_FinanceTransactionNostro_ToFinanceTransaction" Association="Self.FK_FinanceTransactionNostro_ToFinanceTransaction">
             <End Role="FinanceTransaction" EntitySet="FinanceTransaction" />
@@ -1568,6 +1619,7 @@
           <EntitySet Name="EMPLOYEE" EntityType="DB_TritsurModel.EMPLOYEE" />
           <EntitySet Name="FinanceBalance" EntityType="DB_TritsurModel.FinanceBalance" />
           <EntitySet Name="FinanceTransaction" EntityType="DB_TritsurModel.FinanceTransaction" />
+          <EntitySet Name="FinanceTransactionClientNostro" EntityType="DB_TritsurModel.FinanceTransactionClientNostro" />
           <EntitySet Name="FinanceTransactionNostro" EntityType="DB_TritsurModel.FinanceTransactionNostro" />
           <EntitySet Name="Menu" EntityType="DB_TritsurModel.Menu" />
           <EntitySet Name="NostroBank" EntityType="DB_TritsurModel.NostroBank" />
@@ -1669,6 +1721,10 @@
             <End Role="CLIENT" EntitySet="CLIENT" />
             <End Role="UserClientMapping" EntitySet="UserClientMapping" />
           </AssociationSet>
+          <AssociationSet Name="FK_FinanceTransactionClientNostro_ToClientNostro" Association="DB_TritsurModel.FK_FinanceTransactionClientNostro_ToClientNostro">
+            <End Role="ClientNostroBank" EntitySet="ClientNostroBank" />
+            <End Role="FinanceTransactionClientNostro" EntitySet="FinanceTransactionClientNostro" />
+          </AssociationSet>
           <AssociationSet Name="FK_CONTRACT_ToSite" Association="DB_TritsurModel.FK_CONTRACT_ToSite">
             <End Role="SITE" EntitySet="SITE" />
             <End Role="CONTRACT" EntitySet="CONTRACT" />
@@ -1716,6 +1772,10 @@
           <AssociationSet Name="FK_FinanceTransaction_ToTransactionCode" Association="DB_TritsurModel.FK_FinanceTransaction_ToTransactionCode">
             <End Role="TransactionCode" EntitySet="TransactionCode" />
             <End Role="FinanceTransaction" EntitySet="FinanceTransaction" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FinanceTransactionClientNostro_ToFinanceTransaction" Association="DB_TritsurModel.FK_FinanceTransactionClientNostro_ToFinanceTransaction">
+            <End Role="FinanceTransaction" EntitySet="FinanceTransaction" />
+            <End Role="FinanceTransactionClientNostro" EntitySet="FinanceTransactionClientNostro" />
           </AssociationSet>
           <AssociationSet Name="FK_FinanceTransactionNostro_ToFinanceTransaction" Association="DB_TritsurModel.FK_FinanceTransactionNostro_ToFinanceTransaction">
             <End Role="FinanceTransaction" EntitySet="FinanceTransaction" />
@@ -2037,6 +2097,7 @@
           <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
           <Property Name="IsActive" Type="Int16" />
           <NavigationProperty Name="CLIENT1" Relationship="DB_TritsurModel.FK_ClientNostroBank_ToClient" FromRole="ClientNostroBank" ToRole="CLIENT" />
+          <NavigationProperty Name="FinanceTransactionClientNostro" Relationship="DB_TritsurModel.FK_FinanceTransactionClientNostro_ToClientNostro" FromRole="ClientNostroBank" ToRole="FinanceTransactionClientNostro" />
         </EntityType>
         <EntityType Name="CONTRACT">
           <Key>
@@ -2044,7 +2105,7 @@
           </Key>
           <Property Name="ContractId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ContractNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ClientIdPK" Type="Int32" />
+          <Property Name="ClientIdPK" Type="Int32" Nullable="false" />
           <Property Name="Value" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="Line" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="StartPeriode" Type="DateTime" Precision="3" />
@@ -2215,7 +2276,26 @@
           <Property Name="IsActive" Type="Int16" />
           <NavigationProperty Name="CONTRACT" Relationship="DB_TritsurModel.FK_FinanceTransaction_ToContract" FromRole="FinanceTransaction" ToRole="CONTRACT" />
           <NavigationProperty Name="TransactionCode1" Relationship="DB_TritsurModel.FK_FinanceTransaction_ToTransactionCode" FromRole="FinanceTransaction" ToRole="TransactionCode" />
+          <NavigationProperty Name="FinanceTransactionClientNostro" Relationship="DB_TritsurModel.FK_FinanceTransactionClientNostro_ToFinanceTransaction" FromRole="FinanceTransaction" ToRole="FinanceTransactionClientNostro" />
           <NavigationProperty Name="FinanceTransactionNostro" Relationship="DB_TritsurModel.FK_FinanceTransactionNostro_ToFinanceTransaction" FromRole="FinanceTransaction" ToRole="FinanceTransactionNostro" />
+        </EntityType>
+        <EntityType Name="FinanceTransactionClientNostro">
+          <Key>
+            <PropertyRef Name="ClientNostroBankId" />
+            <PropertyRef Name="Client" />
+            <PropertyRef Name="FinanceTransactionId" />
+          </Key>
+          <Property Name="ClientNostroBankId" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Client" Type="Int32" Nullable="false" />
+          <Property Name="FinanceTransactionId" Type="Int64" Nullable="false" />
+          <Property Name="Remark" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Int16" />
+          <NavigationProperty Name="ClientNostroBank" Relationship="DB_TritsurModel.FK_FinanceTransactionClientNostro_ToClientNostro" FromRole="FinanceTransactionClientNostro" ToRole="ClientNostroBank" />
+          <NavigationProperty Name="FinanceTransaction" Relationship="DB_TritsurModel.FK_FinanceTransactionClientNostro_ToFinanceTransaction" FromRole="FinanceTransactionClientNostro" ToRole="FinanceTransaction" />
         </EntityType>
         <EntityType Name="FinanceTransactionNostro">
           <Key>
@@ -2784,7 +2864,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CONTRACT_ToClient">
-          <End Type="DB_TritsurModel.CLIENT" Role="CLIENT" Multiplicity="0..1" />
+          <End Type="DB_TritsurModel.CLIENT" Role="CLIENT" Multiplicity="1" />
           <End Type="DB_TritsurModel.CONTRACT" Role="CONTRACT" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="CLIENT">
@@ -2804,6 +2884,20 @@
             </Principal>
             <Dependent Role="UserClientMapping">
               <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FinanceTransactionClientNostro_ToClientNostro">
+          <End Type="DB_TritsurModel.ClientNostroBank" Role="ClientNostroBank" Multiplicity="1" />
+          <End Type="DB_TritsurModel.FinanceTransactionClientNostro" Role="FinanceTransactionClientNostro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClientNostroBank">
+              <PropertyRef Name="ClientNostroBankId" />
+              <PropertyRef Name="Client" />
+            </Principal>
+            <Dependent Role="FinanceTransactionClientNostro">
+              <PropertyRef Name="ClientNostroBankId" />
+              <PropertyRef Name="Client" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2948,6 +3042,18 @@
             </Principal>
             <Dependent Role="FinanceTransaction">
               <PropertyRef Name="TransactionCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FinanceTransactionClientNostro_ToFinanceTransaction">
+          <End Type="DB_TritsurModel.FinanceTransaction" Role="FinanceTransaction" Multiplicity="1" />
+          <End Type="DB_TritsurModel.FinanceTransactionClientNostro" Role="FinanceTransactionClientNostro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FinanceTransaction">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FinanceTransactionClientNostro">
+              <PropertyRef Name="FinanceTransactionId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3572,6 +3678,21 @@
                 <ScalarProperty Name="ContractId" ColumnName="ContractId" />
                 <ScalarProperty Name="TransactionNumber" ColumnName="TransactionNumber" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FinanceTransactionClientNostro">
+            <EntityTypeMapping TypeName="DB_TritsurModel.FinanceTransactionClientNostro">
+              <MappingFragment StoreEntitySet="FinanceTransactionClientNostro">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="FinanceTransactionId" ColumnName="FinanceTransactionId" />
+                <ScalarProperty Name="Client" ColumnName="Client" />
+                <ScalarProperty Name="ClientNostroBankId" ColumnName="ClientNostroBankId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

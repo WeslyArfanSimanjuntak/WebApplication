@@ -25,6 +25,7 @@ namespace Web.MainApplication
             builder.EntitySet<BatchProduct>("BatchProduct");
             builder.EntitySet<BatchMixProduct>("BatchMixProduct");
             builder.EntitySet<CLIENT>("CLIENT");
+            builder.EntitySet<ClientNostroBank>("ClientNostroBank");
             builder.EntitySet<CONTRACT>("CONTRACT");
             builder.EntitySet<ContractProduct>("ContractProduct");
             builder.EntitySet<DeliveryOrder>("DeliveryOrder");
@@ -35,6 +36,7 @@ namespace Web.MainApplication
             builder.EntitySet<FinanceBalance>("FinanceBalance");
             builder.EntitySet<FinanceTransaction>("FinanceTransaction");
             builder.EntitySet<FinanceTransactionNostro>("FinanceTransactionNostro");
+            builder.EntitySet<FinanceTransactionClientNostro>("FinanceTransactionClientNostro");
             builder.EntitySet<Menu>("Menu");
             builder.EntitySet<NostroBank>("NostroBank");
             builder.EntitySet<PRODUCT>("PRODUCT");

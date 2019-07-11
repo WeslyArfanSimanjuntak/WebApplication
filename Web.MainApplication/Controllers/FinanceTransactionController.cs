@@ -76,15 +76,23 @@ namespace Web.MainApplication.Controllers
             {
                 WarningMessagesAdd("This contract has been deposit with finance transaction code \"" + financeTransactionDeposit.TransactionNumber + "\"");
             }
-            if (Request.Params["NostroBank"] == null) {
+            if (Request.Params["NostroBank"] == null)
+            {
                 WarningMessagesAdd("Nostro Bank Can Not Be Empty");
             }
+
+            if (financeTransaction.Amount > contract.Value)
+            {
+                WarningMessagesAdd("Amount can not be bigger than contract value");
+            }
+
             if (ModelState.IsValid && WarningMessages().Count() == 0)
             {
                 using (var transaction = db.Database.BeginTransaction())
                 {
                     try
                     {
+                        financeTransaction.TransactionCode = "DEP";
                         financeTransaction.SetPropertyCreate();
                         db.FinanceTransaction.Add(financeTransaction);
                         var financeBalance = db.FinanceBalance.Find(financeTransaction.ContractId);
@@ -92,11 +100,20 @@ namespace Web.MainApplication.Controllers
                         financeBalance.SetPropertyUpdate();
                         db.Entry(financeBalance).State = System.Data.Entity.EntityState.Modified;
                         db.SaveChanges();
+
+                        // add data to financetransactionnostro
                         var ftNostro = new FinanceTransactionNostro();
                         ftNostro.FinanceTransactionId = financeTransaction.Id;
                         ftNostro.NostroBankId = Request.Params["NostroBank"];
                         ftNostro.SetPropertyCreate();
                         db.FinanceTransactionNostro.Add(ftNostro);
+
+                        // add data to financetransactionclientnostro
+                        var ftClientNostro = new FinanceTransactionClientNostro();
+                        ftClientNostro.Client = contract.ClientIdPK;
+                        ftClientNostro.ClientNostroBankId = contract.CLIENT.ClientNostroBank.FirstOrDefault().ClientNostroBankId;
+                        ftClientNostro.FinanceTransactionId = financeTransaction.Id;
+                        db.FinanceTransactionClientNostro.Add(ftClientNostro);
                         db.SaveChanges();
                         transaction.Commit();
                         SuccessMessagesAdd("Inserting Deposit " + financeTransaction.TransactionNumber + " Success");
@@ -122,7 +139,7 @@ namespace Web.MainApplication.Controllers
             {
                 lsliNostroBank.AddItemValText(x.NostroBankId, x.NostroBankName);
             });
-            ViewBag.NostroBank = lsliNostroBank.ToSelectList();
+            ViewBag.NostroBank = lsliNostroBank.ToSelectList(Request.Params["NostroBank"]);
             return View(financeTransaction);
         }
 

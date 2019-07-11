@@ -69,13 +69,28 @@
                 @Html.DisplayFor(model => model.ClientCompanyLeaderEmailAddress)
             </dd>
             <dt>
-              Company PIC Phone Number
+                Company PIC Phone Number
             </dt>
 
             <dd>
                 @Html.DisplayFor(model => model.ClientCompanyPICPhoneNumber)
             </dd>
+            <dt>
+                Client Bank Account
+            </dt>
 
+            <dd>
+                @{
+                    if (Model.ClientNostroBank != null)
+                    {
+                        @Html.ActionLink("Banks Account", "ClientNostroBank", new { id = Model.Id })
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Banks Account", "ClientNostroBank", new { id = Model.Id })
+                    }
+                }
+            </dd>
         </dl>
 
     </div>

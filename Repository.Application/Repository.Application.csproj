@@ -122,6 +122,9 @@
     <Compile Include="DataModel\FinanceTransaction.cs">
       <DependentUpon>ModelTritsur.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataModel\FinanceTransactionClientNostro.cs">
+      <DependentUpon>ModelTritsur.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataModel\FinanceTransactionNostro.cs">
       <DependentUpon>ModelTritsur.tt</DependentUpon>
     </Compile>

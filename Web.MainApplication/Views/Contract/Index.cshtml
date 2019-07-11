@@ -52,7 +52,17 @@
                             @Html.DisplayFor(modelItem => item.EndPeriode)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.ClientIdPK) - @Html.DisplayFor(modelItem => item.CLIENT.ClientName)
+                            @{
+                                if (item.CLIENT != null && !string.IsNullOrEmpty(item.CLIENT.ClientName))
+                                {
+                                    @Html.ActionLink(item.CLIENT.ClientName, "Details", "Client", new { id = item.CLIENT.Id }, null)
+                                }
+                                else
+                                {
+                                    @Html.ActionLink("Client Detail", "Details", "Client", new { id = item.CLIENT.Id }, null)
+                                }
+                            }
+                            @*@Html.DisplayFor(modelItem => item.ClientIdPK) - @Html.DisplayFor(modelItem => item.CLIENT.ClientName)*@
                         </td>
 
                         <td>

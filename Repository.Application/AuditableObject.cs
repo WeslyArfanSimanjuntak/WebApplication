@@ -124,6 +124,8 @@ namespace Repository.Application.DataModel
     public partial class ClientNostroBank : IAuditableObject
     {
     }
-
+    public partial class FinanceTransactionClientNostro : IAuditableObject
+    {
+    }
 
 }

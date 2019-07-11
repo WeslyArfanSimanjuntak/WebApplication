@@ -17,6 +17,7 @@ namespace Repository.Application.DataModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public FinanceTransaction()
         {
+            this.FinanceTransactionClientNostro = new HashSet<FinanceTransactionClientNostro>();
             this.FinanceTransactionNostro = new HashSet<FinanceTransactionNostro>();
         }
     
@@ -38,6 +39,8 @@ namespace Repository.Application.DataModel
     
         public virtual CONTRACT CONTRACT { get; set; }
         public virtual TransactionCode TransactionCode1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FinanceTransactionClientNostro> FinanceTransactionClientNostro { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FinanceTransactionNostro> FinanceTransactionNostro { get; set; }
     }
