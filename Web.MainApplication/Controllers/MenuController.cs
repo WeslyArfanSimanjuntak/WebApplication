@@ -122,7 +122,7 @@ namespace Web.MainApplication.Controllers
             });
 
             ViewBag.MenuParentId = sliMenuParentid.OrderBy(x => x.Text).ToList().ToSelectList(menu.MenuParentId);
-            ViewBag.AspNetRoles = sliRoles.ToSelectList(menu.AspNetRoles);
+            ViewBag.AspNetRoles = sliRoles.OrderBy(x=>x.Text).ToList().ToSelectList(menu.AspNetRoles);
             return View(menu);
         }
 
@@ -155,7 +155,7 @@ namespace Web.MainApplication.Controllers
             });
 
             ViewBag.MenuParentId = sliMenuParentid.OrderBy(x => x.Text).ToList().ToSelectList(menu.MenuParentId);
-            ViewBag.AspNetRoles = sliRoles.ToSelectList(menu.AspNetRoles); return View(menu);
+            ViewBag.AspNetRoles = sliRoles.OrderBy(x => x.Text).ToList().ToSelectList(menu.AspNetRoles); return View(menu);
         }
 
         // GET: Menu/Delete/5

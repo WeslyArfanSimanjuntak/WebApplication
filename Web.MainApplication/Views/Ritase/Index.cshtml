@@ -75,7 +75,7 @@
             </tbody>
         </table>
         @{
-            
+
             var dtIndexDeliveryRequest = new Web.MainApplication.Models.DatatableIndexModels(
                                         typeof(Repository.Application.DataModel.RITASE),
                                         new string[] { "RITASENUMBER", "RITASETIME", "RITASESTATUS", "QuantityInTon", "RITASEID" },
@@ -96,10 +96,12 @@
             'paging': true,
             'lengthMenu': [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
             'pageLength': 10,
-			'searching': true,
+            'searching': true,
             'ordering': true,
             'info': true,
-            'autoWidth': false
+            'autoWidth': false,
+            scrollY: true,
+            order: [[1, "desc"]]
         });
     }(jQuery));
 

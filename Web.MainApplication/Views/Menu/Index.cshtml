@@ -60,16 +60,20 @@
                             @{
                                 if (item.AspNetRoles1 != null)
                                 {
-                                    if (item.AspNetRoles1.Type == "Controller")
+                                    if (item.AspNetRoles1.Type.ToLower() == "controller")
                                     {
                                         @item.AspNetRoles1.Name
                                     }
                                     else
                                     {
-                                        @("-- " + item.AspNetRoles1.Name)
+                                        @(item.AspNetRoles1.AspNetRoles2.Name + "- " + item.AspNetRoles1.Name )
                                     }
-                                }
 
+                                }
+                                else
+                                {
+                                    @("--")
+                                }
                             }
                         </td>
                         <td>
@@ -104,8 +108,8 @@
     (function ($) {
 
 
-        $('#menusTable').DataTable({ 
-			'lengthMenu': [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+        $('#menusTable').DataTable({
+            'lengthMenu': [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
             'pageLength': 10,
             'paging': true,
             'searching': true,

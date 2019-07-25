@@ -298,7 +298,11 @@ namespace Web.MainApplication.Controllers
             {
                 lsliSource.AddItemValText(z.Id.ToString(), z.Name);
             });
-            ViewBag.SOURCEID = lsliSource.ToSelectList();
+            ViewBag.SOURCEID = lsliSource.ToSelectList(rITASE.SOURCEID);
+            float convertTonToM3;
+            float.TryParse((string)db.ParameterSetup.Where(x => x.Name == "Convertion(ton to m3)").FirstOrDefault().Value, out convertTonToM3);
+            ViewBag.TonUnitToM3Unit = convertTonToM3;
+
             return View(rITASE);
         }
 

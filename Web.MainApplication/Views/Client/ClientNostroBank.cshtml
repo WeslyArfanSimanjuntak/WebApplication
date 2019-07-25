@@ -7,7 +7,17 @@
 <h2>ClientNostroBank</h2>
 
 <p>
-    @Html.ActionLink("Create New", "ClientNostroBankCreate", new { id = (int)ViewBag.IdClient})
+    @{
+        if (ViewBag.IdClient != null)
+        {
+            @Html.ActionLink("Create New", "ClientNostroBankCreate", new { id = (int)ViewBag.IdClient })
+        }
+        else
+        {
+            @Html.ActionLink("Create New", "ClientNostroBankCreate")
+        }
+    }
+
 </p>
 <table class="table">
     <tr>
@@ -53,53 +63,54 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.BankId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BankBranchCode)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NostroBankName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NostroAccountNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NostroAccountName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BankCategory)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Remark)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatedBy)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UpdatedBy)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatedDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UpdatedDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsActive)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CLIENT1.ClientId)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BankId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BankBranchCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NostroBankName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NostroAccountNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NostroAccountName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BankCategory)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Remark)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpdatedBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpdatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsActive)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CLIENT1.ClientId)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+    }
 
 </table>

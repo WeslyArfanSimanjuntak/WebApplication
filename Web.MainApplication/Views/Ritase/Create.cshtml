@@ -127,33 +127,20 @@
         $('#QuantityInTon').number(true, 2).attr("maxlength", "6");
     }(jQuery));
     $(document).ready(function () {
-        $('#RITASESTATUS').on("change", function () {
-            if ($("#RITASESTATUS").val() == "" || $("#RITASESTATUS").val() == "Accumulate") {
-                $("#BatchCode").val("").change();
-                $("#BatchCode option").not(':first-child').each(function (index) {
-                    $(this).attr('disabled', true);
-                });
-                //$("#BatchCode").val("").attr("readonly", true);
-            }
-            else {
-                $("#BatchCode").val("").change();
-                $("#BatchCode option").not(':first-child').each(function (index) {
-                    $(this).removeAttr('disabled', true);
-                });
-            }
-        });
-
-        $("#RITASESTATUS").change();
+        
 
 
         $("#SITE").on("change", function () {
 
+            var driverArmada = $("#DRIVERARMADA").val();
             $("#DRIVERARMADA option").not(':first-child').each(function (index) {
                 $(this).remove();
             });
+            var armada = $("#ARMADA").val();
             $("#ARMADA option").not(':first-child').each(function (index) {
                 $(this).remove();
             });
+            var product = $("#PRODUCT").val();
             $("#PRODUCT option").not(':first-child').each(function (index) {
                 $(this).remove();
             });
@@ -163,7 +150,12 @@
                 AjaxCall(function (output) {
                     console.log(output);
                     $.each(output.data, function (key, value) {
-                        $("#DRIVERARMADA").append('<option value="' + value["EMPLOYEEID"] + '">' + value["EMPLOYEEID"] + " - " + value["EMPLOYEEFULLNAME"] + '</option>');
+                        if (value["EMPLOYEEID"] == driverArmada) {
+                            $("#DRIVERARMADA").append('<option selected value="' + value["EMPLOYEEID"] + '">' + value["EMPLOYEEID"] + " - " + value["EMPLOYEEFULLNAME"] + '</option>');
+
+                        } else {
+                            $("#DRIVERARMADA").append('<option value="' + value["EMPLOYEEID"] + '">' + value["EMPLOYEEID"] + " - " + value["EMPLOYEEFULLNAME"] + '</option>');
+                        }
 
                     });
 
@@ -173,7 +165,11 @@
                 AjaxCall(function (output) {
                     console.log(output);
                     $.each(output.data, function (key, value) {
-                        $("#ARMADA").append('<option value="' + value["ARMADAID"] + '">' + value["ARMADAID"] + " - " + value["ARMADANAME"] + " - " + value["ARMADACAPACITYINKG"] + ' kg</option>');
+                        if (value["ARMADAID"] == armada) {
+                            $("#ARMADA").append('<option selected value="' + value["ARMADAID"] + '">' + value["ARMADAID"] + " - " + value["ARMADANAME"] + " - " + value["ARMADACAPACITYINKG"] + ' kg</option>');
+                        } else {
+                            $("#ARMADA").append('<option value="' + value["ARMADAID"] + '">' + value["ARMADAID"] + " - " + value["ARMADANAME"] + " - " + value["ARMADACAPACITYINKG"] + ' kg</option>');
+                        }
 
                     });
 
@@ -184,10 +180,11 @@
 
                     console.log(output);
                     $.each(output.data, function (keyProduct, valueProduct) {
-
-
-                        $("#PRODUCT").append('<option value="' + valueProduct["PRODUCTID"] + '">' + valueProduct["PRODUCTNAME"]);
-
+                        if (valueProduct["PRODUCTID"] == product) {
+                            $("#PRODUCT").append('<option selected value="' + valueProduct["PRODUCTID"] + '">' + valueProduct["PRODUCTNAME"]);
+                        } else {
+                            $("#PRODUCT").append('<option value="' + valueProduct["PRODUCTID"] + '">' + valueProduct["PRODUCTNAME"]);
+                        }
                     });
 
                 }, entityApiUrl + '?entitas=PRODUCT&filter=TypeMaterial="Raw"');
@@ -278,5 +275,24 @@
                 }, entityApiUrl + '?entitas=BATCH&filter=RawProduct=="' + selectedProduct + '"');
             }
         });
+
+
+        //$("#RITASESTATUS").on("change", function () {
+        //    if ($("#RITASESTATUS").val() == "" || $("#RITASESTATUS").val() == "Accumulate") {
+        //        $("#BatchCode").val("").change();
+        //        $("#BatchCode option").not(':first-child').each(function (index) {
+        //            $(this).attr('disabled', true);
+        //        });
+        //        //$("#BatchCode").val("").attr("readonly", true);
+        //    }
+        //    else {
+        //        $("#BatchCode").val("").change();
+        //        $("#BatchCode option").not(':first-child').each(function (index) {
+        //            $(this).removeAttr('disabled', true);
+        //        });
+        //    }
+        //});
+
+        $("#RITASESTATUS").change();
     });
 </script>

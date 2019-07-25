@@ -385,7 +385,7 @@ namespace Web.MainApplication.Controllers
                     WarningMessagesAdd("Insufficient Stock [" + x.PRODUCT.PRODUCTNAME + "]. Total stock : " + productSiteStock.TotalStock.ToString() + " ton");
                 }
             });
-            if (pm.Ammount < 0)
+            if (pm.Ammount < 0 || pm.Ammount == 0)
             {
                 WarningMessagesAdd("Amount can not be lower than 0 ton/m3");
             }

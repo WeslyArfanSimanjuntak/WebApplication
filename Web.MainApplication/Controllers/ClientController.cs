@@ -161,7 +161,7 @@ namespace Web.MainApplication.Controllers
         public ActionResult ClientNostroBank(int? id) {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return View(db.ClientNostroBank.ToList());
             }
             var clientNostroBank = db.ClientNostroBank.Where(x => x.Client == id);
             if (clientNostroBank == null)

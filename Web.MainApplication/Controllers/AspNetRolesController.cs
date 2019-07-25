@@ -16,7 +16,7 @@ namespace Web.MainApplication.Controllers
         public ActionResult Index()
         {
             var aspNetRoles = db.AspNetRoles.Include(a => a.AspNetRoles2);
-            
+
             return View(aspNetRoles.ToList());
         }
 
@@ -63,14 +63,27 @@ namespace Web.MainApplication.Controllers
         public ActionResult Create([Bind(Include = "Id,ParentId,Name,Type,Remark,CreatedBy,UpdatedBy,CreatedDate,UpdatedDate,IsActive")] AspNetRoles aspNetRoles)
         {
             var roles = db.AspNetRoles.Where(x => x.ParentId == aspNetRoles.ParentId && x.Name.ToLower() == aspNetRoles.Name.ToLower()).FirstOrDefault();
-            if (roles != null)
+            if (roles != null && roles.Name != null)
             {
                 WarningMessagesAdd("Roles with parent \"" + roles.AspNetRoles2.Name + "\" and roles name \"" + aspNetRoles.Name + "\" is already exist.");
+            }
+            if (aspNetRoles.Name == null)
+            {
+                WarningMessagesAdd("Name can not be empty");
             }
             if (ModelState.IsValid && WarningMessages().Count == 0)
             {
                 try
                 {
+                    if (aspNetRoles.ParentId != null)
+                    {
+                        aspNetRoles.Type = "Function";
+                    }
+                    else
+                    {
+                        aspNetRoles.Type = "Controller";
+
+                    }
                     aspNetRoles.SetPropertyCreate();
                     db.AspNetRoles.Add(aspNetRoles);
                     aspNetRoles.SetPropertyCreate();
@@ -85,8 +98,8 @@ namespace Web.MainApplication.Controllers
                         db.AspNetRoles.Add(aspNetRolesIndex);
                     }
 
-                   
-                    WarningMessagesAdd("Inserting success");
+
+                    SuccessMessagesAdd("Inserting success");
                     return RedirectToAction("Index");
                 }
                 catch (System.Exception e)
@@ -151,6 +164,15 @@ namespace Web.MainApplication.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (aspNetRoles.ParentId != null)
+                {
+                    aspNetRoles.Type = "Function";
+                }
+                else
+                {
+                    aspNetRoles.Type = "Controller";
+
+                }
                 aspNetRoles.SetPropertyUpdate();
                 db.Entry(aspNetRoles).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
